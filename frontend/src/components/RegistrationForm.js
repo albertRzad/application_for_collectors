@@ -19,6 +19,10 @@ const Registration = () => {
     password: "",
   });
 
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault()
     axios.post("http://localhost:3000/registerForm", formData)
@@ -41,32 +45,38 @@ const Registration = () => {
         rel="stylesheet"
       />
       <div class="form__group">
-        <input type="text" class="form__input" id="name" placeholder="Name" />
+        <input type="text" class="form__input" name="name" placeholder="Name" onChange={handleChange} value={formData.name}/>
         <input
           type="text"
           className="form__input"
-          id="surname"
+          name="surname"
           placeholder="Surname"
+          onChange={handleChange}
+          value={formData.surname}
         />
         <input
           type="email"
           className="form__input"
-          id="email"
+          name="email"
           placeholder="E-mail"
-          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+          onChange={handleChange}
+          value={formData.email}
         />
         <input
           type="tel"
           className="form__input"
-          id="phoneNumber"
+          name="phoneNumber"
           placeholder="Phone number"
-          pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}"
+          onChange={handleChange}
+          value={formData.phoneNumber}
         />
         <input
           type="password"
           className="form__input"
-          id="password"
+          name="password"
           placeholder="Password"
+          onChange={handleChange}
+          value={formData.password}
         />
          <button type="submit">Register</button>
       </div>
