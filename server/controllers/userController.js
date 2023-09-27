@@ -24,7 +24,7 @@ const createUser = async (req, res) => {
 
 const getAllUsers = async (req, res) => {
     try {
-      const users = await User.find(); // Pobierz wszystkich użytkowników z bazy danych
+      const users = await User.find();
   
       if (!users) {
         return res.status(404).json({ message: "Brak użytkowników w bazie danych." });
