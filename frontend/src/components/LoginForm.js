@@ -1,21 +1,17 @@
 import { useState } from "react";
 import axios from "axios";
 import "../css/RegistrationForm.css";
+import { useNavigate } from 'react-router-dom';
 
-const Registration = () => {
+
+const Login = () => {
   const initialFormData = {
-    name: "",
-    surname: "",
     email: "",
-    phoneNumber: "",
     password: "",
   };
 
   const [formData, setFormData] = useState({
-    name: "",
-    surname: "",
     email: "",
-    phoneNumber: "",
     password: "",
   });
 
@@ -25,14 +21,13 @@ const Registration = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    axios.post("http://localhost:3000/registerForm", formData)
+    axios.post("http://localhost:3000/loginForm", formData)
       .then((response) => {
         console.log(response);
         if (response.status === 200) {
           console.log(response.status);
           setFormData(initialFormData);
           alert('Success');
-          window.location = "/home"
         }
       }).catch((error) => {
         console.error(error);
@@ -46,15 +41,6 @@ const Registration = () => {
         rel="stylesheet"
       />
       <div class="form__group">
-        <input type="text" class="form__input" name="name" placeholder="Name" onChange={handleChange} value={formData.name}/>
-        <input
-          type="text"
-          className="form__input"
-          name="surname"
-          placeholder="Surname"
-          onChange={handleChange}
-          value={formData.surname}
-        />
         <input
           type="email"
           className="form__input"
@@ -62,14 +48,6 @@ const Registration = () => {
           placeholder="E-mail"
           onChange={handleChange}
           value={formData.email}
-        />
-        <input
-          type="tel"
-          className="form__input"
-          name="phoneNumber"
-          placeholder="Phone number"
-          onChange={handleChange}
-          value={formData.phoneNumber}
         />
         <input
           type="password"
@@ -85,4 +63,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default Login;
