@@ -3,20 +3,33 @@ import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import RegistrationForm from "./components/RegistrationForm";
 import LoginForm from "./components/LoginForm";
 import Footer from "./components/Footer";
+import Home from "./components/Home";
+import Cards from "./components/Cards";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<NavbarForNotLoggedUser />}></Route>
+
+        <Route path="/" element={
+        <NavbarForNotLoggedUser />
+        }>
+
+        </Route>
+
         <Route
           path="/home"
           element={
             <>
-              <NavbarForNotLoggedUser /> <div></div>
+              <NavbarForNotLoggedUser />
+              <Home />
+              <Footer /> 
+              
             </>
-          }
-        ></Route>
+          }>
+        
+        </Route>
+
         <Route
           path="/samples"
           element={
@@ -25,6 +38,7 @@ function App() {
             </>
           }
         ></Route>
+
         <Route
           path="/about"
           element={
@@ -54,7 +68,8 @@ function App() {
               <Footer />
             </>
           }
-        ></Route>
+        >
+        </Route>
       </Routes>
     </Router>
   );
