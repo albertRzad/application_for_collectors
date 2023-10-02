@@ -1,4 +1,6 @@
 const User = require("../models/user")
+const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
 
 const createUser = async (req, res) => {
     const name = req.body.name;
@@ -6,12 +8,13 @@ const createUser = async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
     const phoneNumber = req.body.phoneNumber;
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = new User({
         name: name,
         surname: surname,
         email: email,
-        password: password,
+        password: hashedPassword,
         phoneNumber: phoneNumber
       });
 
@@ -29,10 +32,9 @@ const loginUser = async (req, res) => {
   try {
     const user = await User.findOne({"email": email});
     if (!user) {
-      return res.status(404).json({ message: 'Użytkownik o podanym adresie email nie istnieje' });
+      return res.status(404).json({ message: 'There no user associated with this email address.' });
     }
-
-    const passwordMatch = password.isEqualTo(user.password)
+    const passwordMatch = bcrypt.compare(password, user.password);
     if (passwordMatch) {
       const token = jwt.sign({ _id: user._id }, password, {expiresIn: "7d",})
       return res.status(200).json({ data: {token,email}, message: "Succesfully logged" })
@@ -45,19 +47,4 @@ const loginUser = async (req, res) => {
   }
 }
 
-const getAllUsers = async (_req, res) => {
-    try {
-      const users = await User.find();
-  
-      if (!users) {
-        return res.status(404).json({ message: "Brak użytkowników w bazie danych." });
-      }
-  
-      return res.status(200).json(users);
-    } catch (error) {
-      console.error("Błąd podczas pobierania użytkowników:", error);
-      return res.status(500).json({ message: "Wystąpił błąd podczas pobierania użytkowników z bazy danych." });
-    }
-  };
-
-module.exports = {createUser: createUser, getAllUsers: getAllUsers, loginUser: loginUser};
+module.exports = {createUser: createUser, loginUser: loginUser};

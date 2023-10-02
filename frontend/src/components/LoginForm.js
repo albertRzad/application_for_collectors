@@ -1,8 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
 import "../css/RegistrationForm.css";
-import { useNavigate } from 'react-router-dom';
-
 
 const Login = () => {
   const initialFormData = {
@@ -20,14 +18,16 @@ const Login = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    axios.post("http://localhost:3000/loginForm", formData)
+    e.preventDefault();
+     axios.post("http://localhost:3000/loginForm", formData)
       .then((response) => {
         console.log(response);
         if (response.status === 200) {
+          localStorage.setItem("token", response.data.token);
           console.log(response.status);
           setFormData(initialFormData);
           alert('Success');
+          window.location.assign("/home");
         }
       }).catch((error) => {
         console.error(error);
@@ -57,7 +57,7 @@ const Login = () => {
           onChange={handleChange}
           value={formData.password}
         />
-         <button type="submit">Register</button>
+         <button type="submit">Login</button>
       </div>
     </form>
   );
