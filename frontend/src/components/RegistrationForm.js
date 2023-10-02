@@ -19,6 +19,8 @@ const Registration = () => {
     password: "",
   });
 
+  const [showPopup, setShowPopup] = useState(false);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -31,8 +33,10 @@ const Registration = () => {
         if (response.status === 200) {
           console.log(response.status);
           setFormData(initialFormData);
-          alert('Success');
-          window.location = "/home"
+          setShowPopup(true);
+          setTimeout(function() {
+            window.location.assign("/home");
+          }, 1500);
         }
       }).catch((error) => {
         console.error(error);
@@ -40,6 +44,7 @@ const Registration = () => {
   };
 
   return (
+    <>
     <form className="formContainer" onSubmit={handleSubmit}>
       <link
         href="https://fonts.googleapis.com/css?family=Roboto"
@@ -82,6 +87,19 @@ const Registration = () => {
          <button type="submit">Register</button>
       </div>
     </form>
+
+{showPopup && (
+  <div className="popup">
+    <div className="popup-content">
+       <b> User successfully registered. </b>
+        <br></br>
+        <b>Redirecting to home page. </b>
+    </div>
+  </div>
+)}
+
+</>
+
   );
 };
 
