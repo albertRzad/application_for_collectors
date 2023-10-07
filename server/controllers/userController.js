@@ -28,7 +28,6 @@ const createUser = async (req, res) => {
 const loginUser = async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
-
   try {
     const user = await User.findOne({"email": email});
     if (!user) {
@@ -37,7 +36,8 @@ const loginUser = async (req, res) => {
     const passwordMatch = bcrypt.compare(password, user.password);
     if (passwordMatch) {
       const token = jwt.sign({ _id: user._id }, password, {expiresIn: "7d",})
-      return res.status(200).json({ data: {token,email}, message: "Succesfully logged" })
+      console.log(token)
+      return res.status(200).json({token, message: "Succesfully logged in."});
     } else {
       return res.status(401).json({ error: 'Given password is incorrect' });
     }

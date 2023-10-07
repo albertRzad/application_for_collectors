@@ -1,0 +1,21 @@
+2 tydzień:
+Wstęp, streszczenie, cel i zakres pracy, cele głowne, cele szczegółowe
+
+3 tydzień:
+Analiza rynku,Wykorzystane technologie, połowa diagramów
+
+4 tydzień:
+Druga połowa diagramów, wymagania funckjonalne i niefunkcjonalne, repozytorium na gitlabie skonfigurowane
+5 tydzień:
+Rejestracja, logowanie, authoryzacja, token jwt, redirecting, nawigacja po stronie,przeglad losowych eksponatow
+Wszystko frontend + backend
+
+6 tydzień:
+Strona główna frontend, navbar frontend, stopka frontend,regulamin frontend, faq frontned, + walidacja danych po stronie zarówno frontu jak i backendu
+
+7 tydzień:
+Przeglad eksponatow wystawionych na sprzedaz, Zakladka profilu z mozliwosciami edycji, przeglad kolekcji wraz z mozliwosca tworzenia nowych kolekcji i dodwanie eksponatow
+Wszystko front + backend
+
+8 tydzien:
+Postawienia frontendu oraz backendu na dockerze + ewentualne korekty i ulepszanie strony dofrmalnej dokumentacji + ewentualne poprawki w kodzies

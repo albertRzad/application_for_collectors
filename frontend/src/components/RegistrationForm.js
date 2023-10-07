@@ -50,8 +50,8 @@ const Registration = () => {
         href="https://fonts.googleapis.com/css?family=Roboto"
         rel="stylesheet"
       />
-      <div class="form__group">
-        <input type="text" class="form__input" name="name" placeholder="Name" onChange={handleChange} value={formData.name}/>
+      <div className="form__group">
+        <input type="text" className="form__input" name="name" placeholder="Name" onChange={handleChange} value={formData.name}/>
         <input
           type="text"
           className="form__input"

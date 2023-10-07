@@ -2,9 +2,9 @@ import "../css/Footer.css"
 
 const Footer = () => {
     return(
-        <footer class="footer">
-  <div class="footer__addr">
-    <h1 class="footer__logo">Something</h1>
+        <footer className="footer">
+  <div className="footer__addr">
+    <h1 className="footer__logo">Something</h1>
         
     <h2>Contact</h2>
     

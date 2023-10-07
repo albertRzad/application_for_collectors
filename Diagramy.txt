@@ -1,0 +1,18 @@
+DPU:
+1.Rejestracja
+2.Dodawanie eksponatu
+
+Pakietów:
+1.Uzytkownik
+2.Rejestracja
+
+Diagram klas
+
+BPMN:
+1.Rejestracja
+2.Dodawanie eksponatu
+
+
+Aktywności:
+1.Logowanie
+2.Zmiana hasła

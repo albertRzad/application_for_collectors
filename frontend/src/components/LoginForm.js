@@ -20,14 +20,15 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
      axios.post("http://localhost:3000/loginForm", formData)
-      .then((response) => {
-        console.log(response);
-        if (response.status === 200) {
-          localStorage.setItem("token", response.data.token);
-          console.log(response.status);
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          console.log(res.data.token);
+          console.log(res.status);
           setFormData(initialFormData);
           alert('Success');
           window.location.assign("/home");
+          localStorage.setItem("token", res.data.token);
         }
       }).catch((error) => {
         console.error(error);
@@ -40,7 +41,7 @@ const Login = () => {
         href="https://fonts.googleapis.com/css?family=Roboto"
         rel="stylesheet"
       />
-      <div class="form__group">
+      <div className="form__group">
         <input
           type="email"
           className="form__input"
