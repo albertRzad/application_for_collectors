@@ -5,6 +5,7 @@ const collectionSchema = new mongoose.Schema({
     type: String,
     numberOfExhibits: Number,
     description: String,
+    userId: String
   });
 
   const Collection = mongoose.model("Collection",collectionSchema)

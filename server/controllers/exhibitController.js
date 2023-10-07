@@ -1,4 +1,4 @@
-const Collection = require("../models/exhibit")
+const Exhibit = require("../models/exhibit")
 
 const createExhibit = async (req, res) => {
     const name = req.body.name;
@@ -21,3 +21,5 @@ const createExhibit = async (req, res) => {
         return res.status(200).json({ message: "Exhibit added."});
       })
 }
+
+module.exports = {createExhibit: createExhibit};

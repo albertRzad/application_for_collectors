@@ -19,3 +19,5 @@ const createCollection = async (req, res) => {
         return res.status(200).json({ message: "Exhibit added."});
       })
 }
+
+module.exports = {createCollection: createCollection};

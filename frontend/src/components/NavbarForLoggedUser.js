@@ -4,6 +4,12 @@ import { useState } from "react";
 export default function NavbarForLoggedUser() {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userEmail");
+    window.location = "/home";
+  };
+
   return (
     <nav className="navigation">
       <a href="/" className="brand-name">
@@ -50,7 +56,7 @@ export default function NavbarForLoggedUser() {
             <a href="/userprofile">Profile</a>
           </li>
           <li>
-            <a href="/logout">Logout</a>
+            <button onClick={handleLogout}>Logout</button>
           </li>
         </ul>
       </div>
