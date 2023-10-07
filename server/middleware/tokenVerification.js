@@ -10,10 +10,10 @@ return res.status(403).send({ message: "No token provided!" });
 
 jwt.verify(token, password, (err, decodeduser) => {
 if (err) {
-return res.status(401).send({ message: "Token niepoprawny!" });
+return res.status(401).send({ message: "Invalid token!" });
 }
 req.user = decodeduser
 next()
 })
 }
-export default tokenVerification
+module.exports = tokenVerification;

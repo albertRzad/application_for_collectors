@@ -4,7 +4,6 @@ import RegistrationForm from "./components/RegistrationForm";
 import LoginForm from "./components/LoginForm";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
-import Cards from "./components/Cards";
 
 function App() {
   return (
