@@ -1,0 +1,55 @@
+
+const express = require('express');
+const mongoose = require('mongoose');
+const app = express();
+const port = 3001;
+
+mongoose.connect('mongodb://localhost/your-database-name', { useNewUrlParser: true, useUnifiedTopology: true });
+
+const YourModel = mongoose.model('YourModel', new mongoose.Schema({
+  // Definicja schematu modelu w bazie danych
+}));
+
+app.get('/api/element-count', async (req, res) => {
+  try {
+    const count = await YourModel.countDocuments();
+    res.json({ count });
+  } catch (error) {
+    res.status(500).json({ error: 'Błąd w bazie danych' });
+  }
+});
+
+app.listen(port, () => {
+  console.log(`Serwer działa na porcie ${port}`);
+});
+
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+function App() {
+  const [elementCount, setElementCount] = useState(0);
+
+  useEffect(() => {
+    async function fetchElementCount() {
+      try {
+        const response = await axios.get('/api/element-count');
+        setElementCount(response.data.count);
+      } catch (error) {
+        console.error('Błąd podczas pobierania liczby elementów z bazy danych', error);
+      }
+    }
+    
+    fetchElementCount();
+  }, []);
+
+  return (
+    <div className="App">
+      {Array.from({ length: elementCount }, (_, index) => (
+        <div key={index}></div>
+      )}
+    </div>
+  );
+}
+
+export default App;
