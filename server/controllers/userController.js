@@ -47,4 +47,19 @@ const loginUser = async (req, res) => {
   }
 }
 
-module.exports = {createUser: createUser, loginUser: loginUser};
+const findUserByEmail = async(req,res) =>{
+    try {
+      const email = req.params.email; 
+  
+      const user = await User.findOne({ email });
+      if (!user) {
+        return res.status(404).json({ message: 'There is no user with given email address.' });
+      }
+      res.json(user);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: 'There was an error' });
+  };
+}
+
+module.exports = {createUser: createUser, loginUser: loginUser, findUserByEmail: findUserByEmail};
