@@ -46,6 +46,7 @@ const Registration = () => {
   return (
     <>
     <form className="formContainer" onSubmit={handleSubmit}>
+    <h4>Register</h4>
       <link
         href="https://fonts.googleapis.com/css?family=Roboto"
         rel="stylesheet"
@@ -84,7 +85,11 @@ const Registration = () => {
           onChange={handleChange}
           value={formData.password}
         />
-         <button type="submit">Register</button>
+         <div class="container">
+          <div>
+            <button class="but">Sign up</button>
+          </div>
+        </div>
       </div>
     </form>
 

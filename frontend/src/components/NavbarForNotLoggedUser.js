@@ -34,20 +34,21 @@ export default function NavbarForNotLoggedUser() {
         }
       >
         <ul>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
           <li>
-            <a href="/home">Home</a>
+            <a href="/home"> <i class="fa fa-fw fa-home"></i>Home</a>
           </li>
           <li>
-            <a href="/samples">Sample exhibits</a>
+            <a href="/samples"> <i class="fa fa-fw fa-compass"> </i> Sample exhibits</a>
           </li>
           <li>
-            <a href="/about">About site</a>
+            <a href="/about"> <i class="fa fa-fw fa-search"></i>About site</a>
           </li>
           <li>
-            <a href="/login">Login</a>
+            <a href="/login"> <i class="fa fa-fw fa-user"></i>Login</a>
           </li>
           <li>
-            <a href="/register">Register</a>
+            <a href="/register"> <i class="fa fa-fw fa-address-card"></i>Register</a>
           </li>
         </ul>
       </div>

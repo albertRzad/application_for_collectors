@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
-import "../css/RegistrationForm.css";
+import "../css/LoginForm.css";
+import "../css/Button.css";
 
 const Login = () => {
   const initialFormData = {
@@ -36,7 +37,9 @@ const Login = () => {
   };
 
   return (
+    
     <form className="formContainer" onSubmit={handleSubmit}>
+      <h4>Login</h4>
       <link
         href="https://fonts.googleapis.com/css?family=Roboto"
         rel="stylesheet"
@@ -58,7 +61,13 @@ const Login = () => {
           onChange={handleChange}
           value={formData.password}
         />
-         <button type="submit">Login</button>
+
+        <div class="container">
+          <div>
+            <button class="but">Login</button>
+          </div>
+        </div>
+         
       </div>
     </form>
   );
