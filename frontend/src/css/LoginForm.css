@@ -1,29 +1,43 @@
-.formContainer{
-    display: flex;
-    border: 5px dotted red;
-    align-items: top;
-    justify-content: center;
-    margin-left: 25%;
-    margin-right: 25%;
-    height: 100vh;
-  }
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+}
   
+h4{
+  font-family: 'Segoe UI', bold;
+  font-size: 35px;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
   .formContainer form{
     display: flex;
     flex-direction: column;
-    border: 5px dotted red;
+    border: 5px dotted blue;
     width: 75%; 
     height: max-content;
+    
   }
   
   .formContainer button{
     display: flex;
     margin: 0 auto;
-    width:90%;
+    width: 90%;
     text-align: center;
     justify-content: center;
   }
   
+  .formContainer .form__input {
+    align-content: center;
+    border-radius: 22px;
+    margin-bottom: 35px;
+    width: 100%;
+    height: 64px;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2), 0 0 20px 0 rgba(0, 0, 0, 0.19);
+    
+  }
   
   .formContainer form input{
     border: 1px solid black;
@@ -32,11 +46,11 @@
   }
   
   .formContainer form input:hover{
-    border: 2px solid green;
+    border: 2px solid blue;
   }
   
   .formContainer form input:focus{
-    border: 2px solid red !important;
+    border: 2px solid blue !important;
   }
   
   .formContainer form a{
@@ -70,7 +84,7 @@
     padding: 1.5rem 2rem;
     border-radius: 0.2rem;
     background-color: rgb(255, 255, 255);
-    border: 3px solid red !important;
+    border: 3px solid blue !important;
     width: 90%;
     display: block;
     border-bottom: 0.3rem solid transparent;
