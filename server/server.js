@@ -18,6 +18,7 @@ app.post('/loginForm', userController.loginUser);
 app.post('/collectionForm', collectionController.createCollection);
 app.post('/exhibitForm', exhibitController.createExhibit);
 app.get('/userProfile/:email',userController.findUserByEmail);
+app.post("/tokenVerification", userController.verificateUser)
 
 
 app.listen(3000);

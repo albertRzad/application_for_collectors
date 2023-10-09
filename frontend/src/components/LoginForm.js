@@ -26,10 +26,11 @@ const Login = () => {
         if (res.status === 200) {
           console.log(res.data.token);
           console.log(res.status);
-          setFormData(initialFormData);
           alert('Success');
           window.location.assign("/home");
           localStorage.setItem("token", res.data.token);
+          localStorage.setItem("email",formData.email)
+          setFormData(initialFormData);
         }
       }).catch((error) => {
         console.error(error);

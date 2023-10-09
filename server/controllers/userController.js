@@ -62,4 +62,31 @@ const findUserByEmail = async(req,res) =>{
   };
 }
 
-module.exports = {createUser: createUser, loginUser: loginUser, findUserByEmail: findUserByEmail};
+const verificateUser = async (req, res) => {
+  const token = req.params.email;
+  const email = req.params.email;
+
+  try {
+    const user = await User.findOne({ email: email });
+
+    if (!user) {
+      return res.status(404).json({ message: 'There is no user with the given email address.' });
+    }
+
+    if (!token) {
+      return res.status(403).send({ message: "No token provided!" });
+    }
+
+    jwt.decode(token, user.password, (err) => {
+      if (err) {
+        return res.status(401).send({ message: "Invalid token!" });
+      }
+        return res.status(200).send({ message: "Approved" });
+
+    });
+  } catch (error) {
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+module.exports = {createUser: createUser, loginUser: loginUser, findUserByEmail: findUserByEmail, verificateUser: verificateUser};
