@@ -1,21 +1,33 @@
-2 tydzień:
-Wstęp, streszczenie, cel i zakres pracy, cele głowne, cele szczegółowe
+Za tydzien:
+repozytorium na gitlabie skonfigurowane, navbar, stopka, podstawowy backend, strona glowna
 
-3 tydzień:
-Analiza rynku,Wykorzystane technologie, połowa diagramów
+za 2 tygodnie:
+Rejestracja, logowanie, redirecting, nawigacja po stronie
+polaczenie z baza danych
+Wszystko frontend
 
-4 tydzień:
-Druga połowa diagramów, wymagania funckjonalne i niefunkcjonalne, repozytorium na gitlabie skonfigurowane
-5 tydzień:
-Rejestracja, logowanie, authoryzacja, token jwt, redirecting, nawigacja po stronie,przeglad losowych eksponatow
-Wszystko frontend + backend
+Za 3 tygodnie:
+authoryzacja, token jwt
+Zakladka profilu z mozliwosciami edycji
+Strona glowna po zalogowaniu
 
-6 tydzień:
-Strona główna frontend, navbar frontend, stopka frontend,regulamin frontend, faq frontned, + walidacja danych po stronie zarówno frontu jak i backendu
+Za 4 tygodnie:
+walidacja danych po stronie zarówno frontu jak i backendu
+losowe eksponaty
 
-7 tydzień:
-Przeglad eksponatow wystawionych na sprzedaz, Zakladka profilu z mozliwosciami edycji, przeglad kolekcji wraz z mozliwosca tworzenia nowych kolekcji i dodwanie eksponatow
-Wszystko front + backend
+za 5 tygodni:
+FAQ, Regulamin, poprawki we w=frintendzie dotychczas stworzonych elemntow
+zakladka do przegladania kolekcji front
 
-8 tydzien:
+Za 6 tygodni:
+Dodawanie eksponatow oraz kolekcji front + back,
+wysylanie ofert kupna,
+dodawanie kolekcji do ulubionych
+ 
+za 7 tygodni:
+Wyszukiwarka eksponatów i kolekcji
+front + backend
+Testy
+
+za 8 tygodni:
 Postawienia frontendu oraz backendu na dockerze + ewentualne korekty i ulepszanie strony dofrmalnej dokumentacji + ewentualne poprawki w kodzies

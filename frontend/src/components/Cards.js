@@ -10,13 +10,13 @@ function Cards() {
           <ul className="cards__items">
             <CardItem
               src="images/img-9.jpg"
-              text="Bron z wojny"
+              text="Niesamowite kolekcje broni zabytkowej, jak i współczesnej."
               label="Bron"
               path="/login"
             />
             <CardItem
               src="images/img-2.jpg"
-              text="LORem ipsum"
+              text="Listy listy listy listy listy listy listy listy"
               label="Listy"
               path="/login"
             />
@@ -24,19 +24,19 @@ function Cards() {
           <ul className="cards__items">
             <CardItem
               src="images/img-3.jpg"
-              text="LORem ipsum"
+              text="Książeczki zabytkowe i nie tylko, oryginalne egzemplarze."
               label="Ksiazki"
               path="/login"
             />
             <CardItem
               src="images/img-4.jpg"
-              text="LORem ipsum"
+              text="Znaczki z całego świata potwierdzone certyfikatami jakości."
               label="Znaczki"
               path="/login"
             />
             <CardItem
               src="images/img-8.jpg"
-              text="LORem ipsum"
+              text="Zbiory monet kolekcjonerskich z prawie wszystkich krajów na świecie."
               label="Monety"
               path="/login"
             />
