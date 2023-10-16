@@ -40,7 +40,7 @@ const Login = () => {
   return (
     
     <form className="formContainer" onSubmit={handleSubmit}>
-      <h4>Login</h4>
+      <div className = "FormTitle">Login</div>
       <link
         href="https://fonts.googleapis.com/css?family=Roboto"
         rel="stylesheet"

@@ -6,6 +6,7 @@
   margin-left: 25%;
   margin-right: 25%;
   height: 100vh;
+  
 }
 
 .formContainer form{
@@ -26,7 +27,7 @@
 
 
 .formContainer form input{
-  border: 1px solid black;
+  border: 1px solid rgb(41, 167, 72);
   transition: border .5s;
   border-radius: 20px;
 }

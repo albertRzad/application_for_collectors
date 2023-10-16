@@ -46,7 +46,7 @@ const Registration = () => {
   return (
     <>
     <form className="formContainer" onSubmit={handleSubmit}>
-    <h4>Register</h4>
+    <div className = "FormTitle">Register</div>
       <link
         href="https://fonts.googleapis.com/css?family=Roboto"
         rel="stylesheet"

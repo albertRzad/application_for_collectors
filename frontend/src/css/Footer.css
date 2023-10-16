@@ -15,15 +15,18 @@
     background-color: #f4f4f4;
     align-items: start;
     min-height: 100vh;
+    
   }
   
   .footer {
     display: flex;
     flex-flow: row wrap;
     padding: 30px 30px 20px 30px;
-    color: #2f2f2f;
-    background-color: #fff;
+    color: #ffcc00;
+    /* background-color: rgb(87, 10, 16); */
+    background-image: url(leather-ruby.png);
     border-top: 1px solid #e5e5e5;
+    border: 5px solid black;
   }
   
   .footer > * {
@@ -55,7 +58,8 @@
   
   .footer address {
     font-style: normal;
-    color: #999;
+    /* color: #ffcc00; */
+    
   }
   
   .footer__btn {
@@ -64,7 +68,7 @@
     justify-content: center;
     height: 26px;
     max-width: max-content;
-    background-color: rgb(33, 33, 33, 0.07);
+    background-color: rgba(0, 255, 34, 0.07);
     border-radius: 100px;
     color: #2f2f2f;
     line-height: 0;
@@ -97,7 +101,11 @@
   }
   
   .nav__ul a {
-    color: #999;
+    /* color: #ffcc00; */
+    background: linear-gradient(to bottom, #bda05e 22%,#695127 24%, #c9a861 26%, #d3ac57 27%,#ffecb3 40%,#8f6209 78%); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #fff;
   }
   
   .nav__ul--extra {
