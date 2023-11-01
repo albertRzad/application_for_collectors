@@ -36,19 +36,19 @@ export default function NavbarForNotLoggedUser() {
         <ul>
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
           <li>
-            <a href="/home"> <i class="fa fa-fw fa-home"></i>Home</a>
+            <a href="/home"><span> <i class="fa fa-fw fa-home"></i>Home</span></a>
           </li>
           <li>
-            <a href="/samples"> <i class="fa fa-fw fa-compass"> </i> Sample exhibits</a>
+            <a href="/samples"> <span><i class="fa fa-fw fa-compass"> </i> Sample exhibits</span></a>
           </li>
           <li>
-            <a href="/about"> <i class="fa fa-fw fa-search"></i>About site</a>
+            <a href="/about"><span> <i class="fa fa-fw fa-search"></i>About site</span></a>
           </li>
           <li>
-            <a href="/login"> <i class="fa fa-fw fa-user"></i>Login</a>
+            <a href="/login"> <span><i class="fa fa-fw fa-user"></i>Login</span></a>
           </li>
           <li>
-            <a href="/register"> <i class="fa fa-fw fa-address-card"></i>Register</a>
+            <a href="/register"> <span> <i class="fa fa-fw fa-address-card"></i>Register</span></a>
           </li>
         </ul>
       </div>

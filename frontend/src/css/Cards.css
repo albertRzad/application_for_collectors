@@ -1,14 +1,18 @@
+body {
+  background-image: url(background-texture3.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
 .cards {
     padding: 4rem;
     /* background: rgb(2,0,36); */
     /* background: rgba(14, 14, 17, 0.801); */
-    background-image: url(background-texture3.png);
-    background-position: center center;
-    
-    
-    
     
   }
+  
   .video-container {
     height: 100vh;
     width: 100%;

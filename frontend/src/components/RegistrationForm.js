@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
-import "../css/RegistrationForm.css";
+import "../css/Popup.css";
+import "../css/Form.css";
 
 const Registration = () => {
   const initialFormData = {
@@ -46,6 +47,7 @@ const Registration = () => {
   return (
     <>
     <form className="formContainer" onSubmit={handleSubmit}>
+      <div className="shapeRegister">
     <div className = "FormTitle">Register</div>
       <link
         href="https://fonts.googleapis.com/css?family=Roboto"
@@ -86,10 +88,14 @@ const Registration = () => {
           value={formData.password}
         />
          <div class="container">
+         <div className="formMessage">
+         <a href="/login">Already have an account? Login</a>
+        </div>
           <div>
             <button class="but">Sign up</button>
           </div>
         </div>
+      </div>
       </div>
     </form>
 

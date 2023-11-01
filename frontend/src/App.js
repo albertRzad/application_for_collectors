@@ -16,7 +16,7 @@ function App() {
             element={
               <>
                 <NavbarForNotLoggedUser />
-                <Home />
+                <main><Home /></main>
                 <Footer />
               </>
             }
@@ -27,7 +27,7 @@ function App() {
             element={
               <>
                 <NavbarForNotLoggedUser />
-                <Home />
+                <main><Home /></main>
                 <Footer />
               </>
             }
@@ -56,7 +56,7 @@ function App() {
             element={
               <>
                 <NavbarForNotLoggedUser />
-                <LoginForm />
+                <main><LoginForm /></main>
                 <Footer />
               </>
             }
@@ -67,7 +67,7 @@ function App() {
             element={
               <>
                 <NavbarForNotLoggedUser />
-                <RegistrationForm />
+                <main><RegistrationForm /></main>
                 <Footer />
               </>
             }
@@ -84,7 +84,7 @@ function App() {
             element={
               <>
                 <NavbarForLoggedUser />
-                <Home />
+                <main><Home /></main>
                 <Footer />
               </>
             }
@@ -95,7 +95,7 @@ function App() {
             element={
               <>
                 <NavbarForLoggedUser />
-                <Home />
+                <main><Home /></main>
                 <Footer />
               </>
             }
@@ -124,7 +124,7 @@ function App() {
             element={
               <>
                 <NavbarForLoggedUser />
-                <LoginForm />
+                <main><LoginForm /></main>
                 <Footer />
               </>
             }

@@ -26,7 +26,7 @@ const Footer = () => {
         <li>
           <a href="#">Print</a>
         </li>
-            
+          
         <li>
           <a href="#">Alternative Ads</a>
         </li>

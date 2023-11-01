@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import "../css/LoginForm.css";
+import "../css/Form.css";
 import "../css/Button.css";
 
 const Login = () => {
@@ -40,6 +40,7 @@ const Login = () => {
   return (
     
     <form className="formContainer" onSubmit={handleSubmit}>
+      <div className="shapeLogin">
       <div className = "FormTitle">Login</div>
       <link
         href="https://fonts.googleapis.com/css?family=Roboto"
@@ -64,14 +65,20 @@ const Login = () => {
         />
 
         <div class="container">
+          <div className="formMessage">
+         <a href="/register">Don't have an account yet? Register</a>
+        </div>
           <div>
             <button class="but">Login</button>
           </div>
         </div>
          
       </div>
+      </div>
     </form>
+    
   );
+
 };
 
 export default Login;

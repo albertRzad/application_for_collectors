@@ -6,27 +6,18 @@
     font-size: 100%;
   }
   
-  body {
-    font-family: acumin-pro, system-ui, sans-serif;
-    margin: 0;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    font-size: 14px;
-    background-color: #f4f4f4;
-    align-items: start;
-    min-height: 100vh;
-    
-  }
-  
+
   .footer {
     display: flex;
     flex-flow: row wrap;
-    padding: 30px 30px 20px 30px;
+    padding: 10px 5px 20px 100px;
     color: #ffcc00;
     /* background-color: rgb(87, 10, 16); */
     background-image: url(leather-ruby.png);
     border-top: 1px solid #e5e5e5;
     border: 5px solid black;
+    width: 100%;
+    
   }
   
   .footer > * {
@@ -35,7 +26,7 @@
   
   .footer__addr {
     margin-right: 1.25em;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
   }
   
   .footer__logo {
@@ -66,7 +57,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 26px;
+    height: 54px;
     max-width: max-content;
     background-color: rgba(0, 255, 34, 0.07);
     border-radius: 100px;
