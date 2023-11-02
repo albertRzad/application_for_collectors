@@ -62,7 +62,8 @@
   
 
   .navigation-menu li a:hover {
-    background-color: rgba(182, 11, 11, 0.4); 
+    background-color: rgba(0, 0, 0, 0.295);
+    border-radius: 8px;
   }
 
   
@@ -99,7 +100,8 @@
       left: 0;
       width: 100%;
       height: calc(100vh - 60px);
-      background-color: white;
+      /* background-color: white; */
+      background-image: url(leather-ruby.png);
       border-top: 1px solid black;
       display: none;
     }
