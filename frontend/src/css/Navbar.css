@@ -6,7 +6,7 @@
     width: 100%;
     padding: 0.5rem 0rem;
     box-shadow: 0 2px 2px 2px rgba(9, 9, 9, 0.23);
-    background-image: url(leather-ruby.png);
+    background: #2e2e2e;
     /* background: rgb(87, 10, 16); */
   }
 
@@ -61,7 +61,7 @@
   
 
   .navigation-menu li a:hover {
-    background-color: rgba(0, 0, 0, 0.295);
+    background-color: rgba(145, 145, 145, 0.199);
     border-radius: 8px;
   }
 

@@ -12,10 +12,10 @@
     flex-flow: row wrap;
     padding: 10px 5px 20px 100px;
     color: #ffcc00;
-    /* background-color: rgb(87, 10, 16); */
-    background-image: url(leather-ruby.png);
+    background-color: #2e2e2e; 
+   
     border-top: 1px solid #e5e5e5;
-    border: 5px solid black;
+    border: 1px solid black;
     width: 100%;
     
   }
