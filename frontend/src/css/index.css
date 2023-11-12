@@ -7,9 +7,14 @@ body {
     font-size: 14px;
     background-color: #f4f4f4;
     align-items: start;
+    background: #1a1a1a;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
  
   }
-
+  
   #root {
     display:contents;
   }
