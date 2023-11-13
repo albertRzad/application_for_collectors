@@ -13,7 +13,7 @@ export default function NavbarForLoggedUser() {
   return (
     <nav className="navigation">
       <a href="/" className="brand-name">
-        Collector Artifacts
+        CollectOn
       </a>
       <button
         className="hamburger"

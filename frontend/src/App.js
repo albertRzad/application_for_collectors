@@ -5,6 +5,7 @@ import RegistrationForm from "./components/RegistrationForm";
 import LoginForm from "./components/LoginForm";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
+import UserProfile from "./components/UserProfile";
 
 function App() {
   if (localStorage.getItem("token") == null) {
@@ -100,6 +101,14 @@ function App() {
               </>
             }
           ></Route>
+          <Route
+            path="/Auctions"
+            element={
+              <>
+                <NavbarForLoggedUser />
+              </>
+            }
+          ></Route>
 
           <Route
             path="/myCollections"
@@ -124,7 +133,7 @@ function App() {
             element={
               <>
                 <NavbarForLoggedUser />
-                <main><LoginForm /></main>
+                <main><UserProfile /></main>
                 <Footer />
               </>
             }
