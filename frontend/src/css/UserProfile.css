@@ -1,0 +1,33 @@
+.userprofile {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+}
+
+.userprofilein {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    gap: 20px;
+    height: 100%;
+}
+
+.userprofileleft
+{
+    width: 20%;
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 5px;
+    min-height: 50vh;
+    height: 100%;
+}
+
+.userprofileright
+{
+    width: 100%;
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 5px;
+    min-height: 50vh;
+}

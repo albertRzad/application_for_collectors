@@ -13,7 +13,7 @@ export default function NavbarForLoggedUser() {
   return (
     <nav className="navigation">
       <a href="/" className="brand-name">
-        Collector Artifacts
+        CollectOn
       </a>
       <button
         className="hamburger"
@@ -44,16 +44,16 @@ export default function NavbarForLoggedUser() {
             <a href="/home">Home</a>
           </li>
           <li>
-            <a href="/auctions">Auctions</a>
+            <a href="/user/myauctions">Auctions</a>
           </li>
           <li>
-            <a href="/myCollections">My collections</a>
+            <a href="/user/mycollections">My collections</a>
           </li>
           <li>
             <a href="/exploreCollections">Explore collections</a>
           </li>
           <li>
-            <a href="/userprofile">Profile</a>
+            <a href="/user/profile">Profile</a>
           </li>
           <li>
             <button onClick={handleLogout}>Logout</button>
