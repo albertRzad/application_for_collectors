@@ -17,7 +17,9 @@ function App() {
             element={
               <>
                 <NavbarForNotLoggedUser />
-                <main><Home /></main>
+                <main>
+                  <Home />
+                </main>
                 <Footer />
               </>
             }
@@ -28,7 +30,9 @@ function App() {
             element={
               <>
                 <NavbarForNotLoggedUser />
-                <main><Home /></main>
+                <main>
+                  <Home />
+                </main>
                 <Footer />
               </>
             }
@@ -57,7 +61,9 @@ function App() {
             element={
               <>
                 <NavbarForNotLoggedUser />
-                <main><LoginForm /></main>
+                <main>
+                  <LoginForm />
+                </main>
                 <Footer />
               </>
             }
@@ -68,7 +74,9 @@ function App() {
             element={
               <>
                 <NavbarForNotLoggedUser />
-                <main><RegistrationForm /></main>
+                <main>
+                  <RegistrationForm />
+                </main>
                 <Footer />
               </>
             }
@@ -85,7 +93,9 @@ function App() {
             element={
               <>
                 <NavbarForLoggedUser />
-                <main><Home /></main>
+                <main>
+                  <Home />
+                </main>
                 <Footer />
               </>
             }
@@ -96,28 +106,15 @@ function App() {
             element={
               <>
                 <NavbarForLoggedUser />
-                <main><Home /></main>
+                <main>
+                  <Home />
+                </main>
                 <Footer />
               </>
             }
           ></Route>
-          <Route
-            path="/Auctions"
-            element={
-              <>
-                <NavbarForLoggedUser />
-              </>
-            }
-          ></Route>
 
-          <Route
-            path="/myCollections"
-            element={
-              <>
-                <NavbarForLoggedUser />
-              </>
-            }
-          ></Route>
+          
 
           <Route
             path="/exploreCollections"
@@ -128,16 +125,28 @@ function App() {
             }
           ></Route>
 
-          <Route
+          {/* <Route
             path="/userProfile"
             element={
               <>
-                <NavbarForLoggedUser />
-                <main><UserProfile /></main>
-                <Footer />
+                <main>
+                  <UserProfile />
+                </main>
+              </>
+            }
+          ></Route> */}
+          
+          <Route
+            path="/user/:activepage"
+            element={
+              <>
+                <main>
+                  <UserProfile />
+                </main>
               </>
             }
           ></Route>
+
         </Routes>
       </Router>
     );

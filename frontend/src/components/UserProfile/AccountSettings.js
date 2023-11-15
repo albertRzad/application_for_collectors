@@ -4,7 +4,8 @@ import './AccountSettings.css'
 const AccountSettings = () => {
   return (
     <div className='accountsettings'>
-      <h1 className='mainhead1'>Personal Information</h1>
+      <h1>AccountsSettings</h1>
+      {/* <h1 className='mainhead1'>Personal Information</h1>
 
       <div className='form'>
         <div className='form-group'>
@@ -31,7 +32,7 @@ const AccountSettings = () => {
 
       <button className='mainbutton1'
         
-        >Save Changes</button>
+        >Save Changes</button> */}
     </div>
   )
 }
