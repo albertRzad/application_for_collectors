@@ -4,7 +4,7 @@ import React from 'react'
 const MyAuctions = () => {
     return (
         <div>
-            <h1>MyAuctions</h1>
+            <div className='ProfileTitle'>My Auctions</div>
         </div>
     )
 }

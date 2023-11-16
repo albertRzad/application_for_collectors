@@ -4,7 +4,7 @@ import React from 'react'
 const MyCollections = () => {
     return (
         <div>
-            <h1>myCollections</h1>
+            <div className='ProfileTitle'>My Collections</div>
         </div>
     )
 }

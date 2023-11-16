@@ -18,7 +18,8 @@
 .userprofileleft
 {
     width: 20%;
-    border: 1px solid rgb(207, 207, 207);
+    border: 2px solid rgba(255, 255, 255, 0.055);
+    box-shadow: 0 0 10px rgba(8,7,16,0.6);
     border-radius: 5px;
     min-height: 50vh;
     height: 100%;
@@ -27,7 +28,9 @@
 .userprofileright
 {
     width: 100%;
-    border: 1px solid rgb(207, 207, 207);
+    border: 2px solid rgba(255, 255, 255, 0.055);
     border-radius: 5px;
     min-height: 50vh;
+    box-shadow: 0 0 10px rgba(8,7,16,0.6);
+    margin-right: 20px;
 }

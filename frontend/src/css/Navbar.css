@@ -7,19 +7,19 @@
     padding: 0.2rem 0rem;
     box-shadow: 0 2px 2px 2px rgba(9, 9, 9, 0.23);
     background: #2e2e2e;
-    /* background: rgb(87, 10, 16); */
+    
   }
 
   
   .brand-name {
     text-decoration: none;
-    /* //color: #ffcc00; */
-    font-size: 3.3rem;
+    font-size: 3.5rem;
     margin-left: 0.8rem;
     background: linear-gradient(to bottom, #bda05e 22%,#695127 24%, #c9a861 26%, #d3ac57 27%,#ffecb3 40%,#8f6209 78%); 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     color: #fff;
+    
   }
   
   .navigation-menu {
@@ -54,9 +54,7 @@
   }
 
   .navigation-menu a span {
-    background: linear-gradient(to bottom, #644a0e 22%,#7c4f00 24%, #c9a861 26%, #d3ac57 27%,#ffecb3 40%,#8f6209 78%); 
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #e2bc12;
   }
   
 
@@ -84,7 +82,7 @@
   }
   
   .hamburger:hover {
-    background-color: #ffcc00;
+    background-color: #a58401;
   }
   
   @media screen and (max-width: 550px) {
