@@ -12,9 +12,9 @@ export default function NavbarForLoggedUser() {
 
   return (
     <nav className="navigation">
-      <a href="/" className="brand-name">
+      <h1 href="/" className="brand-name">
         CollectOn
-      </a>
+      </h1>
       <button
         className="hamburger"
         onClick={() => {
@@ -40,23 +40,24 @@ export default function NavbarForLoggedUser() {
         }
       >
         <ul>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
           <li>
-            <a href="/home">Home</a>
+          <a href="/home"><span> <i class="fa fa-fw fa-home"></i>Home</span></a>
           </li>
           <li>
-            <a href="/user/myauctions">Auctions</a>
+            <a href="/user/myauctions"><span><i class="fa fa-fw fa-user"></i>Auctions</span></a>
           </li>
           <li>
-            <a href="/user/mycollections">My collections</a>
+            <a href="/user/mycollections"><span><i class="fa fa-fw fa-user"></i>My collections</span></a>
           </li>
           <li>
-            <a href="/exploreCollections">Explore collections</a>
+            <a href="/exploreCollections"><span><i class="fa fa-fw fa-user"></i>Explore collections</span></a>
           </li>
           <li>
-            <a href="/user/profile">Profile</a>
+            <a href="/user/profile"><span><i class="fa fa-fw fa-user"></i>Profile</span></a>
           </li>
           <li>
-            <button onClick={handleLogout}>Logout</button>
+            <button className="logout" onClick={handleLogout}>Logout</button>
           </li>
         </ul>
       </div>

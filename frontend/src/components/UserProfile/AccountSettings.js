@@ -1,40 +1,59 @@
-import React from 'react'
-import './AccountSettings.css'
+import React, { useState } from 'react';
+import './AccountSettings.css';
+import '../../css/Form.css';
 
 const AccountSettings = () => {
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Add logic to handle the submission of the form, such as validating the input and updating the user's account settings
+  };
+
   return (
-    <div className='accountsettings'>
-      <h1>AccountsSettings</h1>
-      {/* <h1 className='mainhead1'>Personal Information</h1>
+    <div className="accountSettings">
+      <div className='ProfileTitle'>Account Settings</div>
 
-      <div className='form'>
-        <div className='form-group'>
-          <label htmlFor='name'>Your Name <span>*</span></label>
-          <input type='text' name='name' id='name' />
+      <form className='formContainer' onSubmit={handleSubmit}>
+        <div className='form__account'>
+        {/* <div className='form_group_left'> */}
+          <label className='form__input__label' id="n_password">
+            New Password:
+            <input className="form__input" type="password"  value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+          </label>
+          <label className='form__input__label' id="c_password">
+            Confirm Password:
+            <input className="form__input" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+          </label>
+        {/* </div> */}
+        <button type="submit" id="button_save">Save Changes</button>
+        {/* <div className='form_group_right'> */}
+        <label className='form__input__label ' id="email">
+          Change Email:
+          <input className="form__input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        </label>
+        <label className='form__input__label' id="phone">
+          New Phone Number:
+          <input className="form__input" type="tel" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+        </label>
+        {/* <label className='form__input__label' id='payment'>
+          Payment Method:
+          <select value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)}>
+            <option value="creditCard">Credit Card</option>
+            <option value="paypal">PayPal</option>
+            <option value="transfer">Transfer</option>
+          </select>
+        </label> */}
         </div>
+        {/* </div> */}
+      </form>
 
-        <div className='form-group'>
-          <label htmlFor='phone'>Phone/Mobile <span>*</span></label>
-          <input type='text' name='phone' id='phone'
-
-          />
-        </div>
-
-        <div className='form-group'>
-          <label htmlFor='email'>Email <span>*</span></label>
-          <input type='email' name='email' id='email'
-
-          />
-        </div>
-
-      
-      </div>
-
-      <button className='mainbutton1'
-        
-        >Save Changes</button> */}
     </div>
-  )
-}
+  );
+};
 
-export default AccountSettings
+export default AccountSettings;

@@ -11,7 +11,7 @@
     display: flex;
     flex-flow: row wrap;
     padding: 10px 5px 20px 100px;
-    color: #ffcc00;
+    color: #e2bc12;
     background-color: #2e2e2e; 
     width: 100%;
     
@@ -90,10 +90,8 @@
   
   .nav__ul a {
     /* color: #ffcc00; */
-    background: linear-gradient(to bottom, #bda05e 22%,#695127 24%, #c9a861 26%, #d3ac57 27%,#ffecb3 40%,#8f6209 78%); 
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: #fff;
+    color: #e2bc12;
+    
   }
   
   .nav__ul--extra {

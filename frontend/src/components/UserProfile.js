@@ -19,9 +19,11 @@ const UserProfile = () => {
         <NavbarForLoggedUser/>
         {/* <UserSidebar /> */}
         <div className='userprofilein'>
+
         <div className='userprofileleft'>
         { <UserSidebar activepage={activepage} /> }
         </div>
+        
         { <div className='userprofileright'>
             {activepage === 'accountsettings' && <AccountSettings />}
             {activepage === 'profile' && <Profile />}

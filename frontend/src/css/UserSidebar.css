@@ -35,7 +35,7 @@ padding: 20px;
     align-items: center;
     width: 100%;
     font-size: 20px;
-    color: #fff;
+    color: #e2bc12;
 }
 
 .sidebar-menu li:hover {
@@ -45,13 +45,19 @@ padding: 20px;
   
 
 .logout {
+    color: #000000;
+    background-color: #e2bc12;
     display: flex;
     text-decoration: none;
     align-items: flex-end;
     justify-content: center !important;
     width: 70%;
-    font-size: 20px;
     cursor: pointer;
     margin-bottom: 20px;
+    transition: 0.4s;
+    font-weight: 600;
+    border: 0;
+    border-radius: 4px;
+    padding: 10px;
     
 }
