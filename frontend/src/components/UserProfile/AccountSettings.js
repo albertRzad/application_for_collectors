@@ -30,7 +30,9 @@ const AccountSettings = () => {
             <input className="form__input" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
           </label>
         {/* </div> */}
+
         <button type="submit" id="button_save">Save Changes</button>
+        
         {/* <div className='form_group_right'> */}
         <label className='form__input__label ' id="email">
           Change Email:

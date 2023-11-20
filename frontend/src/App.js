@@ -6,6 +6,7 @@ import LoginForm from "./components/LoginForm";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
 import UserProfile from "./components/UserProfile";
+import About from "./components/About";
 
 function App() {
   if (localStorage.getItem("token") == null) {
@@ -52,6 +53,10 @@ function App() {
             element={
               <>
                 <NavbarForNotLoggedUser />
+                <main>
+                  <About />
+                </main>
+                <Footer />
               </>
             }
           ></Route>

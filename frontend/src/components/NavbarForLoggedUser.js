@@ -57,7 +57,7 @@ export default function NavbarForLoggedUser() {
             <a href="/user/profile"><span><i class="fa fa-fw fa-user"></i>Profile</span></a>
           </li>
           <li>
-            <button className="logout" onClick={handleLogout}>Logout</button>
+            <button className="logout-navbar" onClick={handleLogout}>Logout</button>
           </li>
         </ul>
       </div>
