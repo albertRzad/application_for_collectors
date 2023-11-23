@@ -6,7 +6,7 @@ export default function NavbarForLoggedUser() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("userEmail");
+    localStorage.removeItem("email");
     window.location = "/home";
   };
 

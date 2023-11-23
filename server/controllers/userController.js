@@ -88,6 +88,20 @@ const findUserByEmail = async(req,res) =>{
   };
 }
 
+const findAllUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    if (!users || users.length === 0) {
+      return res.status(404).json({ message: 'There are no users in the database.' });
+    }
+
+    res.json(users);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'There was an error' });
+  }
+};
+
 const verificateUser = async (req, res) => {
   const token = req.params.email;
   const email = req.params.email;
@@ -115,4 +129,4 @@ const verificateUser = async (req, res) => {
   }
 };
 
-module.exports = {createUser: createUser, loginUser: loginUser, findUserByEmail: findUserByEmail, verificateUser: verificateUser};
+module.exports = {createUser: createUser, loginUser: loginUser, findUserByEmail: findUserByEmail, verificateUser: verificateUser, findAllUsers: findAllUsers};

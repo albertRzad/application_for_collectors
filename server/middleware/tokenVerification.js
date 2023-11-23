@@ -1,14 +1,14 @@
 const jwt = require('jsonwebtoken')
+const dotenv = require('dotenv').config()
 
 function tokenVerification(req, res, next) {
 let token = req.headers["x-access-token"];
-let password = req.body.password;
 
 if (!token) {
 return res.status(403).send({ message: "No token provided!" });
 }
 
-jwt.verify(token, password, (err, decodeduser) => {
+jwt.verify(token, process.env.JWT_SECRET_KEY, (err, decodeduser) => {
 if (err) {
 return res.status(401).send({ message: "Invalid token!" });
 }

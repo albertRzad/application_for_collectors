@@ -19,6 +19,7 @@ app.post('/collectionForm',tokenVerification, collectionController.createCollect
 app.post('/exhibitForm', tokenVerification,exhibitController.createExhibit);
 app.post('/purchaseOfferForm',tokenVerification, purchaseOfferController.createPurchaseOffer)
 app.get('/userProfile/:email',tokenVerification,userController.findUserByEmail);
+app.get("/getUserCollections:ownerEmail", tokenVerification, collectionController.findAllUserCollections)
 app.post('/tokenVerification', userController.verificateUser)
 
 
