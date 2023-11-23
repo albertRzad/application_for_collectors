@@ -1,7 +1,8 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import "./css/CollectionForm.css";
 import axios from "axios";
+import UserCollections from  "../collections/UserCollections"
 
 const MyCollections = () => {
 
@@ -20,6 +21,11 @@ const MyCollections = () => {
       });
 
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [userCollections, setUserCollections] = useState([]);
+
+    useEffect(() => {
+        fetchCollections();
+    }, []);
 
     const handleChange = (e) => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -31,8 +37,8 @@ const MyCollections = () => {
 
     const closeModal = () => {
         setIsModalOpen(false);
-    }
-
+        window.location.reload()
+        }
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -60,6 +66,25 @@ const MyCollections = () => {
           });;
       };
 
+      const fetchCollections = async () => {
+        try {
+          const token = localStorage.getItem("token");
+          const email = localStorage.getItem("email");
+
+          const response = await axios.get(
+            "http://localhost:3000/getUserCollections:" + email,
+            {
+              headers: {
+                "x-access-token": token,
+              },
+            }
+          );
+          setUserCollections(response.data);
+        } catch (error) {
+          console.error("Error fetching collections:", error);
+        }
+    };
+
     return (
       <div className="myCollectionsContener">
         <div className="ProfileTitle">
@@ -67,6 +92,9 @@ const MyCollections = () => {
           <button className="createButton" onClick={openModal}>
             Create new collection
           </button>
+             <div className='userCollections'>
+            <UserCollections collections={userCollections} />
+            </div>
         </div>
 
         {isModalOpen && (

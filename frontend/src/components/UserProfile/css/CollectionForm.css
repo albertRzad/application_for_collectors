@@ -28,3 +28,10 @@
     background-color: #007bff;
     color: white;
   }
+
+  .collection{
+    border: 10px solid red;
+  }
+  .userCollections {
+    justify-content: center;
+  }

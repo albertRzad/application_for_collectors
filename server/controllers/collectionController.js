@@ -1,6 +1,7 @@
 const Collection = require("../models/collection");
 const User = require("../models/user");
 
+
 const createCollection = async (req, res) => {
   const name = req.body.name;
   const type = req.body.type;
@@ -34,7 +35,7 @@ const findAllUserCollections = async (req, res) => {
   try {
     const ownerEmail = req.params.ownerEmail;
     const trimmedOwnerEmail = ownerEmail.replace(":", "");
-    
+
     const collections = await Collection.find({"ownerEmail": trimmedOwnerEmail})
 
     res.json(collections);
