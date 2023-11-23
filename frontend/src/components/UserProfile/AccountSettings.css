@@ -12,7 +12,7 @@
     font-size: 4rem;
     font-weight: 400;
     text-align: center;
-    color: #e2bc12;
+    color: #d6be73;
     margin-bottom: 1rem;
     margin-top: 2.5rem;
     text-shadow: 3px 3px 12px #000000;
@@ -61,7 +61,7 @@
     margin-bottom: 25px;
     font-size: 13px;
     font-weight: bold;
-    color: #e2bc12;
+    color: #d6be73;
     text-decoration: none;
     margin-top: 30px;
 }
@@ -85,7 +85,7 @@
 
 #button_save {
     color: #000000;
-    background-color: #e2bc12;
+    background-color: #d6be73;
     display: flex;
     position: absolute;
     cursor: pointer;

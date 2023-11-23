@@ -15,10 +15,7 @@
     text-decoration: none;
     font-size: 3.5rem;
     margin-left: 0.8rem;
-    background: linear-gradient(to bottom, #bda05e 22%,#695127 24%, #c9a861 26%, #d3ac57 27%,#ffecb3 40%,#8f6209 78%); 
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: #fff;
+    color: #d6be73;
     
   }
   
@@ -54,7 +51,7 @@
   }
 
   .navigation-menu a span {
-    color: #e2bc12;
+    color: #d6be73;
   }
   
 
@@ -65,7 +62,7 @@
 
   .logout-navbar { 
       color: #000000;
-      background-color: #e2bc12;
+      background-color: #d6be73;
       display: flex;
       text-decoration: none;
       align-items: flex-end;
@@ -89,7 +86,7 @@
     width: 40px;
     padding: 0.5rem;
     border-radius: 50%;
-    background-color: #ffcc00;
+    background-color: #d6be73;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
     position: absolute;
@@ -100,7 +97,7 @@
   }
   
   .hamburger:hover {
-    background-color: #a58401;
+    background-color: #d6be73;
   }
   
   @media screen and (max-width: 550px) {

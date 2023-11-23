@@ -10,7 +10,7 @@
 }
 #button_save1 {
     color: #000000;
-    background-color: #e2bc12;
+    background-color: #d6be73;
     display: flex;
     position: absolute;
     cursor: pointer;
@@ -100,7 +100,7 @@
 
 .upload-button {
     color: #000000;
-    background-color: #e2bc12;
+    background-color: #d6be73;
     display: flex;
     text-decoration: none;
     justify-content: center !important;
@@ -120,8 +120,8 @@
 .upload-button:hover {
     color: rgb(0, 0, 0) ;
     width:100;
-    box-shadow: 0 0 20px #e2bc12;
-    background-color: #e2bc12;
+    box-shadow: 0 0 20px #d6be73;
+    background-color: #d6be73;
 }
 
 
@@ -141,8 +141,8 @@
 }
 
 .bio__input:focus {
-    outline: 2px solid #e2bc12;
+    outline: 2px solid #d6be73;
 }
 .bio__input:hover {
-    outline: 2px solid #e2bc12;
+    outline: 2px solid #d6be73;
 }
