@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import "../css/Form.css";
 import "../css/Button.css";
+import "../css/Popup.css";
 
 const Login = () => {
   const initialFormData = {
@@ -18,6 +19,8 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const [showPopup, setShowPopup] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
      axios.post("http://localhost:3000/loginForm", formData)
@@ -26,11 +29,13 @@ const Login = () => {
         if (res.status === 200) {
           console.log(res.data.token);
           console.log(res.status);
-          alert('Success');
-          window.location.assign("/home");
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("email",formData.email)
           setFormData(initialFormData);
+          setShowPopup(true);
+          setTimeout(function() {
+            window.location.assign("/home");
+          }, 1500);
         }
       }).catch((error) => {
         console.error(error);
@@ -38,45 +43,51 @@ const Login = () => {
   };
 
   return (
-    
-    <form className="formContainer" onSubmit={handleSubmit}>
-      <div className="shapeLogin">
-      <div className = "FormTitle">Login</div>
-      <link
-        href="https://fonts.googleapis.com/css?family=Roboto"
-        rel="stylesheet"
-      />
-      <div className="form__group">
-        <input
-          type="email"
-          className="form__input"
-          name="email"
-          placeholder="E-mail"
-          onChange={handleChange}
-          value={formData.email}
-        />
-        <input
-          type="password"
-          className="form__input"
-          name="password"
-          placeholder="Password"
-          onChange={handleChange}
-          value={formData.password}
-        />
+    <>
+      <form className="formContainer" onSubmit={handleSubmit}>
+        <div className="shapeLogin">
+          <div className="FormTitle">Login</div>
+          <link
+            href="https://fonts.googleapis.com/css?family=Roboto"
+            rel="stylesheet"
+          />
+          <div className="form__group">
+            <input
+              type="email"
+              className="form__input"
+              name="email"
+              placeholder="E-mail"
+              onChange={handleChange}
+              value={formData.email}
+            />
+            <input
+              type="password"
+              className="form__input"
+              name="password"
+              placeholder="Password"
+              onChange={handleChange}
+              value={formData.password}
+            />
 
-        <div class="container">
-          <div className="formMessage">
-         <a href="/register">Don't have an account yet? Register</a>
-        </div>
-          <div>
-            <button class="but">Login</button>
+            <div class="container">
+              <div className="formMessage">
+                <a href="/register">Don't have an account yet? Register</a>
+              </div>
+              <div>
+                <button class="but">Login</button>
+              </div>
+            </div>
           </div>
         </div>
-         
-      </div>
-      </div>
-    </form>
-    
+      </form>
+      {showPopup && (
+        <div className="popup">
+          <div className="popup-content">
+            <b> User successfully logged in. </b>
+          </div>
+        </div>
+      )}
+    </>
   );
 
 };

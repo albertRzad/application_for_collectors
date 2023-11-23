@@ -36,7 +36,7 @@ const Registration = () => {
           setFormData(initialFormData);
           setShowPopup(true);
           setTimeout(function() {
-            window.location.assign("/home");
+            window.location.assign("/login");
           }, 1500);
         }
       }).catch((error) => {
@@ -104,7 +104,7 @@ const Registration = () => {
     <div className="popup-content">
        <b> User successfully registered. </b>
         <br></br>
-        <b>Redirecting to home page. </b>
+        <b>Redirecting to login page. </b>
     </div>
   </div>
 )}
