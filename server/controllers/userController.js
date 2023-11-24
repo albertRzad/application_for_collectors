@@ -1,4 +1,5 @@
 const User = require("../models/user")
+const Collection = require("../models/collection");
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 
@@ -166,15 +167,16 @@ const updateUserDetails = async (req, res) => {
     
     if (newEmail && newEmail.trim() !== '') {
       const userWithGivenEmailExist = await User.findOne({ email: newEmail });
- 
+
       if (userWithGivenEmailExist) {
         return res
-          .status(400)
-          .json({
-            message: "Account with given email address already exists.",
-          });
+        .status(400)
+        .json({
+          message: "Account with given email address already exists.",
+        });
       }
       user.email = newEmail;
+      await updateCollectionsOwnerEmail(email, newEmail);
     }
 
     if (newPhoneNumber && newPhoneNumber.trim() !== '') {
@@ -196,5 +198,27 @@ const updateUserDetails = async (req, res) => {
       .json({ message: "There was an error updating the user details." });
   }
 };
+
+const updateCollectionsOwnerEmail = async (currentEmail, newEmail) => {
+  try {
+    if (!currentEmail || !newEmail) {
+      throw new Error("Current email and new email are required.");
+    }
+
+    const result = await Collection.updateMany(
+      { ownerEmail: currentEmail },
+      { $set: { ownerEmail: newEmail } }
+    );
+
+    if (result.matchedCount === 0) {
+      throw new Error("No collections found with the given email.");
+    }
+
+    return { updatedCount: result.modifiedCount };
+  } catch (err) {
+    throw err;
+  }
+};
+
 
 module.exports = {createUser: createUser, loginUser: loginUser, findUserByEmail: findUserByEmail, verificateUser: verificateUser, findAllUsers: findAllUsers,updateUserDetails: updateUserDetails};

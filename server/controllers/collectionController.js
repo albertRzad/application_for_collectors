@@ -63,4 +63,4 @@ const deleteCollectionById = async (req, res) => {
   }
 };
 
-module.exports = { createCollection: createCollection, findAllUserCollections: findAllUserCollections, deleteCollectionById: deleteCollectionById };
+module.exports = { createCollection: createCollection, findAllUserCollections: findAllUserCollections, deleteCollectionById: deleteCollectionById};

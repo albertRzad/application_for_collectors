@@ -27,7 +27,6 @@ app.post('/tokenVerification', userController.verificateUser)
 
 app.put('/user/update', tokenVerification,userController.updateUserDetails)
 
-
 app.delete('/collection/delete:collectionId', tokenVerification,collectionController.deleteCollectionById)
 
 app.listen(3000);
