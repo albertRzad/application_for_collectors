@@ -18,9 +18,11 @@ app.post('/loginForm', userController.loginUser);
 app.post('/collectionForm',tokenVerification, collectionController.createCollection);
 app.post('/exhibitForm', tokenVerification,exhibitController.createExhibit);
 app.post('/purchaseOfferForm',tokenVerification, purchaseOfferController.createPurchaseOffer)
-app.get('/userProfile/:email',tokenVerification,userController.findUserByEmail);
-app.get("/getUserCollections:ownerEmail", tokenVerification, collectionController.findAllUserCollections)
 app.post('/tokenVerification', userController.verificateUser)
 
+app.get('/userProfile/:email',tokenVerification,userController.findUserByEmail);
+app.get('/getUserCollections:ownerEmail', tokenVerification, collectionController.findAllUserCollections)
+
+app.delete('/collection/delete:collectionId', tokenVerification,collectionController.deleteCollectionById)
 
 app.listen(3000);

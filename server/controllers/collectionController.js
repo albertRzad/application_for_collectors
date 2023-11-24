@@ -45,4 +45,22 @@ const findAllUserCollections = async (req, res) => {
   }
 };
 
-module.exports = { createCollection: createCollection, findAllUserCollections: findAllUserCollections };
+const deleteCollectionById = async (req, res) => {
+  try {
+    const collectionId = req.params.collectionId;
+    const trimmedCollectionId = collectionId.replace(":", "");
+
+    const deletedCollection = await Collection.findByIdAndDelete(trimmedCollectionId);
+
+    if (!deletedCollection) {
+      return res.status(404).json({ message: "Collection not found." });
+    }
+
+    res.status(200).json({ message: "Collection successfully deleted." });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "There was an error deleting the collection." });
+  }
+};
+
+module.exports = { createCollection: createCollection, findAllUserCollections: findAllUserCollections, deleteCollectionById: deleteCollectionById };

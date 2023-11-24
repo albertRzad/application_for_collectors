@@ -72,7 +72,7 @@ const MyCollections = () => {
           const email = localStorage.getItem("email");
 
           const response = await axios.get(
-            "http://localhost:3000/getUserCollections:" + email,
+            `http://localhost:3000/getUserCollections:${email}`,
             {
               headers: {
                 "x-access-token": token,
@@ -85,17 +85,37 @@ const MyCollections = () => {
         }
     };
 
+    const deleteCollection = async (collectionId) => {
+      try {
+        const token = localStorage.getItem("token");
+    
+        const response = await axios.delete(
+          `http://localhost:3000/collection/delete:${collectionId}`,
+          {
+            headers: {
+              "x-access-token": token,
+            },
+          }
+        );
+        if (response.status === 200) {
+
+          const updatedCollections = userCollections.filter(collection => collection._id !== collectionId);
+          setUserCollections(updatedCollections);
+        }
+      } catch (error) {
+        console.error("Error deleting collection:", error);
+      }
+    };
+
     return (
       <div className="myCollectionsContener">
-        <div className="ProfileTitle">
-          My Collections
-          <button className="createButton" onClick={openModal}>
-            Create new collection
-          </button>
-             <div className='userCollections'>
-            <UserCollections collections={userCollections} />
-            </div>
+      <div className="ProfileTitle">
+        My Collections
+        <button className="createButton" onClick={openModal}>Create new collection</button>
+        <div className='userCollections'>
+          <UserCollections collections={userCollections} deleteCollection={deleteCollection} />
         </div>
+      </div>
 
         {isModalOpen && (
   <div className="overlay">
