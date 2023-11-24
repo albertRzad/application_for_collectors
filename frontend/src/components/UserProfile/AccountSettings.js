@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import './AccountSettings.css';
 import '../../css/Form.css';
@@ -22,6 +22,34 @@ const AccountSettings = () => {
   });
 
   const [showPopup, setShowPopup] = useState(false);
+
+  const [currentUser, setCurrentUser] = useState({
+    name: "",
+    surname: "",
+    email: "",
+    phoneNumber: "",
+  });
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const email = localStorage.getItem("email");
+
+    axios
+      .get(`http://localhost:3000/user:${email}`, {
+        headers: { "x-access-token": token },
+      })
+      .then((response) => {
+        setCurrentUser({
+          name: response.data.name,
+          surname: response.data.surname,
+          email: response.data.email,
+          phoneNumber: response.data.phoneNumber,
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+      });
+  }, []);
   
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -55,6 +83,7 @@ const AccountSettings = () => {
           setTimeout(function () {
             setShowPopup(false);
           }, 1500);
+          window.location.reload()
         }
       })
       .catch((error) => {
@@ -66,6 +95,14 @@ const AccountSettings = () => {
   return (
     <div className="accountSettings">
       <div className="ProfileTitle">Account Settings</div>
+
+      <div className="currentUserDetails">
+        Actual user details:
+        <p>Name: {currentUser.name}</p>
+        <p>Surname: {currentUser.surname}</p>
+        <p>Email: {currentUser.email}</p>
+        <p>Phone Number: {currentUser.phoneNumber}</p>
+      </div>
 
       <form className="formContainer" onSubmit={handleSubmit}>
         <div className="form__account">

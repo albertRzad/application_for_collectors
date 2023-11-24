@@ -76,7 +76,7 @@ const MyCollections = () => {
             {
               headers: {
                 "x-access-token": token,
-              },
+              }
             }
           );
           setUserCollections(response.data);

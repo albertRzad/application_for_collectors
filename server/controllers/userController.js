@@ -89,8 +89,9 @@ const loginUser = async (req, res) => {
 const findUserByEmail = async(req,res) =>{
     try {
       const email = req.params.email; 
-  
-      const user = await User.findOne({ email });
+      const trimmedEmail = email.replace(":", "");
+    
+      const user = await User.findOne({ "email": trimmedEmail });
       if (!user) {
         return res.status(404).json({ message: 'There is no user with given email address.' });
       }

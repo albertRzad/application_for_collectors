@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(cors());
 
 
-app.get('/userProfile/:email',tokenVerification,userController.findUserByEmail);
+app.get('/user:email',tokenVerification,userController.findUserByEmail);
 app.get('/getUserCollections:ownerEmail', tokenVerification, collectionController.findAllUserCollections)
 
 app.post('/registerForm',userController.createUser);
