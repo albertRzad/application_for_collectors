@@ -1,0 +1,15 @@
+.collectionContainers{
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+
+.collection {
+    color: white; 
+    font-size: 18px; 
+    margin-bottom: 15px; 
+    width: calc(33% - 15px);
+}

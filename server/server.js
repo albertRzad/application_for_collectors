@@ -17,6 +17,7 @@ app.use(cors());
 
 app.get('/user:email',tokenVerification,userController.findUserByEmail);
 app.get('/getUserCollections:ownerEmail', tokenVerification, collectionController.findAllUserCollections)
+app.get('/getAllCollections', tokenVerification, collectionController.findAllCollections)
 
 app.post('/registerForm',userController.createUser);
 app.post('/loginForm', userController.loginUser);

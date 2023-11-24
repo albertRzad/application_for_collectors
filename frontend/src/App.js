@@ -7,7 +7,7 @@ import Footer from "./components/Footer";
 import Home from "./components/Home";
 import UserProfile from "./components/UserProfile";
 import About from "./components/About";
-
+import ExploreCollections from "./components/ExploreCollections";
 
 function App() {
   if (localStorage.getItem("token") == null) {
@@ -127,6 +127,7 @@ function App() {
             element={
               <>
                 <NavbarForLoggedUser />
+                <ExploreCollections />
               </>
             }
           ></Route>

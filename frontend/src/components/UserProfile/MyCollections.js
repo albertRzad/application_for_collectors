@@ -63,7 +63,7 @@ const MyCollections = () => {
             }
           }).catch((error) => {
             console.error(error);
-          });;
+          });
       };
 
       const fetchCollections = async () => {

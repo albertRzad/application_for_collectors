@@ -1,6 +1,4 @@
 const Collection = require("../models/collection");
-const User = require("../models/user");
-
 
 const createCollection = async (req, res) => {
   const name = req.body.name;
@@ -45,6 +43,18 @@ const findAllUserCollections = async (req, res) => {
   }
 };
 
+const findAllCollections = async (req, res) => {
+  try {
+    const collections = await Collection.find({})
+
+    res.json(collections);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "There was an error" });
+  }
+};
+
+
 const deleteCollectionById = async (req, res) => {
   try {
     const collectionId = req.params.collectionId;
@@ -63,4 +73,4 @@ const deleteCollectionById = async (req, res) => {
   }
 };
 
-module.exports = { createCollection: createCollection, findAllUserCollections: findAllUserCollections, deleteCollectionById: deleteCollectionById};
+module.exports = { createCollection: createCollection, findAllUserCollections: findAllUserCollections, deleteCollectionById: deleteCollectionById, findAllCollections: findAllCollections};
