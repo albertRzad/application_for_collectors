@@ -6,7 +6,7 @@
     width: 100%;
     text-align: center;
     justify-content: center;
-    background-color: #e2bc12;
+    background-color: #d6be73;
     cursor: pointer;
     border: 0;
     border-radius: 4px;
@@ -19,8 +19,8 @@
   button:hover {
     color: rgb(0, 0, 0) ;
     width:100;
-    box-shadow: 0 0 20px #e2bc12;
-    background-color: #e2bc12;
+    box-shadow: 0 0 20px #d6be73;
+    background-color: #d6be73;
   }
   
  

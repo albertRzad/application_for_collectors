@@ -35,7 +35,7 @@ padding: 20px;
     align-items: center;
     width: 100%;
     font-size: 20px;
-    color: #e2bc12;
+    color: #d6be73;
 }
 
 .sidebar-menu li:hover {
@@ -46,7 +46,7 @@ padding: 20px;
 
 .logout {
     color: #000000;
-    background-color: #e2bc12;
+    background-color: #d6be73;
     display: flex;
     text-decoration: none;
     align-items: flex-end;
