@@ -142,4 +142,58 @@ const verificateUser = async (req, res) => {
   }
 };
 
-module.exports = {createUser: createUser, loginUser: loginUser, findUserByEmail: findUserByEmail, verificateUser: verificateUser, findAllUsers: findAllUsers};
+const updateUserDetails = async (req, res) => {
+  try {
+    const email = req.body.email;
+    const newEmail = req.body.newEmail;
+    const newPassword = req.body.newPassword;
+    const newPhoneNumber = req.body.newPhoneNumber;
+    const confirmPassword = req.body.confirmPassword;
+
+    const user = await User.findOne({ email });
+
+    if (newPassword && confirmPassword && newPassword.trim() !== '' && newPassword !== confirmPassword) {
+      return res
+      .status(400)
+      .json({ message: "Passwords aren't the same." });
+    }
+
+    if (newPassword && newPassword.trim() !== '') {
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+      user.password = hashedPassword;
+    }
+    
+    if (newEmail && newEmail.trim() !== '') {
+      const userWithGivenEmailExist = await User.findOne({ email: newEmail });
+ 
+      if (userWithGivenEmailExist) {
+        return res
+          .status(400)
+          .json({
+            message: "Account with given email address already exists.",
+          });
+      }
+      user.email = newEmail;
+    }
+
+    if (newPhoneNumber && newPhoneNumber.trim() !== '') {
+      user.phoneNumber = newPhoneNumber;
+    }
+
+    await user.save();
+
+    return res
+      .status(200)
+      .json({
+        message: "User details updated successfully.",
+        newEmail: user.email,
+      });
+  } catch (err) {
+    console.error(err);
+    return res
+      .status(500)
+      .json({ message: "There was an error updating the user details." });
+  }
+};
+
+module.exports = {createUser: createUser, loginUser: loginUser, findUserByEmail: findUserByEmail, verificateUser: verificateUser, findAllUsers: findAllUsers,updateUserDetails: updateUserDetails};

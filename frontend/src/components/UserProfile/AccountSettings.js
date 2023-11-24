@@ -1,59 +1,129 @@
 import React, { useState } from 'react';
+import axios from "axios";
 import './AccountSettings.css';
 import '../../css/Form.css';
 
 const AccountSettings = () => {
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState('');
+
+  const initialFormData = {
+    email: localStorage.getItem("email"),
+    newEmail: "",
+    newPhoneNumber: "",
+    newPassword: "",
+    confirmPassword: ""
+  };
+
+  const [formData, setFormData] = useState({
+    email: localStorage.getItem("email"),
+    newEmail: "",
+    newPhoneNumber: "",
+    newPassword: "",
+    confirmPassword: ""
+  });
+
+  const [showPopup, setShowPopup] = useState(false);
+  
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add logic to handle the submission of the form, such as validating the input and updating the user's account settings
+    e.preventDefault()
+    const token = localStorage.getItem("token")
+
+    const config = {
+      method: "put",
+      url: "http://localhost:3000/user/update",
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": token,
+      },
+      data: formData,
+    };
+
+    axios(config)
+      .then((response) => {
+        console.log(response);
+        if (response.status === 200) {
+          if (response.data.newEmail) {
+            localStorage.removeItem("email");
+            localStorage.setItem("email", response.data.newEmail);
+          }
+          setFormData(initialFormData);
+          setShowPopup(true);
+          setTimeout(function () {
+            setShowPopup(false);
+          }, 1500);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });;
   };
+
 
   return (
     <div className="accountSettings">
-      <div className='ProfileTitle'>Account Settings</div>
+      <div className="ProfileTitle">Account Settings</div>
 
-      <form className='formContainer' onSubmit={handleSubmit}>
-        <div className='form__account'>
-        {/* <div className='form_group_left'> */}
-          <label className='form__input__label' id="n_password">
+      <form className="formContainer" onSubmit={handleSubmit}>
+        <div className="form__account">
+          <label className="form__input__label" id="n_password">
             New Password:
-            <input className="form__input" type="password"  value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+            <input
+              name="newPassword"
+              className="form__input"
+              type="password"
+              value={formData.newPassword}
+              onChange={handleChange}
+            />
           </label>
-          <label className='form__input__label' id="c_password">
+          <label className="form__input__label" id="c_password">
             Confirm Password:
-            <input className="form__input" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+            <input
+              name="confirmPassword"
+              className="form__input"
+              type="password"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+            />
           </label>
-        {/* </div> */}
 
-        <button type="submit" id="button_save">Save Changes</button>
-        
-        {/* <div className='form_group_right'> */}
-        <label className='form__input__label ' id="email">
-          Change Email:
-          <input className="form__input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        </label>
-        <label className='form__input__label' id="phone">
-          New Phone Number:
-          <input className="form__input" type="tel" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
-        </label>
-        {/* <label className='form__input__label' id='payment'>
-          Payment Method:
-          <select value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)}>
-            <option value="creditCard">Credit Card</option>
-            <option value="paypal">PayPal</option>
-            <option value="transfer">Transfer</option>
-          </select>
-        </label> */}
+          <button type="submit" id="button_save">
+            Save Changes
+          </button>
+
+          <label className="form__input__label " id="email">
+            Change Email:
+            <input
+              name="newEmail"
+              className="form__input"
+              type="email"
+              value={formData.newEmail}
+              onChange={handleChange}
+            />
+          </label>
+          <label className="form__input__label" id="phone">
+            New Phone Number:
+            <input
+              name="newPhoneNumber"
+              className="form__input"
+              type="tel"
+              value={formData.newPhoneNumber}
+              onChange={handleChange}
+            />
+          </label>
         </div>
-        {/* </div> */}
       </form>
 
+      {showPopup && (
+        <div className="popup">
+          <div className="popup-content">
+            <b> User informations updated. </b>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -30,9 +30,7 @@ const Registration = () => {
     e.preventDefault()
     axios.post("http://localhost:3000/registerForm", formData)
       .then((response) => {
-        console.log(response);
         if (response.status === 200) {
-          console.log(response.status);
           setFormData(initialFormData);
           setShowPopup(true);
           setTimeout(function() {
