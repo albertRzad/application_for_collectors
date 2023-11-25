@@ -3,9 +3,23 @@ import { useState, useEffect } from "react";
 import "./css/CollectionForm.css";
 import axios from "axios";
 import UserCollections from "../collections/UserCollections";
-import { convertToBase64 } from '../imagesUtils';
 
 const MyCollections = () => {
+  const [image, setImage] = useState("");
+
+  function convertToBase64(e) {
+    console.log(e);
+    var reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = () => {
+      console.log(reader.result);
+      setImage(reader.result);
+      setFormData({ ...formData, image: reader.result });
+    };
+    reader.onerror = (error) => {
+      console.log("Error: " + error);
+    };
+  }
 
   const initialFormData = {
     name: "",
