@@ -1,8 +1,7 @@
-import React from "react";
-import { useState, useEffect } from "react";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 import AllCollections from "../../collections/AllCollections";
-import "../css/ExploreCollections.css"
+import "../css/ExploreCollections.css";
 const ExploreCollections = () => {
   const [collections, setCollections] = useState([]);
 
@@ -15,7 +14,7 @@ const ExploreCollections = () => {
       const token = localStorage.getItem("token");
 
       const response = await axios.get(
-        'http://localhost:3000/getAllCollections',
+        "http://localhost:3000/getAllCollections",
         {
           headers: {
             "x-access-token": token,
@@ -32,7 +31,7 @@ const ExploreCollections = () => {
     <div>
       <h2>All Collections</h2>
       <div className="collectionsContainer">
-            <AllCollections collections = {collections} />
+        <AllCollections collections={collections} />
       </div>
     </div>
   );

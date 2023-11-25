@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "../UserProfile/css/Exhibit.css";
 
@@ -69,15 +69,6 @@ const CollectionDetails = () => {
   const deleteExhibit = async (exhibitId) => {
     try {
       const token = localStorage.getItem("token");
-
-      const response = await axios.delete(
-        `http://localhost:3000/exhibit/delete:${exhibitId}`,
-        {
-          headers: {
-            "x-access-token": token,
-          },
-        }
-      );
     } catch (error) {
       console.error("Error deleting exhibit:", error);
     }

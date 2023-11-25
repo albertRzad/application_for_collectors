@@ -1,23 +1,66 @@
-.exhibitsContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap; /* Allows items to wrap to the next line */
-}
+/* losowy css wygenerowany przez GPT do zmiany */
+
 
 .exhibit {
+    min-height: 100px; /* This is a minimum height, the div will grow larger if content requires it */
+    width: auto; /* This ensures the width adjusts to the content up to its max-width or the parent's width */
+    padding: 10px; /* Add some padding inside the div so content doesn't touch the borders */
+    box-sizing: border-box; /* Include padding in the div's total width and height */
+    display: flex; /* Using flex layout */
+    flex-direction: column; /* Stack children vertically */
+    gap: 10px; /* Put some space between children */
+    overflow-wrap: break-word; /* To prevent the content from spilling out */
+    border: 5px solid red;
     color: white;
-    font-size: 18px;
-    margin-bottom: 15px;
-    width: 200px;
-    height: 200px;
+  }
+  
+  .exhibit img {
+    max-width: 100%; /* Ensure image does not overflow its container */
+    height: auto; /* Keep the image's aspect ratio */
+    display: block; /* Prevent inline white-space */
+  }
+  
+  /* Styling for the overlay that contains the modal */
+  .overlay {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    text-align: center;
-    padding: 10px; /* Adds padding inside the div */
-    box-sizing: border-box; /* Includes padding in the width and height */
-    word-wrap: break-word; /* Ensures text breaks to avoid overflow */
-    border: 10px solid red;
-}
+    align-items: center;
+    position: fixed; /* Fixed position to cover the entire viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 1000; /* High z-index to be on top of other content */
+  }
+  
+  /* Styling for the modal where you add a new exhibit */
+  .modal {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 500px; /* Max-width for the modal */
+    width: 90%; /* Use 90% of the viewport width on smaller screens */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add some shadow for depth */
+  }
+  
+  /* Buttons inside the modal */
+  .submit-button,
+  .cancel-button {
+    margin-top: 10px; /* Add space above the buttons */
+    padding: 10px 20px; /* Add padding inside the buttons */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners for the buttons */
+    cursor: pointer; /* Pointer cursor on hover */
+  }
+  
+  .cancel-button {
+    background-color: #f44336; /* Red background for cancel */
+    color: white; /* White text */
+  }
+  
+  .submit-button {
+    background-color: #4CAF50; /* Green background for submit */
+    color: white; /* White text */
+  }
+  

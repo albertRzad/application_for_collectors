@@ -1,5 +1,5 @@
-const Exhibit = require("../models/exhibit");
-const Collection = require("../models/collection");
+const Exhibit = require("../models/Exhibit");
+const Collection = require("../models/Collection");
 
 const createExhibit = async (req, res) => {
   const name = req.body.name;

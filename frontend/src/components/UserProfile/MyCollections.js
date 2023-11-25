@@ -1,11 +1,10 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import "./css/CollectionForm.css";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 import UserCollections from "../collections/UserCollections";
+import "./css/CollectionForm.css";
 
 const MyCollections = () => {
-  const [image, setImage] = useState("");
+  const [, setImage] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userCollections, setUserCollections] = useState([]);
 
@@ -14,9 +13,8 @@ const MyCollections = () => {
     type: "",
     description: "",
     email: localStorage.getItem("email"),
-    image: ""
+    image: "",
   });
-
 
   useEffect(() => {
     fetchCollections();

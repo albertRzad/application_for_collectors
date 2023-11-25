@@ -1,5 +1,5 @@
-import "../css/Navbar.css"
 import { useState } from "react";
+import "../css/Navbar.css";
 
 export default function NavbarForLoggedUser() {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
@@ -40,24 +40,50 @@ export default function NavbarForLoggedUser() {
         }
       >
         <ul>
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+          <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+          />
           <li>
-          <a href="/home"><span> <i class="fa fa-fw fa-home"></i>Home</span></a>
+            <a href="/home">
+              <span>
+                {" "}
+                <i class="fa fa-fw fa-home"></i>Home
+              </span>
+            </a>
           </li>
           <li>
-            <a href="/user/myauctions"><span><i class="fa fa-fw fa-user"></i>Auctions</span></a>
+            <a href="/user/myauctions">
+              <span>
+                <i class="fa fa-fw fa-user"></i>Auctions
+              </span>
+            </a>
           </li>
           <li>
-            <a href="/user/mycollections"><span><i class="fa fa-fw fa-user"></i>My collections</span></a>
+            <a href="/user/mycollections">
+              <span>
+                <i class="fa fa-fw fa-user"></i>My collections
+              </span>
+            </a>
           </li>
           <li>
-            <a href="/exploreCollections"><span><i class="fa fa-fw fa-user"></i>Explore collections</span></a>
+            <a href="/exploreCollections">
+              <span>
+                <i class="fa fa-fw fa-user"></i>Explore collections
+              </span>
+            </a>
           </li>
           <li>
-            <a href="/user/profile"><span><i class="fa fa-fw fa-user"></i>Profile</span></a>
+            <a href="/user/profile">
+              <span>
+                <i class="fa fa-fw fa-user"></i>Profile
+              </span>
+            </a>
           </li>
           <li>
-            <button className="logout-navbar" onClick={handleLogout}>Logout</button>
+            <button className="logout-navbar" onClick={handleLogout}>
+              Logout
+            </button>
           </li>
         </ul>
       </div>

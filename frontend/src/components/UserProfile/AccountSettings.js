@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from 'react';
 import axios from "axios";
-import './AccountSettings.css';
-import '../forms/css/Form.css';
+import React, { useEffect, useState } from "react";
+import "../forms/css/Form.css";
+import "./AccountSettings.css";
 
 const AccountSettings = () => {
-
   const initialFormData = {
     email: localStorage.getItem("email"),
     newEmail: "",
     newPhoneNumber: "",
     newPassword: "",
-    confirmPassword: ""
+    confirmPassword: "",
   };
 
   const [formData, setFormData] = useState({
@@ -18,7 +17,7 @@ const AccountSettings = () => {
     newEmail: "",
     newPhoneNumber: "",
     newPassword: "",
-    confirmPassword: ""
+    confirmPassword: "",
   });
 
   const [showPopup, setShowPopup] = useState(false);
@@ -50,15 +49,14 @@ const AccountSettings = () => {
         console.error("Error fetching user data:", error);
       });
   }, []);
-  
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-
   const handleSubmit = (e) => {
-    e.preventDefault()
-    const token = localStorage.getItem("token")
+    e.preventDefault();
+    const token = localStorage.getItem("token");
 
     const config = {
       method: "put",
@@ -83,14 +81,13 @@ const AccountSettings = () => {
           setTimeout(function () {
             setShowPopup(false);
           }, 1500);
-          window.location.reload()
+          window.location.reload();
         }
       })
       .catch((error) => {
         console.error(error);
-      });;
+      });
   };
-
 
   return (
     <div className="accountSettings">

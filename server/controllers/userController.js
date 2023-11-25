@@ -1,7 +1,7 @@
-const User = require("../models/user")
-const Collection = require("../models/collection");
-const bcrypt = require("bcrypt")
-const jwt = require("jsonwebtoken")
+const User = require("../models/User");
+const Collection = require("../models/Collection");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const createUser = async (req, res) => {
   const name = req.body.name;
@@ -61,7 +61,7 @@ const loginUser = async (req, res) => {
   const password = req.body.password;
 
   try {
-    const user = await User.findOne({ "email": email });
+    const user = await User.findOne({ email: email });
     if (!user) {
       return res
         .status(404)
@@ -76,44 +76,47 @@ const loginUser = async (req, res) => {
         .status(200)
         .json({ token, message: "Successfully logged in." });
     } else {
-      return res.status(401).json({ error: 'Incorrect password.' });
+      return res.status(401).json({ error: "Incorrect password." });
     }
   } catch (error) {
-    console.error('Error:', error);
+    console.error("Error:", error);
     res
       .status(500)
       .json({ message: "There was an error during the login process." });
   }
 };
 
+const findUserByEmail = async (req, res) => {
+  try {
+    const email = req.params.email;
+    const trimmedEmail = email.replace(":", "");
 
-const findUserByEmail = async(req,res) =>{
-    try {
-      const email = req.params.email; 
-      const trimmedEmail = email.replace(":", "");
-    
-      const user = await User.findOne({ "email": trimmedEmail });
-      if (!user) {
-        return res.status(404).json({ message: 'There is no user with given email address.' });
-      }
-      res.json(user);
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ message: 'There was an error' });
-  };
-}
+    const user = await User.findOne({ email: trimmedEmail });
+    if (!user) {
+      return res
+        .status(404)
+        .json({ message: "There is no user with given email address." });
+    }
+    res.json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "There was an error" });
+  }
+};
 
-const findAllUsers = async (req, res) => {
+const findAllUsers = async (_req, res) => {
   try {
     const users = await User.find();
     if (!users || users.length === 0) {
-      return res.status(404).json({ message: 'There are no users in the database.' });
+      return res
+        .status(404)
+        .json({ message: "There are no users in the database." });
     }
 
     res.json(users);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'There was an error' });
+    res.status(500).json({ message: "There was an error" });
   }
 };
 
@@ -125,7 +128,9 @@ const verificateUser = async (req, res) => {
     const user = await User.findOne({ email: email });
 
     if (!user) {
-      return res.status(404).json({ message: 'There is no user with the given email address.' });
+      return res
+        .status(404)
+        .json({ message: "There is no user with the given email address." });
     }
 
     if (!token) {
@@ -136,11 +141,10 @@ const verificateUser = async (req, res) => {
       if (err) {
         return res.status(401).send({ message: "Invalid token!" });
       }
-        return res.status(200).send({ message: "Approved" });
-
+      return res.status(200).send({ message: "Approved" });
     });
   } catch (error) {
-    return res.status(500).json({ message: 'Internal server error' });
+    return res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -154,24 +158,25 @@ const updateUserDetails = async (req, res) => {
 
     const user = await User.findOne({ email });
 
-    if (newPassword && confirmPassword && newPassword.trim() !== '' && newPassword !== confirmPassword) {
-      return res
-      .status(400)
-      .json({ message: "Passwords aren't the same." });
+    if (
+      newPassword &&
+      confirmPassword &&
+      newPassword.trim() !== "" &&
+      newPassword !== confirmPassword
+    ) {
+      return res.status(400).json({ message: "Passwords aren't the same." });
     }
 
-    if (newPassword && newPassword.trim() !== '') {
+    if (newPassword && newPassword.trim() !== "") {
       const hashedPassword = await bcrypt.hash(newPassword, 10);
       user.password = hashedPassword;
     }
-    
-    if (newEmail && newEmail.trim() !== '') {
+
+    if (newEmail && newEmail.trim() !== "") {
       const userWithGivenEmailExist = await User.findOne({ email: newEmail });
 
       if (userWithGivenEmailExist) {
-        return res
-        .status(400)
-        .json({
+        return res.status(400).json({
           message: "Account with given email address already exists.",
         });
       }
@@ -179,18 +184,16 @@ const updateUserDetails = async (req, res) => {
       await updateCollectionsOwnerEmail(email, newEmail);
     }
 
-    if (newPhoneNumber && newPhoneNumber.trim() !== '') {
+    if (newPhoneNumber && newPhoneNumber.trim() !== "") {
       user.phoneNumber = newPhoneNumber;
     }
 
     await user.save();
 
-    return res
-      .status(200)
-      .json({
-        message: "User details updated successfully.",
-        newEmail: user.email,
-      });
+    return res.status(200).json({
+      message: "User details updated successfully.",
+      newEmail: user.email,
+    });
   } catch (err) {
     console.error(err);
     return res
@@ -220,5 +223,11 @@ const updateCollectionsOwnerEmail = async (currentEmail, newEmail) => {
   }
 };
 
-
-module.exports = {createUser: createUser, loginUser: loginUser, findUserByEmail: findUserByEmail, verificateUser: verificateUser, findAllUsers: findAllUsers,updateUserDetails: updateUserDetails};
+module.exports = {
+  createUser: createUser,
+  loginUser: loginUser,
+  findUserByEmail: findUserByEmail,
+  verificateUser: verificateUser,
+  findAllUsers: findAllUsers,
+  updateUserDetails: updateUserDetails,
+};
