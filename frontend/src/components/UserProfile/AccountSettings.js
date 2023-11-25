@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import './AccountSettings.css';
-import '../../css/Form.css';
+import '../forms/css/Form.css';
 
 const AccountSettings = () => {
 

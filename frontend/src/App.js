@@ -1,13 +1,13 @@
-import NavbarForNotLoggedUser from "./components/NavbarForNotLoggedUser";
-import NavbarForLoggedUser from "./components/NavbarForLoggedUser";
+import NavbarForNotLoggedUser from "./components/navbars/views/NavbarForNotLoggedUser";
+import NavbarForLoggedUser from "./components/navbars/views/NavbarForLoggedUser";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import RegistrationForm from "./components/RegistrationForm";
-import LoginForm from "./components/LoginForm";
-import Footer from "./components/Footer";
+import RegistrationForm from "./components/forms/views/RegistrationForm";
+import LoginForm from "./components/forms/views/LoginForm";
+import Footer from "./components/footer/Footer";
 import Home from "./components/Home";
 import UserProfile from "./components/UserProfile";
 import About from "./components/About";
-import ExploreCollections from "./components/ExploreCollections";
+import ExploreCollections from "./components/exploreCollections/views/ExploreCollections";
 import CollectionDetails from "./components/collections/CollectionDetails";
 
 function App() {

@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import AllCollections from "./collections/AllCollections";
+import AllCollections from "../../collections/AllCollections";
 import "../css/ExploreCollections.css"
 const ExploreCollections = () => {
   const [collections, setCollections] = useState([]);
