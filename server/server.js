@@ -30,7 +30,7 @@ app.post('/collectionForm',tokenVerification, collectionController.createCollect
 
 
 app.post('/exhibitForm', tokenVerification,exhibitController.createExhibit);
-
+app.delete('/exhibit/delete:id', tokenVerification,exhibitController.deleteExhibit);
 
 app.post('/purchaseOfferForm',tokenVerification, purchaseOfferController.createPurchaseOffer);
 

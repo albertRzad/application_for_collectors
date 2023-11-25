@@ -6,28 +6,8 @@ import UserCollections from "../collections/UserCollections";
 
 const MyCollections = () => {
   const [image, setImage] = useState("");
-
-  function convertToBase64(e) {
-    console.log(e);
-    var reader = new FileReader();
-    reader.readAsDataURL(e.target.files[0]);
-    reader.onload = () => {
-      console.log(reader.result);
-      setImage(reader.result);
-      setFormData({ ...formData, image: reader.result });
-    };
-    reader.onerror = (error) => {
-      console.log("Error: " + error);
-    };
-  }
-
-  const initialFormData = {
-    name: "",
-    type: "",
-    description: "",
-    email: localStorage.getItem("email"),
-    image: ""
-  };
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [userCollections, setUserCollections] = useState([]);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -37,8 +17,6 @@ const MyCollections = () => {
     image: ""
   });
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [userCollections, setUserCollections] = useState([]);
 
   useEffect(() => {
     fetchCollections();
@@ -56,6 +34,20 @@ const MyCollections = () => {
     setIsModalOpen(false);
     window.location.reload();
   };
+
+  function convertToBase64(e) {
+    console.log(e);
+    var reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = () => {
+      console.log(reader.result);
+      setImage(reader.result);
+      setFormData({ ...formData, image: reader.result });
+    };
+    reader.onerror = (error) => {
+      console.log("Error: " + error);
+    };
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -75,7 +67,6 @@ const MyCollections = () => {
         console.log(response);
         if (response.status === 200) {
           console.log(response.status);
-          setFormData(initialFormData);
           closeModal();
         }
       })
@@ -137,6 +128,7 @@ const MyCollections = () => {
           <UserCollections
             collections={userCollections}
             deleteCollection={deleteCollection}
+            setUserCollections={setUserCollections}
           />
         </div>
       </div>
