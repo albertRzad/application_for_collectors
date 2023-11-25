@@ -19,6 +19,11 @@ class CollectionList extends React.Component {
             <p>Name: {collection.name}</p>
             <p>Type: {collection.type}</p>
             <p>Description: {collection.description}</p>
+            {collection.image === "" || collection.image === null ? (
+          ""
+        ) : (
+          <img width={100} height={100} src={collection.image} />
+        )}
             <button
               onClick={(e) => {
                 e.stopPropagation();

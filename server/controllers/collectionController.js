@@ -6,6 +6,7 @@ const createCollection = async (req, res) => {
   const type = req.body.type;
   const description = req.body.description;
   const email = req.body.email;
+  const image = req.body.image;
 
   if (!name || !description) {
     return res
@@ -32,6 +33,7 @@ const createCollection = async (req, res) => {
     description: description,
     type: type,
     ownerEmail: email,
+    image: image
   });
 
   newCollection.save().then(() => {

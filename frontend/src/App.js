@@ -10,7 +10,6 @@ import About from "./components/About";
 import ExploreCollections from "./components/ExploreCollections";
 import CollectionDetails from "./components/collections/CollectionDetails";
 
-
 function App() {
   if (localStorage.getItem("token") == null) {
     return (
