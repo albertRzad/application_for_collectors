@@ -5,7 +5,7 @@ const exhibitSchema = new mongoose.Schema({
     description: String,
     year: String,
     state: String,
-    collectionName: String
+    collectionId: String
   });
 
   const Exhibit = mongoose.model("Exhibit",exhibitSchema)

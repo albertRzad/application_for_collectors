@@ -6,14 +6,14 @@ const createExhibit = async (req, res) => {
     const description = req.body.description;
     const year = req.body.year;
     const state = req.body.state;
-    const collectionName = req.body.collectionName;
+    const collectionId = req.body.collectionId;
 
-    const collection = await Collection.findOne({ name: collectionName });
+    const collection = await Collection.findById({ "_id": collectionId });
 
     if (!collection) {
       return res
         .status(404)
-        .json({ message: "Collection with given name not found." });
+        .json({ message: "Collection with given id not found." });
     }
 
     const newExhibit = new Exhibit({
@@ -21,7 +21,7 @@ const createExhibit = async (req, res) => {
         description: description,
         year: year,
         state: state,
-        collectionName: collectionName
+        collectionId: collectionId
       });
 
       newExhibit.save()

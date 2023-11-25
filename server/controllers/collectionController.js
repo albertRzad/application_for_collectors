@@ -1,21 +1,31 @@
 const Collection = require("../models/collection");
+const Exhibit = require("../models/exhibit");
 
 const createCollection = async (req, res) => {
   const name = req.body.name;
   const type = req.body.type;
-  const description = req.body.description
+  const description = req.body.description;
   const email = req.body.email;
-  
+
   if (!name || !description) {
-    return res.status(400).json({ message: "Name and description are required." });
+    return res
+      .status(400)
+      .json({ message: "Name and description are required." });
   }
 
   const nameAndDescriptionRegex = /^[A-Za-z,. -]+$/;
 
-  if (!nameAndDescriptionRegex.test(name) || !nameAndDescriptionRegex.test(description)) {
-    return res.status(400).json({ message: "Name and description must contain only letters, commas, periods, hyphens, and spaces." });
+  if (
+    !nameAndDescriptionRegex.test(name) ||
+    !nameAndDescriptionRegex.test(description)
+  ) {
+    return res
+      .status(400)
+      .json({
+        message:
+          "Name and description must contain only letters, commas, periods, hyphens, and spaces.",
+      });
   }
-
 
   const newCollection = new Collection({
     name: name,
@@ -34,7 +44,9 @@ const findAllUserCollections = async (req, res) => {
     const ownerEmail = req.params.ownerEmail;
     const trimmedOwnerEmail = ownerEmail.replace(":", "");
 
-    const collections = await Collection.find({"ownerEmail": trimmedOwnerEmail})
+    const collections = await Collection.find({
+      ownerEmail: trimmedOwnerEmail,
+    });
 
     res.json(collections);
   } catch (err) {
@@ -45,7 +57,7 @@ const findAllUserCollections = async (req, res) => {
 
 const findAllCollections = async (req, res) => {
   try {
-    const collections = await Collection.find({})
+    const collections = await Collection.find({});
 
     res.json(collections);
   } catch (err) {
@@ -54,13 +66,14 @@ const findAllCollections = async (req, res) => {
   }
 };
 
-
 const deleteCollectionById = async (req, res) => {
   try {
     const collectionId = req.params.collectionId;
     const trimmedCollectionId = collectionId.replace(":", "");
 
-    const deletedCollection = await Collection.findByIdAndDelete(trimmedCollectionId);
+    const deletedCollection = await Collection.findByIdAndDelete(
+      trimmedCollectionId
+    );
 
     if (!deletedCollection) {
       return res.status(404).json({ message: "Collection not found." });
@@ -69,8 +82,42 @@ const deleteCollectionById = async (req, res) => {
     res.status(200).json({ message: "Collection successfully deleted." });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: "There was an error deleting the collection." });
+    res
+      .status(500)
+      .json({ message: "There was an error deleting the collection." });
   }
 };
 
-module.exports = { createCollection: createCollection, findAllUserCollections: findAllUserCollections, deleteCollectionById: deleteCollectionById, findAllCollections: findAllCollections};
+const getAllExhibitsByCollectionId = async (req, res) => {
+  try {
+    const collectionId = req.params.collectionId;
+    const trimmedCollectionId = collectionId.replace(":", "");
+    const collection = await Collection.findById(trimmedCollectionId);
+    if (!collection) {
+      return res.status(404).json({ message: "Collection not found." });
+    }
+
+    const exhibits = await Exhibit.find({ "collectionId": trimmedCollectionId });
+
+    if (exhibits.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No exhibits found for this collection." });
+    }
+
+    res.json(exhibits);
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ message: "There was an error retrieving the exhibits." });
+  }
+};
+
+module.exports = {
+  createCollection: createCollection,
+  findAllUserCollections: findAllUserCollections,
+  deleteCollectionById: deleteCollectionById,
+  findAllCollections: findAllCollections,
+  getAllExhibitsByCollectionId: getAllExhibitsByCollectionId
+};

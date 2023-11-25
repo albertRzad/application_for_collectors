@@ -8,6 +8,8 @@ import Home from "./components/Home";
 import UserProfile from "./components/UserProfile";
 import About from "./components/About";
 import ExploreCollections from "./components/ExploreCollections";
+import CollectionDetails from "./components/collections/CollectionDetails";
+
 
 function App() {
   if (localStorage.getItem("token") == null) {
@@ -120,8 +122,6 @@ function App() {
             }
           ></Route>
 
-          
-
           <Route
             path="/exploreCollections"
             element={
@@ -131,6 +131,17 @@ function App() {
               </>
             }
           ></Route>
+
+          <Route
+            path="/collection/:id"
+            element={
+              <>
+                <NavbarForLoggedUser />
+                <CollectionDetails />
+              </>
+            }
+          ></Route>
+          
 
           {/* <Route
             path="/userProfile"
@@ -142,7 +153,7 @@ function App() {
               </>
             }
           ></Route> */}
-          
+
           <Route
             path="/user/:activepage"
             element={
@@ -153,7 +164,6 @@ function App() {
               </>
             }
           ></Route>
-
         </Routes>
       </Router>
     );
