@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 class AllCollections extends Component {
   handleCollectionClick = (collectionId) => {
@@ -8,6 +9,28 @@ class AllCollections extends Component {
   handleVisitUserProfile = (ownerEmail) => {
     window.location.href = `http://localhost:3001/exploreUserProfile/${ownerEmail}`;
   };
+
+  handleLikesIncrement = (collectionId) => {
+    const token = localStorage.getItem("token");
+    const config = {
+      method: "put",
+      url: `http://localhost:3000/collection/likes:${collectionId}`,
+      headers: {
+        "x-access-token": token,
+      },
+    };
+
+    axios(config)
+      .then((response) => {
+        console.log(response);
+        if (response.status === 200) {
+          console.log(response.status);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 
   render() {
     const { collections } = this.props;
@@ -23,6 +46,7 @@ class AllCollections extends Component {
             <p>Type: {collection.type}</p>
             <p>Description: {collection.description}</p>
             <p>Owner: {collection.ownerEmail}</p>
+            <p>Likes: {collection.likes}</p>
             {collection.image === "" || collection.image === null ? (
               ""
             ) : (
@@ -37,6 +61,11 @@ class AllCollections extends Component {
               onClick={() => this.handleCollectionClick(collection._id)}
             >
               View Collection
+            </button>
+            <button
+              onClick={() => this.handleLikesIncrement(collection._id)}
+            >
+              Like
             </button>
           </div>
         ))}

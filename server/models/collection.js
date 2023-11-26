@@ -5,7 +5,8 @@ const collectionSchema = new mongoose.Schema({
     type: String,
     description: String,
     ownerEmail: String,
-    image: String
+    image: String,
+    likes: Number
   });
 
   const Collection = mongoose.model("Collection",collectionSchema)

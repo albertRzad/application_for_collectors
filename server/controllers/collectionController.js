@@ -20,12 +20,10 @@ const createCollection = async (req, res) => {
     !nameAndDescriptionRegex.test(name) ||
     !nameAndDescriptionRegex.test(description)
   ) {
-    return res
-      .status(400)
-      .json({
-        message:
-          "Name and description must contain only letters, commas, periods, hyphens, and spaces.",
-      });
+    return res.status(400).json({
+      message:
+        "Name and description must contain only letters, commas, periods, hyphens, and spaces.",
+    });
   }
 
   const newCollection = new Collection({
@@ -33,7 +31,8 @@ const createCollection = async (req, res) => {
     description: description,
     type: type,
     ownerEmail: email,
-    image: image
+    image: image,
+    likes: 0
   });
 
   newCollection.save().then(() => {
@@ -99,7 +98,7 @@ const getAllExhibitsByCollectionId = async (req, res) => {
       return res.status(404).json({ message: "Collection not found." });
     }
 
-    const exhibits = await Exhibit.find({ "collectionId": trimmedCollectionId });
+    const exhibits = await Exhibit.find({ collectionId: trimmedCollectionId });
 
     if (exhibits.length === 0) {
       return res
@@ -116,10 +115,32 @@ const getAllExhibitsByCollectionId = async (req, res) => {
   }
 };
 
+const incrementCollectionLikes = async (req, res) => {
+  const collectionId = req.params.collectionId;
+  const trimmedCollectionId = collectionId.replace(":","");
+  try {
+    const collection = await Collection.findById(trimmedCollectionId);
+
+    if (!collection) {
+      return res.status(404).json({ message: "Collection not found." });
+    }
+
+    collection.likes += 1;
+
+    await collection.save();
+
+    return res.status(200).json({ message: "Likes incremented." });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
 module.exports = {
   createCollection: createCollection,
   findAllUserCollections: findAllUserCollections,
   deleteCollectionById: deleteCollectionById,
   findAllCollections: findAllCollections,
-  getAllExhibitsByCollectionId: getAllExhibitsByCollectionId
+  getAllExhibitsByCollectionId: getAllExhibitsByCollectionId,
+  incrementCollectionLikes: incrementCollectionLikes
 };

@@ -1,6 +1,5 @@
 import React from "react";
 
-
 class CollectionList extends React.Component {
   handleCollectionClick = (collectionId) => {
     window.location.href = `http://localhost:3001/collection/${collectionId}`;
@@ -8,7 +7,6 @@ class CollectionList extends React.Component {
 
   render() {
     const { collections, deleteCollection, setUserCollections} = this.props;
-
     const deleteCollectionHandler = async (collectionId) => {
       const confirmDelete = window.confirm(
         "Are you sure you want to delete this collection?"
@@ -32,6 +30,7 @@ class CollectionList extends React.Component {
             <p>Name: {collection.name}</p>
             <p>Type: {collection.type}</p>
             <p>Description: {collection.description}</p>
+            <p>Likes: {collection.likes}</p>
             {collection.image === "" || collection.image === null ? (
               ""
             ) : (

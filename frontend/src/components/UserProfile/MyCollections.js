@@ -14,7 +14,8 @@ const MyCollections = () => {
     type: "",
     description: "",
     email: localStorage.getItem("email"),
-    image: ""
+    image: "",
+    likes: 0
   });
 
 

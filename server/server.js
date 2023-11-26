@@ -27,6 +27,7 @@ app.get('/getAllCollections', tokenVerification, collectionController.findAllCol
 app.get('/getAllCollectionExhibits:collectionId', tokenVerification,collectionController.getAllExhibitsByCollectionId);
 app.delete('/collection/delete:collectionId', tokenVerification,collectionController.deleteCollectionById);
 app.post('/collectionForm',tokenVerification, collectionController.createCollection);
+app.put('/collection/likes:collectionId', tokenVerification, collectionController.incrementCollectionLikes)
 
 
 app.post('/exhibitForm', tokenVerification,exhibitController.createExhibit);
