@@ -28,7 +28,6 @@ class CollectionList extends React.Component {
           <div
             key={index}
             className="collection"
-            onClick={() => this.handleCollectionClick(collection._id)}
           >
             <p>Name: {collection.name}</p>
             <p>Type: {collection.type}</p>
@@ -45,6 +44,11 @@ class CollectionList extends React.Component {
               }}
             >
               Delete
+            </button>
+            <button
+              onClick={() => this.handleCollectionClick(collection._id)}
+            >
+              View Collection
             </button>
           </div>
         ))}

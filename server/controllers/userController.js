@@ -1,7 +1,28 @@
-const User = require("../models/user")
+const User = require("../models/User")
 const Collection = require("../models/collection");
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
+
+function convertToBase64(imagePath) {
+  return new Promise((resolve, reject) => {
+    fetch(imagePath)
+      .then(response => response.blob())
+      .then(blob => {
+        var reader = new FileReader();
+        reader.readAsDataURL(blob);
+        reader.onload = () => {
+          resolve(reader.result); // Resolve the promise with the base64 string
+        };
+        reader.onerror = (error) => {
+          reject("Error: " + error); // Reject the promise on error
+        };
+      })
+      .catch(error => {
+        reject("Fetch Error: " + error);
+      });
+  });
+}
+
 
 const createUser = async (req, res) => {
   const name = req.body.name;
@@ -16,7 +37,7 @@ const createUser = async (req, res) => {
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{5,}$/;
   const phoneNumberRegex = /^\d{9}$/;
-
+  
   if (!nameRegex.test(name)) {
     return res.status(400).json({ message: "Invalid name format." });
   }
@@ -41,6 +62,9 @@ const createUser = async (req, res) => {
       email: email,
       password: hashedPassword,
       phoneNumber: phoneNumber,
+      country: null,
+      bio: null,
+      profileImage: null
     });
 
     try {

@@ -9,6 +9,22 @@ const createExhibit = async (req, res) => {
   const collectionId = req.body.collectionId;
   const image = req.body.image;
 
+  if (!name || name.length < 3 || !/^[a-zA-Z0-9 ]+$/.test(name)) {
+    return res.status(400).json({ message: "Invalid name." });
+  }
+
+  if (!description || typeof description !== "string") {
+    return res.status(400).json({ message: "Invalid description." });
+  }
+
+  if (!year || !/^\d{4}$/.test(year)) {
+    return res.status(400).json({ message: "Invalid year." });
+  }
+
+  if (!state || state.length < 4 || !/^[a-zA-Z]+$/.test(state)) {
+    return res.status(400).json({ message: "Invalid state." });
+  }
+
   const collection = await Collection.findById({ _id: collectionId });
 
   if (!collection) {

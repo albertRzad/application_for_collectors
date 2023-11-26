@@ -9,6 +9,8 @@ import UserProfile from "./components/UserProfile";
 import About from "./components/About";
 import ExploreCollections from "./components/ExploreCollections";
 import CollectionDetails from "./components/collections/CollectionDetails";
+import ExploreCollectionDetails from "./components/collections/ExploreCollectionDetails";
+import ExploreProfile from "./components/ExploreUserProfile";
 
 function App() {
   if (localStorage.getItem("token") == null) {
@@ -140,7 +142,26 @@ function App() {
               </>
             }
           ></Route>
-          
+
+          <Route
+            path="/exploreCollection/:id"
+            element={
+              <>
+                <NavbarForLoggedUser />
+                <ExploreCollectionDetails />
+              </>
+            }
+          ></Route>
+
+          <Route
+            path="/exploreUserProfile/:email"
+            element={
+              <>
+                <NavbarForLoggedUser />
+                <ExploreProfile />
+              </>
+            }
+          ></Route>
 
           {/* <Route
             path="/userProfile"
