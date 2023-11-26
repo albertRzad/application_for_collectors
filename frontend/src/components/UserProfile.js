@@ -10,7 +10,6 @@ import MyCollections from './UserProfile/MyCollections'
 import Chat from './UserProfile/Chat'
 import MyAuctions from './UserProfile/MyAuctions'
 import AccountSettings from './UserProfile/AccountSettings'
-import ExploreProfile from './ExploreUserProfile'
 
 const UserProfile = () => {
   const {activepage} = useParams()
@@ -30,7 +29,7 @@ const UserProfile = () => {
             {activepage === 'profile' && <Profile />}
             {activepage === 'mycollections' && <MyCollections />}
             {activepage === 'chats' && <Chat />}
-            {activepage === 'myauctions' && <ExploreProfile />}
+            {activepage === 'myauctions' && <MyAuctions />}
           </div> }
           </div>
         </div>
