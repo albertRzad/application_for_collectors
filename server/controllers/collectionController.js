@@ -1,5 +1,5 @@
-const Collection = require("../models/Collection");
-const Exhibit = require("../models/Exhibit");
+const Collection = require("../models/collection");
+const Exhibit = require("../models/exhibit");
 
 const createCollection = async (req, res) => {
   const name = req.body.name;
@@ -20,10 +20,12 @@ const createCollection = async (req, res) => {
     !nameAndDescriptionRegex.test(name) ||
     !nameAndDescriptionRegex.test(description)
   ) {
-    return res.status(400).json({
-      message:
-        "Name and description must contain only letters, commas, periods, hyphens, and spaces.",
-    });
+    return res
+      .status(400)
+      .json({
+        message:
+          "Name and description must contain only letters, commas, periods, hyphens, and spaces.",
+      });
   }
 
   const newCollection = new Collection({
@@ -31,7 +33,7 @@ const createCollection = async (req, res) => {
     description: description,
     type: type,
     ownerEmail: email,
-    image: image,
+    image: image
   });
 
   newCollection.save().then(() => {
@@ -97,7 +99,7 @@ const getAllExhibitsByCollectionId = async (req, res) => {
       return res.status(404).json({ message: "Collection not found." });
     }
 
-    const exhibits = await Exhibit.find({ collectionId: trimmedCollectionId });
+    const exhibits = await Exhibit.find({ "collectionId": trimmedCollectionId });
 
     if (exhibits.length === 0) {
       return res
@@ -119,5 +121,5 @@ module.exports = {
   findAllUserCollections: findAllUserCollections,
   deleteCollectionById: deleteCollectionById,
   findAllCollections: findAllCollections,
-  getAllExhibitsByCollectionId: getAllExhibitsByCollectionId,
+  getAllExhibitsByCollectionId: getAllExhibitsByCollectionId
 };

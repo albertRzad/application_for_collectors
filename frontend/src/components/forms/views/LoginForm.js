@@ -1,7 +1,7 @@
-import axios from "axios";
 import { useState } from "react";
-import "../css/Button.css";
+import axios from "axios";
 import "../css/Form.css";
+import "../css/Button.css";
 import "../css/Popup.css";
 
 const Login = () => {
@@ -23,25 +23,23 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:3000/loginForm", formData)
+     axios.post("http://localhost:3000/loginForm", formData)
       .then((res) => {
         console.log(res);
         if (res.status === 200) {
           console.log(res.data.token);
           console.log(res.status);
           localStorage.setItem("token", res.data.token);
-          localStorage.setItem("email", formData.email);
+          localStorage.setItem("email",formData.email)
           setFormData(initialFormData);
           setShowPopup(true);
-          setTimeout(function () {
+          setTimeout(function() {
             window.location.assign("/home");
           }, 1500);
         }
-      })
-      .catch((error) => {
+      }).catch((error) => {
         console.error(error);
-      });
+      });;
   };
 
   return (
@@ -91,6 +89,7 @@ const Login = () => {
       )}
     </>
   );
+
 };
 
 export default Login;

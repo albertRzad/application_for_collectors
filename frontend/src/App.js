@@ -1,14 +1,14 @@
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import About from "./components/About";
+import NavbarForNotLoggedUser from "./components/navbars/views/NavbarForNotLoggedUser";
+import NavbarForLoggedUser from "./components/navbars/views/NavbarForLoggedUser";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import RegistrationForm from "./components/forms/views/RegistrationForm";
+import LoginForm from "./components/forms/views/LoginForm";
+import Footer from "./components/footer/Footer";
 import Home from "./components/Home";
 import UserProfile from "./components/UserProfile";
-import CollectionDetails from "./components/collections/CollectionDetails";
+import About from "./components/About";
 import ExploreCollections from "./components/exploreCollections/views/ExploreCollections";
-import Footer from "./components/footer/Footer";
-import LoginForm from "./components/forms/views/LoginForm";
-import RegistrationForm from "./components/forms/views/RegistrationForm";
-import NavbarForLoggedUser from "./components/navbars/views/NavbarForLoggedUser";
-import NavbarForNotLoggedUser from "./components/navbars/views/NavbarForNotLoggedUser";
+import CollectionDetails from "./components/collections/CollectionDetails";
 
 function App() {
   if (localStorage.getItem("token") == null) {
@@ -140,6 +140,7 @@ function App() {
               </>
             }
           ></Route>
+          
 
           {/* <Route
             path="/userProfile"

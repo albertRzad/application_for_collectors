@@ -1,12 +1,13 @@
 import React from "react";
 
+
 class CollectionList extends React.Component {
   handleCollectionClick = (collectionId) => {
     window.location.href = `http://localhost:3001/collection/${collectionId}`;
   };
 
   render() {
-    const { collections, deleteCollection, setUserCollections } = this.props;
+    const { collections, deleteCollection, setUserCollections} = this.props;
 
     const deleteCollectionHandler = async (collectionId) => {
       const confirmDelete = window.confirm(
