@@ -5,7 +5,9 @@ class AllCollections extends Component {
   constructor(props) {
     super(props);
 
-    const likedCollections = new Set(JSON.parse(localStorage.getItem('likedCollections') || '[]'));
+    const likedCollections = new Set(
+      JSON.parse(localStorage.getItem("likedCollections") || "[]")
+    );
 
     this.state = {
       likedCollections,
@@ -34,10 +36,16 @@ class AllCollections extends Component {
       .then((response) => {
         if (response.status === 200) {
           this.setState((prevState) => {
-            const updatedLikedCollections = new Set(prevState.likedCollections.add(collectionId));
-            
-            localStorage.setItem('likedCollections', JSON.stringify(Array.from(updatedLikedCollections)));
+            const updatedLikedCollections = new Set(
+              prevState.likedCollections.add(collectionId)
+            );
 
+            localStorage.setItem(
+              "likedCollections",
+              JSON.stringify(Array.from(updatedLikedCollections))
+            );
+
+            window.location.reload();
             return { likedCollections: updatedLikedCollections };
           });
         }
@@ -61,9 +69,16 @@ class AllCollections extends Component {
             <p>Owner: {collection.ownerEmail}</p>
             <p>Likes: {collection.likes}</p>
             {collection.image && (
-              <img width={100} height={100} src={collection.image} alt="Collection" />
+              <img
+                width={100}
+                height={100}
+                src={collection.image}
+                alt="Collection"
+              />
             )}
-            <button onClick={() => this.handleVisitUserProfile(collection.ownerEmail)}>
+            <button
+              onClick={() => this.handleVisitUserProfile(collection.ownerEmail)}
+            >
               Visit User Profile
             </button>
             <button onClick={() => this.handleCollectionClick(collection._id)}>
