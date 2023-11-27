@@ -34,7 +34,7 @@ const ExploreCollections = () => {
     <div>
       <h2>All Collections</h2>
       <div className="collectionsContainer">
-            <AllCollections collections = {collections} />
+            <AllCollections collections = {collections} fetchCollections = {fetchCollections} />
       </div>
     </div>
   );

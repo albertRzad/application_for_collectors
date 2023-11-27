@@ -16,6 +16,7 @@ const CollectionDetails = () => {
     state: localStorage.getItem("email"),
     image: "",
     collectionId: id,
+    toSold: "",
   });
 
   const openModal = () => {
@@ -24,31 +25,31 @@ const CollectionDetails = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
-    window.location.reload();
+    fetchExhibits()
   };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  useEffect(() => {
-    const fetchExhibits = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const config = {
-          method: "get",
-          url: `http://localhost:3000/getAllCollectionExhibits:${id}`,
-          headers: {
-            "x-access-token": token,
-          },
-        };
-        const response = await axios(config);
-        setExhibits(response.data);
-      } catch (error) {
-        console.error("Error fetching collection details:", error);
-      }
-    };
+  const fetchExhibits = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const config = {
+        method: "get",
+        url: `http://localhost:3000/getAllCollectionExhibits:${id}`,
+        headers: {
+          "x-access-token": token,
+        },
+      };
+      const response = await axios(config);
+      setExhibits(response.data);
+    } catch (error) {
+      console.error("Error fetching collection details:", error);
+    }
+  };
 
+  useEffect(() => {
     fetchExhibits();
   }, [id]);
 
@@ -70,29 +71,19 @@ const CollectionDetails = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await axios.delete(
-        `http://localhost:3000/exhibit/delete:${exhibitId}`,
-        {
-          headers: {
-            "x-access-token": token,
-          },
-        }
-      );
+      const config = {
+        method: "delete",
+        url: `http://localhost:3000/exhibit/delete:${exhibitId}`,
+        headers: {
+          "x-access-token": token,
+        },
+      };
+      const response = await axios(config);
+      if(response.status === 200){
+        await fetchExhibits();
+      }
     } catch (error) {
       console.error("Error deleting exhibit:", error);
-    }
-  };
-
-  const deleteExhibitHandler = async (exhibitId) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this exhibit?"
-    );
-    if (confirmDelete) {
-      await deleteExhibit(exhibitId);
-      const newExhibits = exhibits.filter(
-        (exhibit) => exhibit._id !== exhibitId
-      );
-      setExhibits(newExhibits);
     }
   };
 
@@ -140,9 +131,7 @@ const CollectionDetails = () => {
             ) : (
               <img width={100} height={100} src={exhibit.image} />
             )}
-            <button onClick={() => deleteExhibitHandler(exhibit._id)}>
-              Delete
-            </button>
+            <button onClick={() => deleteExhibit(exhibit._id)}>Delete</button>
           </div>
         ))}
       </div>
@@ -196,6 +185,21 @@ const CollectionDetails = () => {
             </div>
 
             <div>
+              To sold:
+              <select
+                className="form__input"
+                name="toSold"
+                onChange={handleChange}
+                value={formData.toSold}
+                required
+              >
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+                <option value="To exchange">To exchange</option>
+              </select>
+            </div>
+
+            <div>
               <input
                 type="file"
                 className="form__input"
@@ -204,6 +208,7 @@ const CollectionDetails = () => {
                 required
               />
             </div>
+
             <div>
               <button className="submit-button" type="submit">
                 Dodaj

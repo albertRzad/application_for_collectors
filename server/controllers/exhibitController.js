@@ -8,6 +8,7 @@ const createExhibit = async (req, res) => {
   const state = req.body.state;
   const collectionId = req.body.collectionId;
   const image = req.body.image;
+  const toSold = req.body.toSold;
 
   if (!name || name.length < 3 || !/^[a-zA-Z0-9 ]+$/.test(name)) {
     return res.status(400).json({ message: "Invalid name." });
@@ -21,9 +22,9 @@ const createExhibit = async (req, res) => {
     return res.status(400).json({ message: "Invalid year." });
   }
 
-  if (!state || state.length < 4 || !/^[a-zA-Z]+$/.test(state)) {
+  if (!state || state.length < 4 || !/^[a-zA-Z ]+$/.test(state)) {
     return res.status(400).json({ message: "Invalid state." });
-  }
+}
 
   const collection = await Collection.findById({ _id: collectionId });
 
@@ -40,6 +41,7 @@ const createExhibit = async (req, res) => {
     state: state,
     collectionId: collectionId,
     image: image,
+    toSold:toSold
   });
 
   newExhibit.save().then(() => {
@@ -49,15 +51,15 @@ const createExhibit = async (req, res) => {
 
 const deleteExhibit = async (req, res) => {
   const exhibitId = req.params.id;
-
+  const trimmedExhibitId = exhibitId.replace(":","");
   try {
-    const exhibit = await Exhibit.findById(exhibitId);
+    const exhibit = await Exhibit.findById(trimmedExhibitId);
 
     if (!exhibit) {
       return res.status(404).json({ message: "Exhibit not found." });
     }
 
-    await Exhibit.findByIdAndDelete(exhibitId);
+    await Exhibit.findByIdAndDelete(trimmedExhibitId);
     res.status(200).json({ message: "Exhibit deleted successfully." });
   } catch (error) {
     res.status(500).json({ message: "An error occurred.", error: error });

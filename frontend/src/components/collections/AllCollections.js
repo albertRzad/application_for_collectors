@@ -4,13 +4,8 @@ import axios from "axios";
 class AllCollections extends Component {
   constructor(props) {
     super(props);
-
-    const likedCollections = new Set(
-      JSON.parse(localStorage.getItem("likedCollections") || "[]")
-    );
-
     this.state = {
-      likedCollections,
+      likedCollections: [],
     };
   }
 
@@ -26,7 +21,7 @@ class AllCollections extends Component {
     const token = localStorage.getItem("token");
     const config = {
       method: "put",
-      url: `http://localhost:3000/collection/likes:${collectionId}`,
+      url: `http://localhost:3000/collection/likes:${collectionId}`, // Popraw URL, zlikwiduj dwukropek
       headers: {
         "x-access-token": token,
       },
@@ -35,19 +30,10 @@ class AllCollections extends Component {
     axios(config)
       .then((response) => {
         if (response.status === 200) {
-          this.setState((prevState) => {
-            const updatedLikedCollections = new Set(
-              prevState.likedCollections.add(collectionId)
-            );
-
-            localStorage.setItem(
-              "likedCollections",
-              JSON.stringify(Array.from(updatedLikedCollections))
-            );
-
-            window.location.reload();
-            return { likedCollections: updatedLikedCollections };
-          });
+          this.props.fetchCollections();
+          this.setState((prevState) => ({
+            likedCollections: [...prevState.likedCollections, collectionId],
+          }));
         }
       })
       .catch((error) => {
@@ -84,8 +70,10 @@ class AllCollections extends Component {
             <button onClick={() => this.handleCollectionClick(collection._id)}>
               View Collection
             </button>
-            {!likedCollections.has(collection._id) && (
-              <button onClick={() => this.handleLikesIncrement(collection._id)}>
+            {!likedCollections.includes(collection._id) && (
+              <button
+                onClick={() => this.handleLikesIncrement(collection._id)}
+              >
                 Like
               </button>
             )}

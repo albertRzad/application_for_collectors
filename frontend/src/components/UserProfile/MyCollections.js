@@ -33,7 +33,7 @@ const MyCollections = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
-    window.location.reload();
+    fetchCollections();
   };
 
   function convertToBase64(e) {
@@ -108,10 +108,7 @@ const MyCollections = () => {
         }
       );
       if (response.status === 200) {
-        const updatedCollections = userCollections.filter(
-          (collection) => collection._id !== collectionId
-        );
-        setUserCollections(updatedCollections);
+        await fetchCollections();
       }
     } catch (error) {
       console.error("Error deleting collection:", error);
