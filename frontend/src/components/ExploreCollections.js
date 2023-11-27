@@ -13,15 +13,17 @@ const ExploreCollections = () => {
   const fetchCollections = async () => {
     try {
       const token = localStorage.getItem("token");
+      const email = localStorage.getItem("email");
 
-      const response = await axios.get(
-        'http://localhost:3000/getAllCollections',
-        {
-          headers: {
-            "x-access-token": token,
-          },
-        }
-      );
+      const config = {
+        method: "get",
+        url: `http://localhost:3000/getAllCollectionsExceptUser:${email}`,
+        headers: {
+          "x-access-token": token,
+        },
+      };
+
+      const response = await axios(config);
       setCollections(response.data);
     } catch (error) {
       console.error("Error fetching collections:", error);

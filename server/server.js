@@ -23,6 +23,7 @@ app.put('/user/update', tokenVerification,userController.updateUserDetails);
 
 
 app.get('/getUserCollections:ownerEmail', tokenVerification, collectionController.findAllUserCollections);
+app.get('/getAllCollectionsExceptUser:ownerEmail', tokenVerification, collectionController.findAllCollectionsExceptByEmail)
 app.get('/getAllCollections', tokenVerification, collectionController.findAllCollections);
 app.get('/getAllCollectionExhibits:collectionId', tokenVerification,collectionController.getAllExhibitsByCollectionId);
 app.delete('/collection/delete:collectionId', tokenVerification,collectionController.deleteCollectionById);

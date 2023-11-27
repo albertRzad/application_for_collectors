@@ -67,6 +67,20 @@ const findAllCollections = async (req, res) => {
   }
 };
 
+const findAllCollectionsExceptByEmail = async (req, res) => {
+  const ownerEmail = req.params.ownerEmail;
+  const trimmedOwnerEmail = ownerEmail.replace(":", "");
+  try {
+    const collections = await Collection.find({ ownerEmail: { $ne: trimmedOwnerEmail } });
+
+    res.json(collections);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "There was an error" });
+  }
+};
+
+
 const deleteCollectionById = async (req, res) => {
   try {
     const collectionId = req.params.collectionId;
@@ -142,5 +156,6 @@ module.exports = {
   deleteCollectionById: deleteCollectionById,
   findAllCollections: findAllCollections,
   getAllExhibitsByCollectionId: getAllExhibitsByCollectionId,
-  incrementCollectionLikes: incrementCollectionLikes
+  incrementCollectionLikes: incrementCollectionLikes,
+  findAllCollectionsExceptByEmail: findAllCollectionsExceptByEmail
 };
