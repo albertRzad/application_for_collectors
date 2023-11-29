@@ -16,7 +16,7 @@ const CollectionDetails = () => {
     state: localStorage.getItem("email"),
     image: "",
     collectionId: id,
-    toSold: "",
+    toSold: "No",
   });
 
   const openModal = () => {

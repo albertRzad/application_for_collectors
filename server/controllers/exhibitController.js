@@ -24,7 +24,7 @@ const createExhibit = async (req, res) => {
 
   if (!state || state.length < 4 || !/^[a-zA-Z ]+$/.test(state)) {
     return res.status(400).json({ message: "Invalid state." });
-}
+  }
 
   const collection = await Collection.findById({ _id: collectionId });
 
@@ -41,7 +41,7 @@ const createExhibit = async (req, res) => {
     state: state,
     collectionId: collectionId,
     image: image,
-    toSold:toSold
+    toSold: toSold,
   });
 
   newExhibit.save().then(() => {
@@ -51,7 +51,7 @@ const createExhibit = async (req, res) => {
 
 const deleteExhibit = async (req, res) => {
   const exhibitId = req.params.id;
-  const trimmedExhibitId = exhibitId.replace(":","");
+  const trimmedExhibitId = exhibitId.replace(":", "");
   try {
     const exhibit = await Exhibit.findById(trimmedExhibitId);
 
@@ -66,4 +66,31 @@ const deleteExhibit = async (req, res) => {
   }
 };
 
-module.exports = { createExhibit: createExhibit, deleteExhibit: deleteExhibit };
+const findCollectionOwnerByExhibitId = async (req, res) => {
+  const exhibitId = req.params.id;
+  const trimmedExhibitId = exhibitId.replace(":", "");
+  try {
+    const exhibit = await Exhibit.findById(trimmedExhibitId);
+
+    if (!exhibit) {
+      return res.status(404).json({ message: "Exhibit not found" });
+    }
+
+    const collection = await Collection.findById(exhibit.collectionId);
+
+    if (!collection) {
+      return res.status(404).json({ message: "Collection not found" });
+    }
+
+    res.json({ ownerEmail: collection.ownerEmail });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "There was an error" });
+  }
+};
+
+module.exports = {
+  createExhibit: createExhibit,
+  deleteExhibit: deleteExhibit,
+  findCollectionOwnerByExhibitId: findCollectionOwnerByExhibitId,
+};

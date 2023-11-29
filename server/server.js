@@ -31,8 +31,10 @@ app.post('/collectionForm',tokenVerification, collectionController.createCollect
 app.put('/collection/likes:collectionId', tokenVerification, collectionController.incrementCollectionLikes)
 
 
+app.get('/findCollectionOwnerByExhibitId:id',tokenVerification, exhibitController.findCollectionOwnerByExhibitId);
 app.post('/exhibitForm', tokenVerification,exhibitController.createExhibit);
 app.delete('/exhibit/delete:id', tokenVerification,exhibitController.deleteExhibit);
+
 
 app.post('/purchaseOfferForm',tokenVerification, purchaseOfferController.createPurchaseOffer);
 

@@ -1,31 +1,46 @@
 const PurchaseOffer = require("../models/purchaseOffer");
 const Exhibit = require("../models/exhibit");
+const User = require("../models/User");
 
 const createPurchaseOffer = async (req, res) => {
-    const name = req.body.name;
-    const price = req.body.price;
-    const message = req.body.message;
-    const exhibitId = req.body.exhibitId;
+  const buyerEmail = req.body.buyerEmail;
+  const sellerEmail = req.body.sellerEmail;
+  const price = req.body.price;
+  const message = req.body.message;
+  const exhibitId = req.body.exhibitId;
 
-    const exhibit = await Exhibit.findOne({ _id: exhibitId });
+  const buyer = await User.find({ email: buyerEmail });
+  if (!buyer) {
+    return res
+      .status(404)
+      .json({ message: "User with given email not found." });
+  }
 
-    if (!exhibit) {
-      return res
-        .status(404)
-        .json({ message: "Exhibit with given id not found." });
-    }
+  const seller = await User.find({ email: sellerEmail });
 
-    const newPurchaseOffer = new PurchaseOffer({
-        name: name,
-        price: price,
-        message: message,
-        exhibitId: exhibitId
-      });
+  if (!seller) {
+    return res.status(404).json({ message: "User with email id not found." });
+  }
 
-      newPurchaseOffer.save()
-      .then(() => {
-        return res.status(200).json({ message: "Purchase offer added."});
-      })
-}
+  const exhibit = await Exhibit.findOne({ _id: exhibitId });
 
-module.exports = {createPurchaseOffer: createPurchaseOffer};
+  if (!exhibit) {
+    return res
+      .status(404)
+      .json({ message: "Exhibit with given id not found." });
+  }
+
+  const newPurchaseOffer = new PurchaseOffer({
+    buyerEmail: buyerEmail,
+    sellerEmail: sellerEmail,
+    price: price,
+    message: message,
+    exhibitId: exhibitId,
+  });
+
+  newPurchaseOffer.save().then(() => {
+    return res.status(200).json({ message: "Purchase offer added." });
+  });
+};
+
+module.exports = { createPurchaseOffer: createPurchaseOffer };

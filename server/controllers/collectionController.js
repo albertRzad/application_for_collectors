@@ -80,7 +80,6 @@ const findAllCollectionsExceptByEmail = async (req, res) => {
   }
 };
 
-
 const deleteCollectionById = async (req, res) => {
   try {
     const collectionId = req.params.collectionId;
@@ -157,5 +156,5 @@ module.exports = {
   findAllCollections: findAllCollections,
   getAllExhibitsByCollectionId: getAllExhibitsByCollectionId,
   incrementCollectionLikes: incrementCollectionLikes,
-  findAllCollectionsExceptByEmail: findAllCollectionsExceptByEmail
+  findAllCollectionsExceptByEmail: findAllCollectionsExceptByEmail,
 };
