@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import AllCollections from "./AllCollections";
-import "./css/ExploreCollections.css"
+import "./css/ExploreCollections.css";
 const ExploreCollections = () => {
   const [collections, setCollections] = useState([]);
 
@@ -34,7 +34,10 @@ const ExploreCollections = () => {
     <div>
       <h2>All Collections</h2>
       <div className="collectionsContainer">
-            <AllCollections collections = {collections} fetchCollections = {fetchCollections} />
+        <AllCollections
+          collections={collections}
+          fetchCollections={fetchCollections}
+        />
       </div>
     </div>
   );

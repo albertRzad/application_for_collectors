@@ -6,7 +6,7 @@ class CollectionList extends React.Component {
   };
 
   render() {
-    const { collections, deleteCollection, setUserCollections} = this.props;
+    const { collections, deleteCollection, setUserCollections } = this.props;
     const deleteCollectionHandler = async (collectionId) => {
       const confirmDelete = window.confirm(
         "Are you sure you want to delete this collection?"
@@ -23,10 +23,7 @@ class CollectionList extends React.Component {
     return (
       <div>
         {collections.map((collection, index) => (
-          <div
-            key={index}
-            className="collection"
-          >
+          <div key={index} className="collection">
             <p>Name: {collection.name}</p>
             <p>Type: {collection.type}</p>
             <p>Description: {collection.description}</p>
@@ -44,9 +41,7 @@ class CollectionList extends React.Component {
             >
               Delete
             </button>
-            <button
-              onClick={() => this.handleCollectionClick(collection._id)}
-            >
+            <button onClick={() => this.handleCollectionClick(collection._id)}>
               View Collection
             </button>
           </div>

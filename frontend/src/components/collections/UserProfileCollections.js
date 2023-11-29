@@ -6,15 +6,12 @@ class UserProfileCollections extends React.Component {
   };
 
   render() {
-    const {collections} = this.props;
+    const { collections } = this.props;
 
     return (
       <div className="collections">
         {collections.map((collection, index) => (
-          <div
-            key={index}
-            className="collection"
-          >
+          <div key={index} className="collection">
             <p>Name: {collection.name}</p>
             <p>Type: {collection.type}</p>
             <p>Description: {collection.description}</p>
@@ -24,9 +21,7 @@ class UserProfileCollections extends React.Component {
             ) : (
               <img width={100} height={100} src={collection.image} />
             )}
-            <button
-              onClick={() => this.handleCollectionClick(collection._id)}
-            >
+            <button onClick={() => this.handleCollectionClick(collection._id)}>
               View Collection
             </button>
           </div>

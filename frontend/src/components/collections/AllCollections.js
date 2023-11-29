@@ -71,9 +71,7 @@ class AllCollections extends Component {
               View Collection
             </button>
             {!likedCollections.includes(collection._id) && (
-              <button
-                onClick={() => this.handleLikesIncrement(collection._id)}
-              >
+              <button onClick={() => this.handleLikesIncrement(collection._id)}>
                 Like
               </button>
             )}

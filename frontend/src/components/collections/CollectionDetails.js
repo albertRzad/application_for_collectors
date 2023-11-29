@@ -25,7 +25,7 @@ const CollectionDetails = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
-    fetchExhibits()
+    fetchExhibits();
   };
 
   const handleChange = (e) => {
@@ -79,7 +79,7 @@ const CollectionDetails = () => {
         },
       };
       const response = await axios(config);
-      if(response.status === 200){
+      if (response.status === 200) {
         await fetchExhibits();
       }
     } catch (error) {
