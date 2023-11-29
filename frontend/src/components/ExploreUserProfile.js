@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios"; // Import axios for making HTTP requests
 import "../css/ExploreUserProfile.css";
-import { useParams } from "react-router-dom";
+import UserProfileCollections from "./collections/UserProfileCollections";
 
 const ExploreProfile = () => {
   const [bio, setBio] = useState("");
@@ -9,9 +9,10 @@ const ExploreProfile = () => {
   const [newSurname, setNewSurname] = useState("");
   const [country, setCountry] = useState("");
   const [profileImagePath, setProfileImagePath] = useState("");
+  const [userCollections, setUserCollections] = useState([]);
   const [userEmail, setUserEmail] = useState("");
 
-  useEffect(() => {
+  const extractUserEmail = () => {
     const currentUrl = window.location.href;
     const parts = currentUrl.split("/");
     const exploreUserProfileIndex = parts.indexOf("exploreUserProfile");
@@ -23,6 +24,10 @@ const ExploreProfile = () => {
       const extractedOwnerEmail = parts[exploreUserProfileIndex + 1];
       setUserEmail(extractedOwnerEmail);
     }
+  };
+
+  useEffect(() => {
+    extractUserEmail();
   }, []);
 
   useEffect(() => {
@@ -57,40 +62,66 @@ const ExploreProfile = () => {
     fetchUserData();
   }, [userEmail]);
 
+  useEffect(() => {
+    const fetchCollections = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        const response = await axios.get(
+          `http://localhost:3000/getUserCollections:${userEmail}`,
+          {
+            headers: {
+              "x-access-token": token,
+            },
+          }
+        );
+        setUserCollections(response.data);
+      } catch (error) {
+        console.error("Error fetching collections:", error);
+      }
+    };
+    fetchCollections();
+  }, [userEmail]);
+
   return (
-    <div className="Profile">
-      <div className="ProfileTitle">Profile</div>
+    <>
+      <div className="Profile">
+        <div className="ProfileTitle">Profile</div>
 
-      <div className="profileContainer">
-        <div className="profile__info">
-          <img
-            src={"/images/defaultProfileImage.png"}
-            alt="Profile"
-            className="profile__image"
-          />
+        <div className="profileContainer">
+          <div className="profile__info">
+            <img
+              src={profileImagePath}
+              alt="Profile"
+              className="profile__image"
+            />
 
-          <div className="profile__info__item" id="bio">
-            <span className="info__label">Bio:</span>
-            <span className="info__content">{bio}</span>
+            <div className="profile__info__item" id="bio">
+              <span className="info__label">Bio:</span>
+              <span className="info__content">{bio}</span>
+            </div>
+
+            <div className="profile__info__item" id="name">
+              <span className="info__label">Name:</span>
+              <span className="info__content">{newName}</span>
+            </div>
+
+            <div className="profile__info__item" id="surname">
+              <span className="info__label">Surname:</span>
+              <span className="info__content">{newSurname}</span>
+            </div>
+
+            <div className="profile__info__item" id="country">
+              <span className="info__label">Country:</span>
+              <span className="info__content">{country}</span>
+            </div>
           </div>
-
-          <div className="profile__info__item" id="name">
-            <span className="info__label">Name:</span>
-            <span className="info__content">{newName}</span>
-          </div>
-
-          <div className="profile__info__item" id="surname">
-            <span className="info__label">Surname:</span>
-            <span className="info__content">{newSurname}</span>
-          </div>
-
-          <div className="profile__info__item" id="country">
-            <span className="info__label">Country:</span>
-            <span className="info__content">{country}</span>
+          <div className="userProfileCollections">
+            <UserProfileCollections collections={userCollections} />
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

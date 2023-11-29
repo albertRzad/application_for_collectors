@@ -11,7 +11,7 @@
 .profileContainer {
     display: flex;
     justify-content: center;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     border: 5px solid blue;
 }
@@ -26,3 +26,4 @@
     display: block;
     margin: 5px 0;
 }
+

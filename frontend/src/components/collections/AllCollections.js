@@ -21,7 +21,7 @@ class AllCollections extends Component {
     const token = localStorage.getItem("token");
     const config = {
       method: "put",
-      url: `http://localhost:3000/collection/likes:${collectionId}`, // Popraw URL, zlikwiduj dwukropek
+      url: `http://localhost:3000/collection/likes:${collectionId}`,
       headers: {
         "x-access-token": token,
       },

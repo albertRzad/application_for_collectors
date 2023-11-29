@@ -5,6 +5,7 @@ const MyAuctions = () => {
     return (
         <div>
             <div className='ProfileTitle'>My Auctions</div>
+            <div>DUPA</div>
         </div>
     )
 }
