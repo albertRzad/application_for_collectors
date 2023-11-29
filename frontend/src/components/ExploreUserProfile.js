@@ -85,40 +85,42 @@ const ExploreProfile = () => {
 
   return (
     <>
-      <div className="Profile">
-        <div className="ProfileTitle">Profile</div>
+      <div className="userProfileContainer">
+        <div className="Profile">
+          <div className="ProfileTitle">Profile</div>
 
-        <div className="profileContainer">
-          <div className="profile__info">
-            <img
-              src={profileImagePath}
-              alt="Profile"
-              className="profile__image"
-            />
+          <div className="profileContainer">
+            <div className="profile__info">
+              <img
+                src={profileImagePath}
+                alt="Profile"
+                className="profile__image"
+              />
 
-            <div className="profile__info__item" id="bio">
-              <span className="info__label">Bio:</span>
-              <span className="info__content">{bio}</span>
-            </div>
+              <div className="profile__info__item" id="bio">
+                <span className="info__label">Bio:</span>
+                <span className="info__content">{bio}</span>
+              </div>
 
-            <div className="profile__info__item" id="name">
-              <span className="info__label">Name:</span>
-              <span className="info__content">{newName}</span>
-            </div>
+              <div className="profile__info__item" id="name">
+                <span className="info__label">Name:</span>
+                <span className="info__content">{newName}</span>
+              </div>
 
-            <div className="profile__info__item" id="surname">
-              <span className="info__label">Surname:</span>
-              <span className="info__content">{newSurname}</span>
-            </div>
+              <div className="profile__info__item" id="surname">
+                <span className="info__label">Surname:</span>
+                <span className="info__content">{newSurname}</span>
+              </div>
 
-            <div className="profile__info__item" id="country">
-              <span className="info__label">Country:</span>
-              <span className="info__content">{country}</span>
+              <div className="profile__info__item" id="country">
+                <span className="info__label">Country:</span>
+                <span className="info__content">{country}</span>
+              </div>
             </div>
           </div>
-          <div className="userProfileCollections">
-            <UserProfileCollections collections={userCollections} />
-          </div>
+        </div>
+        <div className="userProfileCollections">
+          <UserProfileCollections collections={userCollections} />
         </div>
       </div>
     </>

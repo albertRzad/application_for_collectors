@@ -9,10 +9,6 @@
 }
 
 .profileContainer {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    align-items: center;
     border: 5px solid blue;
 }
 
@@ -25,5 +21,17 @@
 .info__label, .info__content {
     display: block;
     margin: 5px 0;
+}
+
+.userProfileContainer{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    border: 5px solid green;
+}
+
+.collections{
+    border: 5px solid pink;
 }
 
