@@ -1,0 +1,37 @@
+.Profile {
+    color: white;
+    text-align: center;
+}
+
+.ProfileTitle {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.profileContainer {
+    border: 5px solid blue;
+}
+
+.profile__info__item {
+    font-size: 18px;
+    margin: 10px 0;
+    border: 5px solid red;
+}
+
+.info__label, .info__content {
+    display: block;
+    margin: 5px 0;
+}
+
+.userProfileContainer{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    border: 5px solid green;
+}
+
+.collections{
+    border: 5px solid pink;
+}
+

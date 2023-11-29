@@ -1,7 +1,7 @@
 import React from 'react';
 import  { useState, useEffect } from 'react';
-import "./Profile.css"
-import '../../css/Form.css';
+import "./css/Profile.css"
+import '../authentication/css/Form.css';
 
 
 const Profile = () => {

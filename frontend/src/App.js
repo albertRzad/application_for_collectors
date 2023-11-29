@@ -1,16 +1,16 @@
-import NavbarForNotLoggedUser from "./components/NavbarForNotLoggedUser";
-import NavbarForLoggedUser from "./components/NavbarForLoggedUser";
+import NavbarForNotLoggedUser from "./components/navbars/NavbarForNotLoggedUser";
+import NavbarForLoggedUser from "./components/navbars/NavbarForLoggedUser";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import RegistrationForm from "./components/RegistrationForm";
-import LoginForm from "./components/LoginForm";
+import RegistrationForm from "./components/authentication/RegistrationForm";
+import LoginForm from "./components/authentication/LoginForm";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
-import UserProfile from "./components/UserProfile";
+import UserProfile from "./components/UserProfile/UserProfile";
 import About from "./components/About";
-import ExploreCollections from "./components/ExploreCollections";
+import ExploreCollections from "./components/collections/ExploreCollections";
 import CollectionDetails from "./components/collections/CollectionDetails";
 import ExploreCollectionDetails from "./components/collections/ExploreCollectionDetails";
-import ExploreProfile from "./components/ExploreUserProfile";
+import ExploreProfile from "./components/UserProfile/ExploreUserProfile";
 
 function App() {
   if (localStorage.getItem("token") == null) {

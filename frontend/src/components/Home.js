@@ -1,7 +1,7 @@
 import "../css/Home.css"
-import "../css/Cards.css"
+import "./cards/css/Cards.css"
 import React, { useState, useEffect } from 'react';
-import Cards from './Cards';
+import Cards from './cards/Cards';
 
 
 const Home = () => {
