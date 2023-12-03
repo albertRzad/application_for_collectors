@@ -136,6 +136,7 @@ const AccountSettings = () => {
               type="email"
               value={formData.newEmail}
               onChange={handleChange}
+              placeholder={currentUser.email}
             />
           </label>
           <label className="form__input__label" id="phone">
@@ -146,6 +147,7 @@ const AccountSettings = () => {
               type="tel"
               value={formData.newPhoneNumber}
               onChange={handleChange}
+              placeholder={currentUser.phoneNumber}
             />
           </label>
         </div>
