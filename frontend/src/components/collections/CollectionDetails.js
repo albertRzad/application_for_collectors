@@ -114,8 +114,8 @@ const CollectionDetails = () => {
   };
 
   return (
-    <div>
-      <h2>Exhibits</h2>
+    <div className="exhibitsWrapper">
+      <div className='ProfileTitle'>Exhibits</div>
       <button className="createButton" onClick={openModal}>
         Add new exhibit
       </button>

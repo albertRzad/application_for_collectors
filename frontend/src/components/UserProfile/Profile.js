@@ -87,6 +87,7 @@ const Profile = () => {
               type="name"
               value={newName}
               onChange={(e) => setNewName(e.target.value)}
+              
             />
           </label>
 

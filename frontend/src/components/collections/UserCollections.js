@@ -1,4 +1,6 @@
 import React from "react";
+import "../UserProfile/css/CollectionForm.css";
+import {Link } from "react-router-dom";
 
 class CollectionList extends React.Component {
   handleCollectionClick = (collectionId) => {
@@ -21,29 +23,34 @@ class CollectionList extends React.Component {
     };
 
     return (
-      <div>
+      <div className="collection__wrapper">
         {collections.map((collection, index) => (
-          <div key={index} className="collection">
-            <p>Name: {collection.name}</p>
-            <p>Type: {collection.type}</p>
-            <p>Description: {collection.description}</p>
-            <p>Likes: {collection.likes}</p>
-            {collection.image === "" || collection.image === null ? (
+          <div key={index} className="collection__item">
+            <Link to = {`/collection/${collection._id}`}>
+            <figure className="collection__image__wrap" data-category={collection.type}>
+            {collection.image === "" || collections.image === null ? (
               ""
             ) : (
-              <img width={100} height={100} src={collection.image} />
+              <img className="collection__image" width={100} height={100} src={collection.image} />
             )}
-            <button
+            </figure>
+            </Link>
+            <div className="collection__item__info">
+            <p> {collection.name}</p>
+            {/* <p>Type: {collection.type}</p> */}
+            {/* <p>Description: {collection.description}</p> */}
+            <p>Likes: {collection.likes}</p>
+            <div className="collection__item__button">
+            <button className="delete__button"
               onClick={(e) => {
                 e.stopPropagation();
                 deleteCollectionHandler(collection._id);
               }}
             >
-              Delete
+              Delete Collection
             </button>
-            <button onClick={() => this.handleCollectionClick(collection._id)}>
-              View Collection
-            </button>
+            </div>
+            </div>
           </div>
         ))}
       </div>
