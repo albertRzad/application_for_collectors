@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import "../UserProfile/css/Exhibit.css";
+import "../UserProfile/css/CollectionDetails.css";
 
 const ExploreCollectionDetails = () => {
   const [exhibits, setExhibits] = useState([]);
@@ -115,7 +115,7 @@ const ExploreCollectionDetails = () => {
         },
       };
       const response = await axios(config);
-      setExhibits(response.data);
+      setExhibits(response.data.exhibits);
     } catch (error) {
       console.error("Error fetching collection details:", error);
     }

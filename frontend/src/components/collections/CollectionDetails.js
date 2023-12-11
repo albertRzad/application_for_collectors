@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import "../UserProfile/css/Exhibit.css";
+import "../UserProfile/css/CollectionDetails.css";
 
 const CollectionDetails = () => {
   const [exhibits, setExhibits] = useState([]);
   const { id } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [image, setImage] = useState("");
+  const [collectionName, setcollectionName] = useState("");
 
   const [formData, setFormData] = useState({
     name: "",
@@ -19,13 +20,20 @@ const CollectionDetails = () => {
     toSold: "No",
   });
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
+  // const openModal = () => {
+  //   setIsModalOpen(true);
+  // };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-    fetchExhibits();
+  // const closeModal = () => {
+  //   setIsModalOpen(false);
+  //   fetchExhibits();
+  // };
+
+  const toggleExhibit = () => {
+    setIsModalOpen(!isModalOpen);
+    if (isModalOpen) {
+      fetchExhibits();
+    }
   };
 
   const handleChange = (e) => {
@@ -42,8 +50,10 @@ const CollectionDetails = () => {
           "x-access-token": token,
         },
       };
+
       const response = await axios(config);
-      setExhibits(response.data);
+      setcollectionName(response.data.collectionName);
+      setExhibits(response.data.exhibits);
     } catch (error) {
       console.error("Error fetching collection details:", error);
     }
@@ -104,8 +114,7 @@ const CollectionDetails = () => {
       .then((response) => {
         console.log(response);
         if (response.status === 200) {
-          console.log(response.status);
-          closeModal();
+          toggleExhibit();
         }
       })
       .catch((error) => {
@@ -114,112 +123,125 @@ const CollectionDetails = () => {
   };
 
   return (
-    <div className="exhibitsWrapper">
-      <div className='ProfileTitle'>Exhibits</div>
-      <button className="createButton" onClick={openModal}>
-        Add new exhibit
-      </button>
+    <div className="exhibitsBody">
       <div className="exhibitsContainer">
+      <div className='CollectionName'> {collectionName} </div>
+      <div className="exhibitsItems">
         {exhibits.map((exhibit, index) => (
           <div key={index} className="exhibit">
+            <figure className="exhibitImageWrap" data-category={exhibit.type}>
+            {exhibit.image === "" || exhibit.image === null ? (
+              ""
+            ) : (
+              <img className="exhibitImage" width={100} height={100} src={exhibit.image} />
+            )}
+            </figure>
+            <div className="exhibitItemInfo">
             <p>Name: {exhibit.name}</p>
             <p>Description: {exhibit.description}</p>
             <p>Year: {exhibit.year}</p>
             <p>State: {exhibit.state}</p>
-            {exhibit.image === "" || exhibit.image === null ? (
-              ""
-            ) : (
-              <img width={100} height={100} src={exhibit.image} />
-            )}
-            <button onClick={() => deleteExhibit(exhibit._id)}>Delete</button>
+            <div className="exhibitDeleteButton">
+            <button  className="delete__button" onClick={() => deleteExhibit(exhibit._id)}>Delete</button>
+            </div>
+            </div>
           </div>
         ))}
-      </div>
-      {isModalOpen && (
-        <div className="overlay">
-          <form className="modal" onSubmit={handleSubmit}>
-            <h2>Add new exhibit</h2>
-            <div>
-              <input
-                type="text"
-                className="form__input"
-                name="name"
-                placeholder="Name"
-                onChange={handleChange}
-                value={formData.name}
-                required
-              />
-            </div>
-            <div>
-              <input
-                type="text"
-                className="form__input"
-                name="year"
-                placeholder="Year"
-                onChange={handleChange}
-                value={formData.year}
-                required
-              />
-            </div>
-            <div>
-              <input
-                type="text"
-                className="form__input"
-                name="state"
-                placeholder="State"
-                onChange={handleChange}
-                value={formData.state}
-                required
-              />
-            </div>
-            <div>
-              <textarea
-                className="form__input"
-                name="description"
-                placeholder="Description"
-                onChange={handleChange}
-                value={formData.description}
-                rows={4}
-                required
-              />
-            </div>
-
-            <div>
-              To sold:
-              <select
-                className="form__input"
-                name="toSold"
-                onChange={handleChange}
-                value={formData.toSold}
-                required
-              >
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-                <option value="To exchange">To exchange</option>
-              </select>
-            </div>
-
-            <div>
-              <input
-                type="file"
-                className="form__input"
-                name="image"
-                onChange={convertToBase64}
-                required
-              />
-            </div>
-
-            <div>
-              <button className="submit-button" type="submit">
-                Dodaj
-              </button>
-              <button className="cancel-button" onClick={closeModal}>
-                Anuluj
-              </button>
-            </div>
-          </form>
         </div>
-      )}
+      <div className="addExhibitButtonContainer">
+      <button className="addExhibitButton" onClick={toggleExhibit}>
+        Add new exhibit
+      </button>
+      </div>
+      </div>
+
+      <dialog className="modal" open={isModalOpen}>
+  <form className="collectionForm" onSubmit={handleSubmit}>
+    <div className='formTitle'>Add new exhibit</div>
+    
+    <div>
+      <input
+        type="text"
+        className="form__input"
+        name="name"
+        placeholder="Name"
+        onChange={handleChange}
+        value={formData.name}
+        required
+      />
+    </div>
+
+    <div>
+      <input
+        type="text"
+        className="form__input"
+        name="year"
+        placeholder="Year"
+        onChange={handleChange}
+        value={formData.year}
+        required
+      />
+    </div>
+
+    <div>
+      <input
+        type="text"
+        className="form__input"
+        name="state"
+        placeholder="State"
+        onChange={handleChange}
+        value={formData.state}
+        required
+      />
+    </div>
+
+    <div>
+      <textarea
+        className="form__input"
+        name="description"
+        placeholder="Description"
+        onChange={handleChange}
+        value={formData.description}
+        rows={4}
+        required
+      />
+    </div>
+
+    <div>
+      <select
+        className="form__input"
+        name="toSold"
+        onChange={handleChange}
+        value={formData.toSold}
+        required
+      >
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+        <option value="To exchange">To exchange</option>
+      </select>
+    </div>
+
+    <div>
+      <input
+        type="file"
+        className="form__input"
+        name="image"
+        onChange={convertToBase64}
+        required
+      />
+    </div>
+
+    <div className='modal__actions'>
+      <button className='modal-button' type='submit'>
+        Dodaj
+      </button>
+      <button className='modal-button' onClick={toggleExhibit} type='button'>
+        Anuluj
+      </button>
+    </div>
+  </form>
+</dialog>
+
     </div>
   );
 };

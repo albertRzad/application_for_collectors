@@ -119,7 +119,7 @@ const getAllExhibitsByCollectionId = async (req, res) => {
         .json({ message: "No exhibits found for this collection." });
     }
 
-    res.json(exhibits);
+    res.json({exhibits , collectionName: collection.name});
   } catch (error) {
     console.error(error);
     res

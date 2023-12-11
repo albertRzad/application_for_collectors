@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import './css/CollectionForm.css';
 import './css/MyCollections.css';
+import './css/CollectionForm.css';
 import axios from 'axios';
 import UserCollections from '../collections/UserCollections';
 
@@ -105,7 +105,10 @@ const MyCollections = () => {
       <div className='ProfileTitle'>My Collections</div>
       <div className='userCollections'>
         <div className='collection__container'>
+          {userCollections.length !== 0 ? 
           <UserCollections collections={userCollections} deleteCollection={deleteCollection} setUserCollections={setUserCollections} />
+          : <span className='loader'>  </span> }
+          
         </div>
       </div>
 

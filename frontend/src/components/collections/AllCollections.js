@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-
+import {Link } from "react-router-dom";
 class AllCollections extends Component {
   constructor(props) {
     super(props);
@@ -48,33 +48,35 @@ class AllCollections extends Component {
     return (
       <div className="collectionContainers">
         {collections.map((collection, index) => (
-          <div key={index} className="collection">
-            <p>Name: {collection.name}</p>
-            <p>Type: {collection.type}</p>
-            <p>Description: {collection.description}</p>
-            <p>Owner: {collection.ownerEmail}</p>
-            <p>Likes: {collection.likes}</p>
-            {collection.image && (
-              <img
-                width={100}
-                height={100}
-                src={collection.image}
-                alt="Collection"
-              />
-            )}
-            <button
+          <div key={index} className="collection__item">
+          <Link to= {`/exploreCollection/${collection._id}`}>
+          <figure className="collection__image__wrap" data-category={collection.type}>
+          {collection.image === "" || collection.image === null ? (
+            ""
+          ) : (
+            <img className="collection__image" width={100} height={100} src={collection.image} />
+          )} 
+          </figure>
+          </Link>
+          <div className="collection__item__info">
+          <p>Name: {collection.name}</p>
+          <p>Description: {collection.description}</p>
+          <p>Owner: {collection.ownerEmail}</p>
+          <p>Likes: {collection.likes}</p>
+          <div className="exploreCollectionsButtons">
+          <button className = "visitUserProfileButton"
               onClick={() => this.handleVisitUserProfile(collection.ownerEmail)}
             >
               Visit User Profile
             </button>
-            <button onClick={() => this.handleCollectionClick(collection._id)}>
-              View Collection
-            </button>
             {!likedCollections.includes(collection._id) && (
-              <button onClick={() => this.handleLikesIncrement(collection._id)}>
+              <button className = "likeCollectionButton" onClick={() => this.handleLikesIncrement(collection._id)}>
                 Like
               </button>
             )}
+            </div>
+          </div>
+            
           </div>
         ))}
       </div>
