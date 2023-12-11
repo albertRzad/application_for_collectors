@@ -31,14 +31,18 @@ const ExploreCollections = () => {
   };
 
   return (
-    <div>
-      <h2>All Collections</h2>
-      <div className="collectionsContainer">
+    <div className="allCollections">
+      <div className="allCollectionsIn">
+      <div className="allCollectionsHeader">All Collections</div>
+      <div className="allCollectionsContainer">
+        {collections.length !== 0 ? 
         <AllCollections
           collections={collections}
           fetchCollections={fetchCollections}
         />
+        : <span className='loader'>  </span> }
       </div>
+    </div>
     </div>
   );
 };

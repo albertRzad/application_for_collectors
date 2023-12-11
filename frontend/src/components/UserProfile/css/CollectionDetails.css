@@ -1,0 +1,119 @@
+.exhibitsBody{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.CollectionName{
+    font-family: 'Roboto', sans-serif;
+    font-size: 3rem;
+    font-weight: 400;
+    text-align: center;
+    color: #d6be73;
+    /* margin-bottom: 1rem; */
+    /* margin-top: 2.5rem; */
+    text-shadow: 3px 3px 12px #000000;
+    
+  } 
+
+.exhibitsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    max-width: 85%; 
+    height: 80%;
+    flex-grow: 1;
+    border: 2px solid rgba(255, 255, 255, 0.055);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(8,7,16,0.6);
+    
+}
+
+
+.exhibitsItems {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center; 
+    overflow: auto;
+    /* max-width: 23%; */
+}
+
+.exhibit {
+    /* flex: 1 0 100%; */
+    border-radius: 10px;
+    margin: 15px;
+    transition: all 0.2s linear;
+    overflow: auto;
+    /* max-width: 23%; */
+    width: fit-content;
+}
+
+.exhibitImageWrap{
+    position: relative;
+    width: 100%;
+    padding-top: 67%;
+    border-radius: 10px;
+}
+
+.exhibitImage{
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.exhibitItemInfo{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  min-width: 250px;
+  min-height: 150px;
+  width: 100%;
+  background-color: rgb(241, 241, 241);
+  padding-left: 5px;
+}
+
+.exhibitItemInfo p{
+    margin-top: 3px;
+    display: flex;
+    /* justify-content: center; */
+    color: #000000;
+    text-shadow: none;
+    font-size: 14px;
+    font-weight: bold;
+    
+  }
+  
+  .exhibitDeleteButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+  }
+
+  .addExhibitButtonContainer{
+
+  }
+
+  .addExhibitButton {
+    color: #000000;
+    background-color: #d6be73;
+    text-decoration: none;
+    width: 100%;
+    cursor: pointer;
+    transition: 0.4s;
+    font-weight: 600;
+    border: 0;
+    border-radius: 4px;
+    padding: 10px;
+  }

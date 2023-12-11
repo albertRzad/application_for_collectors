@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios"; // Import axios for making HTTP requests
 import "./css/ExploreUserProfile.css";
+import './css/CollectionForm.css';
 import UserProfileCollections from "../collections/UserProfileCollections";
 
 const ExploreProfile = () => {
@@ -86,22 +87,15 @@ const ExploreProfile = () => {
   return (
     <>
       <div className="userProfileContainer">
-        <div className="Profile">
-          <div className="ProfileTitle">Profile</div>
-
+        <div className="userProfileContainerIn">
+        <div className="userProfileExplore">
           <div className="profileContainer">
-            <div className="profile__info">
+            <div className="profileInfo">
               <img
                 src={profileImagePath}
                 alt="Profile"
                 className="profile__image"
               />
-
-              <div className="profile__info__item" id="bio">
-                <span className="info__label">Bio:</span>
-                <span className="info__content">{bio}</span>
-              </div>
-
               <div className="profile__info__item" id="name">
                 <span className="info__label">Name:</span>
                 <span className="info__content">{newName}</span>
@@ -116,11 +110,19 @@ const ExploreProfile = () => {
                 <span className="info__label">Country:</span>
                 <span className="info__content">{country}</span>
               </div>
+
+              <div className="profile__info__item" id="bio">
+                <span className="info__label">Bio:</span>
+                <span className="info__content">{bio}</span>
+              </div>
             </div>
           </div>
         </div>
         <div className="userProfileCollections">
+          <div className="userProfileCollectionsWrapper">
           <UserProfileCollections collections={userCollections} />
+          </div>
+        </div>
         </div>
       </div>
     </>

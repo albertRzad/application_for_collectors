@@ -128,7 +128,10 @@ function App() {
             element={
               <>
                 <NavbarForLoggedUser />
+                <main>
                 <ExploreCollections />
+                </main>
+                <Footer />
               </>
             }
           ></Route>
@@ -138,7 +141,10 @@ function App() {
             element={
               <>
                 <NavbarForLoggedUser />
+                <main>
                 <CollectionDetails />
+                </main>
+                <Footer />
               </>
             }
           ></Route>
@@ -158,7 +164,10 @@ function App() {
             element={
               <>
                 <NavbarForLoggedUser />
+                <main>
                 <ExploreProfile />
+                </main>
+                <Footer />
               </>
             }
           ></Route>
