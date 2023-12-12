@@ -21,7 +21,7 @@ const Profile = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add logic to handle the submission of the form, such as validating the input and updating the user's account settings
+   
   };
 
   const handleImageChange = (event) => {
