@@ -12,7 +12,8 @@
 }
 
 .popup-content {
-  background-color: #fff;
+  background-color: #2e2e2e;
+  color: #d6be73;
   height: 150px;
   padding: 20px;
   border-radius: 20px;

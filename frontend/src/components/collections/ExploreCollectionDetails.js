@@ -8,6 +8,7 @@ const ExploreCollectionDetails = () => {
   const { id } = useParams();
   const [sellerEmail, setSellerEmail] = useState("");
   const [isPurchaseModalOpen, setPurchaseModalOpen] = useState(false);
+  const [collectionName, setcollectionName] = useState("");
 
   const [purchaseOfferformData, setPurchaseOfferFormData] = useState({
     buyerEmail: localStorage.getItem("email"),
@@ -115,6 +116,7 @@ const ExploreCollectionDetails = () => {
         },
       };
       const response = await axios(config);
+      setcollectionName(response.data.collectionName);
       setExhibits(response.data.exhibits);
     } catch (error) {
       console.error("Error fetching collection details:", error);
@@ -125,13 +127,13 @@ const ExploreCollectionDetails = () => {
     switch (toSold) {
       case "Yes":
         return (
-          <button onClick={() => handleOpenBuyOfferForm(exhibitId)}>
+          <button className= "exhibitsOfferButton" onClick={() => handleOpenBuyOfferForm(exhibitId)}>
             Send Buy Offer
           </button>
         );
       case "To exchange":
         return (
-          <button onClick={() => handleOpenExchangeOfferForm(exhibitId)}>
+          <button className= "exhibitsOfferButton" onClick={() => handleOpenExchangeOfferForm(exhibitId)}>
             Send Exchange Offer
           </button>
         );
@@ -146,25 +148,37 @@ const ExploreCollectionDetails = () => {
 
   return (
     <>
-      <div>
-        <h2>Exhibits</h2>
-        <div className="exhibitsContainer">
-          {exhibits.map((exhibit, index) => (
-            <div key={index} className="exhibit">
-              <p>Name: {exhibit.name}</p>
-              <p>Description: {exhibit.description}</p>
-              <p>Year: {exhibit.year}</p>
-              <p>State: {exhibit.state}</p>
-              {exhibit.image === "" || exhibit.image === null ? (
-                ""
-              ) : (
-                <img width={100} height={100} src={exhibit.image} />
-              )}
-              {renderOfferButton(exhibit.toSold, exhibit._id)}
+    <div className="exhibitsBody">
+      <div className="exhibitsContainer">
+      <div className='CollectionName'> {collectionName} </div>
+      <div className="exhibitsItems">
+        {exhibits.map((exhibit, index) => (
+          <div key={index} className="exhibit">
+            <figure className="exhibitImageWrap" data-category={exhibit.type}>
+            {exhibit.image === "" || exhibit.image === null ? (
+              ""
+            ) : (
+              <img className="exhibitImage" width={100} height={100} src={exhibit.image} />
+            )}
+            </figure>
+            <div className="exhibitItemInfo">
+            <p>Name: {exhibit.name}</p>
+            <p>Description: {exhibit.description}</p>
+            <p>Year: {exhibit.year}</p>
+            <p>State: {exhibit.state}</p>
             </div>
-          ))}
+            <div className="exhibitOfferButton">
+            {renderOfferButton(exhibit.toSold, exhibit._id)}
+            </div>
+          </div>
+          
+        ))} 
         </div>
       </div>
+      </div>
+
+
+
       {isPurchaseModalOpen && (
         <div className="overlay">
           <form className="modal" onSubmit={handlePurchaseOfferSubmit}>
