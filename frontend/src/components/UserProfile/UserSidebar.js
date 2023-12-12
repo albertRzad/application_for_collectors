@@ -46,7 +46,7 @@ export default function UserSidebar({ activepage }) {
             <Link to="/user/chats">
               <span>
                 {" "}
-                <i className="fa fa-fw fa-comments"></i> Chats
+                <i className="fa fa-fw fa-heart"></i> My favourites
               </span>
             </Link>
           </li>
@@ -54,7 +54,7 @@ export default function UserSidebar({ activepage }) {
             <Link to="/user/myauctions">
               <span>
                 {" "}
-                <i className="fa fa-fw fa-cart-arrow-down"></i> My Auctions
+                <i className="fa fa-fw fa-cart-arrow-down"></i> Buy/Exchange Offfers
               </span>
             </Link>
           </li>
