@@ -154,7 +154,10 @@ function App() {
             element={
               <>
                 <NavbarForLoggedUser />
+                <main>
                 <ExploreCollectionDetails />
+                </main>
+                <Footer />
               </>
             }
           ></Route>
