@@ -128,33 +128,11 @@ const getAllExhibitsByCollectionId = async (req, res) => {
   }
 };
 
-const incrementCollectionLikes = async (req, res) => {
-  const collectionId = req.params.collectionId;
-  const trimmedCollectionId = collectionId.replace(":","");
-  try {
-    const collection = await Collection.findById(trimmedCollectionId);
-
-    if (!collection) {
-      return res.status(404).json({ message: "Collection not found." });
-    }
-
-    collection.likes += 1;
-
-    await collection.save();
-
-    return res.status(200).json({ message: "Likes incremented." });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: "Internal Server Error" });
-  }
-};
-
 module.exports = {
   createCollection: createCollection,
   findAllUserCollections: findAllUserCollections,
   deleteCollectionById: deleteCollectionById,
   findAllCollections: findAllCollections,
   getAllExhibitsByCollectionId: getAllExhibitsByCollectionId,
-  incrementCollectionLikes: incrementCollectionLikes,
   findAllCollectionsExceptByEmail: findAllCollectionsExceptByEmail,
 };

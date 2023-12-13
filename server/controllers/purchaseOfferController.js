@@ -43,4 +43,24 @@ const createPurchaseOffer = async (req, res) => {
   });
 };
 
-module.exports = { createPurchaseOffer: createPurchaseOffer };
+const getPurchaseOffersBySeller = async (req, res) => {
+  const sellerEmail = req.params.email;
+  const trimmedSellerEmail = sellerEmail.replace(":","");
+
+  console.log(trimmedSellerEmail);
+  try {
+    const purchaseOffers = await PurchaseOffer.find({ sellerEmail: trimmedSellerEmail });
+
+    if (!purchaseOffers || purchaseOffers.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No purchase offers found for this seller." });
+    }
+
+    return res.status(200).json(purchaseOffers);
+  } catch (error) {
+    return res.status(500).json({ message: "Error retrieving purchase offers." });
+  }
+};
+
+module.exports = { createPurchaseOffer: createPurchaseOffer, getPurchaseOffersBySeller: getPurchaseOffersBySeller};

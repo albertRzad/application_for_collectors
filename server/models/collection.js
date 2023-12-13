@@ -1,14 +1,13 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const collectionSchema = new mongoose.Schema({
-    name: String,
-    type: String,
-    description: String,
-    ownerEmail: String,
-    image: String,
-    likes: Number
-  });
+  name: String,
+  type: String,
+  description: String,
+  ownerEmail: { type: String, index: true },
+  image: String,
+});
 
-  const Collection = mongoose.model("Collection",collectionSchema)
-  
- module.exports = Collection
+const Collection = mongoose.model("Collection", collectionSchema);
+
+module.exports = Collection;

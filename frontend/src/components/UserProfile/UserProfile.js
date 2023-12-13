@@ -7,9 +7,8 @@ import NavbarForLoggedUser from "../navbars/NavbarForLoggedUser";
 import Footer from "../Footer";
 import Profile from "./Profile";
 import MyCollections from "./MyCollections";
-import Chat from "./Chat";
-import MyAuctions from "./MyAuctions";
 import AccountSettings from "./AccountSettings";
+import Offers from "../offers/Offers";
 
 const UserProfile = () => {
   const { activepage } = useParams();
@@ -28,8 +27,7 @@ const UserProfile = () => {
               {activepage === "accountsettings" && <AccountSettings />}
               {activepage === "profile" && <Profile />}
               {activepage === "mycollections" && <MyCollections />}
-              {activepage === "chats" && <Chat />}
-              {activepage === "myauctions" && <MyAuctions />}
+              {activepage === "offers" && <Offers/>}
             </div>
           }
         </div>

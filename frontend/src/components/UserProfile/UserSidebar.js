@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import "./css/UserSidebar.css";
 import { useState } from "react";
 import "../authentication/css/Button.css";
+
 export default function UserSidebar({ activepage }) {
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -42,16 +43,8 @@ export default function UserSidebar({ activepage }) {
               </span>
             </Link>
           </li>
-          <li className={activepage === "chats" ? "active" : ""}>
-            <Link to="/user/chats">
-              <span>
-                {" "}
-                <i className="fa fa-fw fa-heart"></i> My favourites
-              </span>
-            </Link>
-          </li>
           <li className={activepage === "auctions" ? "active" : ""}>
-            <Link to="/user/myauctions">
+            <Link to="/user/offers">
               <span>
                 {" "}
                 <i className="fa fa-fw fa-cart-arrow-down"></i> Buy/Exchange Offfers

@@ -28,7 +28,6 @@ app.get('/getAllCollections', tokenVerification, collectionController.findAllCol
 app.get('/getAllCollectionExhibits:collectionId', tokenVerification,collectionController.getAllExhibitsByCollectionId);
 app.delete('/collection/delete:collectionId', tokenVerification,collectionController.deleteCollectionById);
 app.post('/collectionForm',tokenVerification, collectionController.createCollection);
-app.put('/collection/likes:collectionId', tokenVerification, collectionController.incrementCollectionLikes)
 
 
 app.get('/findCollectionOwnerByExhibitId:id',tokenVerification, exhibitController.findCollectionOwnerByExhibitId);
@@ -37,7 +36,7 @@ app.delete('/exhibit/delete:id', tokenVerification,exhibitController.deleteExhib
 
 
 app.post('/purchaseOfferForm',tokenVerification, purchaseOfferController.createPurchaseOffer);
-
+app.get('/purchaseOffersBySeller:email', tokenVerification, purchaseOfferController.getPurchaseOffersBySeller);
 
 
 app.listen(3000);

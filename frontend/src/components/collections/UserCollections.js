@@ -37,9 +37,6 @@ class CollectionList extends React.Component {
             </Link>
             <div className="collection__item__info">
             <p> {collection.name}</p>
-            {/* <p>Type: {collection.type}</p> */}
-            {/* <p>Description: {collection.description}</p> */}
-            <p>Likes: {collection.likes}</p>
             <div className="collection__item__button">
             <button className="delete__button"
               onClick={(e) => {
