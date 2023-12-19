@@ -11,3 +11,5 @@ const purchaseOfferSchema = new mongoose.Schema({
   const PurchaseOffer = mongoose.model("PurchaseOffer",purchaseOfferSchema);
   
  module.exports = PurchaseOffer;
+
+ 

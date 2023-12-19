@@ -10,7 +10,7 @@ const createExhibit = async (req, res) => {
   const image = req.body.image;
   const toSold = req.body.toSold;
 
-  if (!name || name.length < 3 || !/^[a-zA-Z0-9 ]+$/.test(name)) {
+  if (!name || name.length < 3 || !/^[a-zA-Z0-9ąćęłńóśźżĄĆĘŁŃÓŚŹŻ ]+$/.test(name)) {
     return res.status(400).json({ message: "Invalid name." });
   }
 

@@ -9,3 +9,5 @@ const exchangeOfferSchema = new mongoose.Schema({
   const ExchangeOffer = mongoose.model("ExchangeOffer",exchangeOfferSchema);
   
  module.exports = ExchangeOffer;
+
+ 

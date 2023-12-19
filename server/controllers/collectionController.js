@@ -14,7 +14,7 @@ const createCollection = async (req, res) => {
       .json({ message: "Name and description are required." });
   }
 
-  const nameAndDescriptionRegex = /^[A-Za-z,. -]+$/;
+  const nameAndDescriptionRegex = /^[A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ,. -]+$/;
 
   if (
     !nameAndDescriptionRegex.test(name) ||

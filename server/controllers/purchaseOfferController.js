@@ -1,6 +1,6 @@
 const PurchaseOffer = require("../models/purchaseOffer");
 const Exhibit = require("../models/exhibit");
-const User = require("../models/User");
+const User = require("../models/user");
 
 const createPurchaseOffer = async (req, res) => {
   const buyerEmail = req.body.buyerEmail;
@@ -45,11 +45,13 @@ const createPurchaseOffer = async (req, res) => {
 
 const getPurchaseOffersBySeller = async (req, res) => {
   const sellerEmail = req.params.email;
-  const trimmedSellerEmail = sellerEmail.replace(":","");
+  const trimmedSellerEmail = sellerEmail.replace(":", "");
 
   console.log(trimmedSellerEmail);
   try {
-    const purchaseOffers = await PurchaseOffer.find({ sellerEmail: trimmedSellerEmail });
+    const purchaseOffers = await PurchaseOffer.find({
+      sellerEmail: trimmedSellerEmail,
+    });
 
     if (!purchaseOffers || purchaseOffers.length === 0) {
       return res
@@ -59,8 +61,13 @@ const getPurchaseOffersBySeller = async (req, res) => {
 
     return res.status(200).json(purchaseOffers);
   } catch (error) {
-    return res.status(500).json({ message: "Error retrieving purchase offers." });
+    return res
+      .status(500)
+      .json({ message: "Error retrieving purchase offers." });
   }
 };
 
-module.exports = { createPurchaseOffer: createPurchaseOffer, getPurchaseOffersBySeller: getPurchaseOffersBySeller};
+module.exports = {
+  createPurchaseOffer: createPurchaseOffer,
+  getPurchaseOffersBySeller: getPurchaseOffersBySeller,
+};

@@ -125,123 +125,136 @@ const CollectionDetails = () => {
   return (
     <div className="exhibitsBody">
       <div className="exhibitsContainer">
-      <div className='CollectionName'> {collectionName} </div>
-      <div className="exhibitsItems">
-        {exhibits.map((exhibit, index) => (
-          <div key={index} className="exhibit">
-            <figure className="exhibitImageWrap" data-category={exhibit.type}>
-            {exhibit.image === "" || exhibit.image === null ? (
-              ""
-            ) : (
-              <img className="exhibitImage" width={100} height={100} src={exhibit.image} />
-            )}
-            </figure>
-            <div className="exhibitItemInfo">
-            <p>Name: {exhibit.name}</p>
-            <p>Description: {exhibit.description}</p>
-            <p>Year: {exhibit.year}</p>
-            <p>State: {exhibit.state}</p>
-            <div className="exhibitDeleteButton">
-            <button  className="delete__button" onClick={() => deleteExhibit(exhibit._id)}>Delete</button>
+        <div className="CollectionName"> {collectionName} </div>
+        <div className="exhibitsItems">
+          {exhibits.map((exhibit, index) => (
+            <div key={index} className="exhibit">
+              <figure className="exhibitImageWrap" data-category={exhibit.type}>
+                {exhibit.image === "" || exhibit.image === null ? (
+                  ""
+                ) : (
+                  <img
+                    className="exhibitImage"
+                    width={100}
+                    height={100}
+                    src={exhibit.image}
+                  />
+                )}
+              </figure>
+              <div className="exhibitItemInfo">
+                <p>Name: {exhibit.name}</p>
+                <p>Description: {exhibit.description}</p>
+                <p>Year: {exhibit.year}</p>
+                <p>State: {exhibit.state}</p>
+                <div className="exhibitDeleteButton">
+                  <button
+                    className="delete__button"
+                    onClick={() => deleteExhibit(exhibit._id)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
             </div>
-            </div>
-          </div>
-        ))}
+          ))}
         </div>
-      <div className="addExhibitButtonContainer">
-      <button className="addExhibitButton" onClick={toggleExhibit}>
-        Add new exhibit
-      </button>
-      </div>
+        <div className="addExhibitButtonContainer">
+          <button className="addExhibitButton" onClick={toggleExhibit}>
+            Add new exhibit
+          </button>
+        </div>
       </div>
 
       <dialog className="modal" open={isModalOpen}>
-  <form className="collectionForm" onSubmit={handleSubmit}>
-    <div className='formTitle'>Add new exhibit</div>
-    
-    <div>
-      <input
-        type="text"
-        className="form__input"
-        name="name"
-        placeholder="Name"
-        onChange={handleChange}
-        value={formData.name}
-        required
-      />
-    </div>
+        <form className="collectionForm" onSubmit={handleSubmit}>
+          <div className="formTitle">Add new exhibit</div>
 
-    <div>
-      <input
-        type="text"
-        className="form__input"
-        name="year"
-        placeholder="Year"
-        onChange={handleChange}
-        value={formData.year}
-        required
-      />
-    </div>
+          <div>
+            <input
+              type="text"
+              className="form__input"
+              name="name"
+              placeholder="Name"
+              onChange={handleChange}
+              value={formData.name}
+              required
+            />
+          </div>
 
-    <div>
-      <input
-        type="text"
-        className="form__input"
-        name="state"
-        placeholder="State"
-        onChange={handleChange}
-        value={formData.state}
-        required
-      />
-    </div>
+          <div>
+            <input
+              type="text"
+              className="form__input"
+              name="year"
+              placeholder="Year"
+              onChange={handleChange}
+              value={formData.year}
+              required
+            />
+          </div>
 
-    <div>
-      <textarea
-        className="form__input"
-        name="description"
-        placeholder="Description"
-        onChange={handleChange}
-        value={formData.description}
-        rows={4}
-        required
-      />
-    </div>
+          <div>
+            <input
+              type="text"
+              className="form__input"
+              name="state"
+              placeholder="State"
+              onChange={handleChange}
+              value={formData.state}
+              required
+            />
+          </div>
 
-    <div>
-      <select
-        className="form__input"
-        name="toSold"
-        onChange={handleChange}
-        value={formData.toSold}
-        required
-      >
-        <option value="Yes">Yes</option>
-        <option value="No">No</option>
-        <option value="To exchange">To exchange</option>
-      </select>
-    </div>
+          <div>
+            <textarea
+              className="form__input"
+              name="description"
+              placeholder="Description"
+              onChange={handleChange}
+              value={formData.description}
+              rows={4}
+              required
+            />
+          </div>
 
-    <div>
-      <input
-        type="file"
-        className="form__input"
-        name="image"
-        onChange={convertToBase64}
-        required
-      />
-    </div>
+          <div>
+            <select
+              className="form__input"
+              name="toSold"
+              onChange={handleChange}
+              value={formData.toSold}
+              required
+            >
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+              <option value="To exchange">To exchange</option>
+            </select>
+          </div>
 
-    <div className='modal__actions'>
-      <button className='modal-button' type='submit'>
-        Dodaj
-      </button>
-      <button className='modal-button' onClick={toggleExhibit} type='button'>
-        Anuluj
-      </button>
-    </div>
-  </form>
-</dialog>
+          <div>
+            <input
+              type="file"
+              className="form__input"
+              name="image"
+              onChange={convertToBase64}
+              required
+            />
+          </div>
 
+          <div className="modal__actions">
+            <button className="modal-button" type="submit">
+              Dodaj
+            </button>
+            <button
+              className="modal-button"
+              onClick={toggleExhibit}
+              type="button"
+            >
+              Anuluj
+            </button>
+          </div>
+        </form>
+      </dialog>
     </div>
   );
 };

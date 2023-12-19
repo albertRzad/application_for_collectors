@@ -13,3 +13,4 @@ const exhibitSchema = new mongoose.Schema({
   const Exhibit = mongoose.model("Exhibit",exhibitSchema)
   
  module.exports = Exhibit
+ 
