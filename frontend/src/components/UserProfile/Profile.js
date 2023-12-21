@@ -2,40 +2,88 @@ import React from "react";
 import { useState, useEffect } from "react";
 import "./css/Profile.css";
 import "../authentication/css/Form.css";
+import axios from "axios";
 
 const Profile = () => {
   const [newName, setNewName] = useState("");
   const [newSurname, setNewSurname] = useState("");
   const [country, setCountry] = useState("");
-  const [avatar, setAvatar] = useState(
-    localStorage.getItem("userAvatar") || ""
-  );
+  const [image, setImage] = useState("");
   const [bio, setBio] = useState("");
 
   useEffect(() => {
-    const savedAvatar = localStorage.getItem("userAvatar");
-    if (savedAvatar) {
-      setAvatar(savedAvatar);
-    }
+    const fetchUserData = async () => {
+      const token = localStorage.getItem("token");
+      const userEmail = localStorage.getItem("email");
+
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/user:${userEmail}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "x-access-token": token,
+            },
+          }
+        );
+
+        const userData = response.data;
+        setNewName(userData.name || "");
+        setNewSurname(userData.surname || "");
+        setCountry(userData.country || "");
+        setBio(userData.bio || "");
+        setImage(userData.profileImage || "");
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-   
+    const token = localStorage.getItem("token");
+
+    const formData = {
+      newName: newName,
+      newSurname: newSurname,
+      country: country,
+      bio: bio,
+      profileImage: image,
+      userEmail: localStorage.getItem("email"),
+    };
+
+    const config = {
+      method: "put",
+      url: "http://localhost:3000/user/profile/update",
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": token,
+      },
+      data: formData,
+    };
+
+    axios(config)
+      .then((response) => {
+        if (response.status === 200) {
+          console.log("User details updated successfully");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    if (file && (file.type === "image/jpeg" || file.type === "image/png")) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        setAvatar(e.target.result);
-        localStorage.setItem("userAvatar", e.target.result);
-      };
-      reader.readAsDataURL(file);
-    } else {
-      alert("Proszę wybrać plik obrazu typu JPEG lub PNG.");
-    }
+  const convertToBase64 = (e) => {
+    var reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = () => {
+      setImage(reader.result);
+    };
+    reader.onerror = (error) => {
+      console.error("Error: ", error);
+    };
   };
 
   return (
@@ -50,10 +98,10 @@ const Profile = () => {
 
           <div
             className="avatar-preview"
-            style={{ backgroundImage: `url(${avatar})` }}
+            style={{ backgroundImage: `url(${image})` }}
             onClick={() => document.getElementById("avatarInput").click()}
           >
-            {!avatar && <div className="avatar-placeholder">Avatar</div>}
+            {!image && <div className="avatar-placeholder">Avatar</div>}
             <i className="fa fa-upload avatar-upload-icon"></i>
           </div>
 
@@ -61,7 +109,7 @@ const Profile = () => {
             <input
               id="avatarInput"
               type="file"
-              onChange={handleImageChange}
+              onChange={convertToBase64}
               accept="image/jpeg, image/png"
               style={{ display: "none" }}
             />
@@ -71,6 +119,7 @@ const Profile = () => {
             Bio:
             <textarea
               className="bio__input"
+              type="bio"
               value={bio}
               onChange={(e) => setBio(e.target.value)}
             />
@@ -87,7 +136,6 @@ const Profile = () => {
               type="name"
               value={newName}
               onChange={(e) => setNewName(e.target.value)}
-              
             />
           </label>
 

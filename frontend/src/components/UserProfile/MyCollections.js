@@ -15,7 +15,6 @@ const MyCollections = () => {
     description: '',
     email: localStorage.getItem('email'),
     image: '',
-    likes: 0,
   });
 
   useEffect(() => {

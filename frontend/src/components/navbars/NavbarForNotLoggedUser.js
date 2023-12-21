@@ -47,14 +47,6 @@ export default function NavbarForNotLoggedUser() {
             </a>
           </li>
           <li>
-            <a href="/samples">
-              {" "}
-              <span>
-                <i class="fa fa-fw fa-compass"> </i> Sample exhibits
-              </span>
-            </a>
-          </li>
-          <li>
             <a href="/about">
               <span>
                 {" "}

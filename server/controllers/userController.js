@@ -3,26 +3,6 @@ const Collection = require("../models/collection");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-function convertToBase64(imagePath) {
-  return new Promise((resolve, reject) => {
-    fetch(imagePath)
-      .then((response) => response.blob())
-      .then((blob) => {
-        var reader = new FileReader();
-        reader.readAsDataURL(blob);
-        reader.onload = () => {
-          resolve(reader.result); // Resolve the promise with the base64 string
-        };
-        reader.onerror = (error) => {
-          reject("Error: " + error); // Reject the promise on error
-        };
-      })
-      .catch((error) => {
-        reject("Fetch Error: " + error);
-      });
-  });
-}
-
 const createUser = async (req, res) => {
   const name = req.body.name;
   const surname = req.body.surname;
@@ -34,7 +14,8 @@ const createUser = async (req, res) => {
   const nameRegex = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-zA-ZĄĆĘŁŃÓŚŹŻ]+$/;
   const surnameRegex = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-zA-ZĄĆĘŁŃÓŚŹŻ-]*$/;
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-ZĄĆĘŁŃÓŚŹŻ]{2,4}$/;
-  const passwordRegex = /^(?=.*[a-ząćęłńóśźż])(?=.*[A-ZĄĆĘŁŃÓŚŹŻ])(?=.*\d)[a-zA-Ząćęłńóśźż\d]{5,}$/;
+  const passwordRegex =
+    /^(?=.*[a-ząćęłńóśźż])(?=.*[A-ZĄĆĘŁŃÓŚŹŻ])(?=.*\d)[a-zA-Ząćęłńóśźż\d]{5,}$/;
   const phoneNumberRegex = /^\d{9}$/;
 
   if (!nameRegex.test(name)) {
@@ -246,6 +227,61 @@ const updateCollectionsOwnerEmail = async (currentEmail, newEmail) => {
   }
 };
 
+const updateUserProfileDetails = async (req, res) => {
+  try {
+    const newName = req.body.newName;
+    const newSurname = req.body.newSurname;
+    const country = req.body.country;
+    const bio = req.body.bio;
+    const profileImage = req.body.profileImage;
+    const userEmail = req.body.userEmail;
+
+    console.log(newName);
+    console.log(newSurname);
+    console.log(country);
+    console.log(bio);
+    console.log(userEmail);
+
+    const nameRegex = /^[A-Z][a-z]+$/;
+    if (!nameRegex.test(newName) || !nameRegex.test(newSurname)) {
+      return res.status(400).json({
+        message:
+          "Invalid name or surname format. They should start with a capital letter and contain only letters.",
+      });
+    }
+
+    const countryRegex = /^[A-Za-z]+$/;
+    if (!countryRegex.test(country)) {
+      return res.status(400).json({
+        message: "Invalid country format. It should contain only letters.",
+      });
+    }
+
+    const user = await User.findOne({ email: userEmail });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    user.name = newName;
+    user.surname = newSurname;
+    user.country = country;
+    user.bio = bio;
+    user.profileImage = profileImage;
+
+    await user.save();
+
+    return res.status(200).json({
+      message: "User details updated successfully.",
+    });
+  } catch (err) {
+    console.error(err);
+    return res
+      .status(500)
+      .json({ message: "There was an error updating the user details." });
+  }
+};
+
 module.exports = {
   createUser: createUser,
   loginUser: loginUser,
@@ -253,4 +289,5 @@ module.exports = {
   verificateUser: verificateUser,
   findAllUsers: findAllUsers,
   updateUserDetails: updateUserDetails,
+  updateUserProfileDetails: updateUserProfileDetails,
 };

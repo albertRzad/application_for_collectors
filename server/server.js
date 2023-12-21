@@ -21,6 +21,7 @@ app.post('/loginForm', userController.loginUser);
 app.get('/user:email',tokenVerification,userController.findUserByEmail);
 app.post('/tokenVerification', userController.verificateUser);
 app.put('/user/update', tokenVerification,userController.updateUserDetails);
+app.put('/user/profile/update', tokenVerification,userController.updateUserProfileDetails);
 
 
 app.get('/getUserCollections:ownerEmail', tokenVerification, collectionController.findAllUserCollections);

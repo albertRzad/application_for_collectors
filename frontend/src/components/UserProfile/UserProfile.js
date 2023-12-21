@@ -16,7 +16,6 @@ const UserProfile = () => {
     <>
       <div className="userprofile">
         <NavbarForLoggedUser />
-        {/* <UserSidebar /> */}
         <div className="userprofilein">
           <div className="userprofileleft">
             {<UserSidebar activepage={activepage} />}
