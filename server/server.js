@@ -7,7 +7,7 @@ const userController = require("./controllers/userController");
 const collectionController = require("./controllers/collectionController");
 const exhibitController = require("./controllers/exhibitController");
 const purchaseOfferController = require("./controllers/purchaseOfferController");
-
+const exchangeOfferController = require("./controllers/exchangeOfferController");
 
 const app = express();
 app.use(express.json({ limit: '25mb' }))
@@ -33,6 +33,7 @@ app.post('/collectionForm',tokenVerification, collectionController.createCollect
 
 
 app.get('/findCollectionOwnerByExhibitId:id',tokenVerification, exhibitController.findCollectionOwnerByExhibitId);
+app.get('/findAllExhibitsForUser:email', tokenVerification, exhibitController.findAllExhibitsForUser);
 app.post('/exhibitForm', tokenVerification,exhibitController.createExhibit);
 app.delete('/exhibit/delete:id', tokenVerification,exhibitController.deleteExhibit);
 
@@ -40,5 +41,7 @@ app.delete('/exhibit/delete:id', tokenVerification,exhibitController.deleteExhib
 app.post('/purchaseOfferForm',tokenVerification, purchaseOfferController.createPurchaseOffer);
 app.get('/purchaseOffersBySeller:email', tokenVerification, purchaseOfferController.getPurchaseOffersBySeller);
 
+app.post('/exchangeOfferForm',tokenVerification, exchangeOfferController.createExchangeOffer);
+app.get('/exchangeOffersBySeller:email', tokenVerification, exchangeOfferController.getExchangeOffersBySeller);
 
 app.listen(3000);

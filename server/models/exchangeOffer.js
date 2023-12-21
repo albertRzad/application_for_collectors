@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 
 const exchangeOfferSchema = new mongoose.Schema({
+    buyerEmail: String,
+    sellerEmail: String,
     message: String,
-    exchangeExhibitId: String,
+    offeredExhibitId: String,
     exhibitId: String,
   });
 

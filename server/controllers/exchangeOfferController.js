@@ -1,13 +1,15 @@
-const PurchaseOffer = require("../models/purchaseOffer");
+const ExchangeOffer = require("../models/exchangeOffer");
 const Exhibit = require("../models/exhibit");
 const User = require("../models/user");
 
-const createPurchaseOffer = async (req, res) => {
+const createExchangeOffer = async (req, res) => {
   const buyerEmail = req.body.buyerEmail;
   const sellerEmail = req.body.sellerEmail;
-  const price = req.body.price;
+  const offeredExhibitId = req.body.offeredExhibitId;
   const message = req.body.message;
   const exhibitId = req.body.exhibitId;
+
+  console.log(req.body);
 
   const buyer = await User.find({ email: buyerEmail });
   if (!buyer) {
@@ -30,43 +32,43 @@ const createPurchaseOffer = async (req, res) => {
       .json({ message: "Exhibit with given id not found." });
   }
 
-  const newPurchaseOffer = new PurchaseOffer({
+  const newExchangeOffer = new ExchangeOffer({
     buyerEmail: buyerEmail,
     sellerEmail: sellerEmail,
-    price: price,
+    offeredExhibitId: offeredExhibitId,
     message: message,
     exhibitId: exhibitId,
   });
 
-  newPurchaseOffer.save().then(() => {
+  newExchangeOffer.save().then(() => {
     return res.status(200).json({ message: "Purchase offer added." });
   });
 };
 
-const getPurchaseOffersBySeller = async (req, res) => {
+const getExchangeOffersBySeller = async (req, res) => {
   const sellerEmail = req.params.email;
   const trimmedSellerEmail = sellerEmail.replace(":", "");
-  
+
   try {
-    const purchaseOffers = await PurchaseOffer.find({
+    const exchangeOffers = await ExchangeOffer.find({
       sellerEmail: trimmedSellerEmail,
     });
 
-    if (!purchaseOffers || purchaseOffers.length === 0) {
+    if (!exchangeOffers || exchangeOffers.length === 0) {
       return res
         .status(404)
-        .json({ message: "No purchase offers found for this seller." });
+        .json({ message: "No exchange offers found for this seller." });
     }
 
-    return res.status(200).json(purchaseOffers);
+    return res.status(200).json(exchangeOffers);
   } catch (error) {
     return res
       .status(500)
-      .json({ message: "Error retrieving purchase offers." });
+      .json({ message: "Error retrieving exchange offers." });
   }
 };
 
 module.exports = {
-  createPurchaseOffer: createPurchaseOffer,
-  getPurchaseOffersBySeller: getPurchaseOffersBySeller,
+  createExchangeOffer: createExchangeOffer,
+  getExchangeOffersBySeller: getExchangeOffersBySeller
 };

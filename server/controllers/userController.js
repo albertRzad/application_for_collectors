@@ -236,12 +236,6 @@ const updateUserProfileDetails = async (req, res) => {
     const profileImage = req.body.profileImage;
     const userEmail = req.body.userEmail;
 
-    console.log(newName);
-    console.log(newSurname);
-    console.log(country);
-    console.log(bio);
-    console.log(userEmail);
-
     const nameRegex = /^[A-Z][a-z]+$/;
     if (!nameRegex.test(newName) || !nameRegex.test(newSurname)) {
       return res.status(400).json({

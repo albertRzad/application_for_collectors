@@ -1,49 +1,92 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './css/offers.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./css/offers.css";
 
 const Offers = () => {
-  const [offers, setOffers] = useState([]);
+  const [purchaseOffers, setPurchaseOffers] = useState([]);
+  const [exchangeOffers, setExchangeOffers] = useState([]);
 
   useEffect(() => {
-    const fetchOffers = async () => {
-        try {
-          const token = localStorage.getItem("token");
-          const email = localStorage.getItem("email");
-    
-          const config = {
-            method: "get",
-            url: `http://localhost:3000/purchaseOffersBySeller:${email}`,
-            headers: {
-              "x-access-token": token,
-            },
-          };
-    
-          const response = await axios(config);
-          setOffers(response.data);
-        } catch (error) {
-          console.error("Error fetching collections:", error);
-        }
-      };
+    const fetchPurchaseOffers = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const email = localStorage.getItem("email");
 
-    fetchOffers();
+        const config = {
+          method: "get",
+          url: `http://localhost:3000/purchaseOffersBySeller:${email}`,
+          headers: {
+            "x-access-token": token,
+          },
+        };
+
+        const response = await axios(config);
+        setPurchaseOffers(response.data);
+      } catch (error) {
+        console.error("Error fetching collections:", error);
+      }
+    };
+
+    fetchPurchaseOffers();
+  }, []);
+
+  useEffect(() => {
+    const fetchExchangeOffers = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const email = localStorage.getItem("email");
+
+        const config = {
+          method: "get",
+          url: `http://localhost:3000/exchangeOffersBySeller:${email}`,
+          headers: {
+            "x-access-token": token,
+          },
+        };
+
+        const response = await axios(config);
+        setExchangeOffers(response.data);
+      } catch (error) {
+        console.error("Error fetching collections:", error);
+      }
+    };
+
+    fetchExchangeOffers();
   }, []);
 
   return (
-    <div className="offers-container">
-      {offers.length > 0 ? (
-        offers.map((offer, index) => (
-          <div key={index} className="offer">
-            <p>Buyer Email: {offer.buyerEmail}</p>
-            <p>Seller Email: {offer.sellerEmail}</p>
-            <p>Price: {offer.price}</p>
-            <p>Message: {offer.message}</p>
-          </div>
-        ))
-      ) : (
-        <p>No offers available.</p>
-      )}
-    </div>
+    <>
+      <label>Purchase offers:</label>
+      <div className="offers-container">
+        {purchaseOffers.length > 0 ? (
+          purchaseOffers.map((offer, index) => (
+            <div key={index} className="offer">
+              <p>Buyer Email: {offer.buyerEmail}</p>
+              <p>Seller Email: {offer.sellerEmail}</p>
+              <p>Price: {offer.price}</p>
+              <p>Message: {offer.message}</p>
+            </div>
+          ))
+        ) : (
+          <p>No purchase offers available.</p>
+        )}
+      </div>
+      <label>Exchange offers:</label>
+      <div className="offers-container">
+        {exchangeOffers.length > 0 ? (
+          exchangeOffers.map((offer, index) => (
+            <div key={index} className="offer">
+              <p>Buyer Email: {offer.buyerEmail}</p>
+              <p>Seller Email: {offer.sellerEmail}</p>
+              <p>Offered exhibit id: {offer.offeredExhibitId}</p>
+              <p>Message: {offer.message}</p>
+            </div>
+          ))
+        ) : (
+          <p>No exchange offers available.</p>
+        )}
+      </div>
+    </>
   );
 };
 

@@ -89,8 +89,43 @@ const findCollectionOwnerByExhibitId = async (req, res) => {
   }
 };
 
+const findAllExhibitsForUser = async (req, res) => {
+  try {
+    const ownerEmail = req.params.email;
+    const trimmedOwnerEmail = ownerEmail.replace(":", "");
+
+    const collections = await Collection.find({
+      ownerEmail: trimmedOwnerEmail,
+    });
+
+    if (!collections || collections.length === 0) {
+      return res.status(404).json({ message: "No collections found for this user." });
+    }
+
+    const allExhibits = [];
+
+    for (const collection of collections) {
+      const exhibits = await Exhibit.find({ collectionId: collection._id });
+
+      if (exhibits && exhibits.length > 0) {
+        allExhibits.push(...exhibits);
+      }
+    }
+
+    if (allExhibits.length === 0) {
+      return res.status(404).json({ message: "No exhibits found for this user." });
+    }
+    
+    res.json(allExhibits);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "There was an error" });
+  }
+};
+
 module.exports = {
   createExhibit: createExhibit,
   deleteExhibit: deleteExhibit,
   findCollectionOwnerByExhibitId: findCollectionOwnerByExhibitId,
+  findAllExhibitsForUser: findAllExhibitsForUser
 };

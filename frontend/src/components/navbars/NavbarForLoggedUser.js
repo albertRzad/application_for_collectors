@@ -53,13 +53,6 @@ export default function NavbarForLoggedUser() {
             </a>
           </li>
           <li>
-            <a href="/user/myauctions">
-              <span>
-                <i class="fa fa-fw fa-user"></i>Offers
-              </span>
-            </a>
-          </li>
-          <li>
             <a href="/user/mycollections">
               <span>
                 <i class="fa fa-fw fa-archive"></i>My collections
