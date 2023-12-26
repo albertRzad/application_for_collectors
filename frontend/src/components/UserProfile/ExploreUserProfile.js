@@ -12,6 +12,7 @@ const ExploreProfile = () => {
   const [profileImagePath, setProfileImagePath] = useState("");
   const [userCollections, setUserCollections] = useState([]);
   const [userEmail, setUserEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   const extractUserEmail = () => {
     const currentUrl = window.location.href;
@@ -51,8 +52,10 @@ const ExploreProfile = () => {
           setNewName(userData.name);
           setNewSurname(userData.surname);
           setCountry(userData.country);
+          setPhoneNumber(userData.phoneNumber);
+          
           setProfileImagePath(
-            userData.profileImage || "/images/defaultProfileImage.png"
+            userData.profileImage || "/images/defaultImageProfile1.jpg"
           );
         }
       } catch (error) {
@@ -94,7 +97,7 @@ const ExploreProfile = () => {
               <img
                 src={profileImagePath}
                 alt="Profile"
-                className="profile__image"
+                className="avatar-preview"
               />
               <div className="profile__info__item" id="name">
                 <span className="info__label">Name:</span>
@@ -114,6 +117,11 @@ const ExploreProfile = () => {
               <div className="profile__info__item" id="bio">
                 <span className="info__label">Bio:</span>
                 <span className="info__content">{bio}</span>
+              </div>
+
+              <div className="profile__info__item" id="phoneNumber">
+                <span className="info__label">Phone Number:</span>
+                <span className="info__content">{phoneNumber}</span>
               </div>
             </div>
           </div>

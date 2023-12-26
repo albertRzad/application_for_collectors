@@ -63,13 +63,19 @@
 }
 
 .profileInfo{
+    margin-top: 10px;
     margin-left: 10px;
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .profile__info__item {
     font-size: 18px;
     margin: 20px 0;
+    flex-direction: row !important;
+    display: flex;
+    justify-content: space-between;
     
 }
 
@@ -88,9 +94,4 @@
     text-decoration: none;
 }
 
-
-
-.collections{
-border: 1px red solid;
-}
 
