@@ -351,7 +351,7 @@ const ExploreCollectionDetails = () => {
                 </option>
                 {allUserExhibits.map((exhibit, index) => (
                   <option key={index} value={exhibit._id}>
-                    {exhibit._id}
+                    {exhibit.name}
                   </option>
                 ))}
               </select>

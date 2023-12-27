@@ -4,61 +4,49 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer__addr">
-        <h1 className="footer__logo">Something</h1>
+        <h1 className="footer__logo">CollectOn</h1>
 
         <h2>Contact</h2>
 
         <address>
           <br />
-          5534 Somewhere In. The World 22193-10212
+          123 Collectors Lane, Vintage City 54321
         </address>
       </div>
 
       <ul className="footer__nav">
         <li className="nav__item">
-          <h2 className="nav__title">Media</h2>
+          <h2 className="nav__title">Collections</h2>
 
           <ul className="nav__ul">
             <li>
-              <a href="#">Online</a>
+              <a href="#">Antiques</a>
             </li>
 
             <li>
-              <a href="#">Print</a>
+              <a href="#">Rare Coins</a>
             </li>
 
             <li>
-              <a href="#">Alternative Ads</a>
+              <a href="#">Vintage Toys</a>
             </li>
           </ul>
         </li>
 
         <li className="nav__item nav__item--extra">
-          <h2 className="nav__title">Technology</h2>
+          <h2 className="nav__title">Explore</h2>
 
           <ul className="nav__ul nav__ul--extra">
             <li>
-              <a href="#">Hardware Design</a>
+              <a href="#">Featured Collectors</a>
             </li>
 
             <li>
-              <a href="#">Software Design</a>
+              <a href="#">Events & Exhibitions</a>
             </li>
 
             <li>
-              <a href="#">Digital Signage</a>
-            </li>
-
-            <li>
-              <a href="#">Automation</a>
-            </li>
-
-            <li>
-              <a href="#">Artificial Intelligence</a>
-            </li>
-
-            <li>
-              <a href="#">IoT</a>
+              <a href="#">Collector's Forum</a>
             </li>
           </ul>
         </li>
