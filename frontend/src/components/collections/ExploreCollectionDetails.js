@@ -299,7 +299,7 @@ const ExploreCollectionDetails = () => {
       {isPurchaseModalOpen && (
         <div className="overlay">
           <form className="modal" onSubmit={handlePurchaseOfferSubmit}>
-            <h2>Send exchange offer</h2>
+            <h2>Send buy offer</h2>
             <div>
               <input
                 type="text"

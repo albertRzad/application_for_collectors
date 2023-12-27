@@ -174,18 +174,6 @@ function App() {
               </>
             }
           ></Route>
-
-          {/* <Route
-            path="/userProfile"
-            element={
-              <>
-                <main>
-                  <UserProfile />
-                </main>
-              </>
-            }
-          ></Route> */}
-
           <Route
             path="/user/:activepage"
             element={
