@@ -12,6 +12,7 @@ const ExploreCollectionDetails = () => {
   const [collectionName, setcollectionName] = useState("");
   const [allUserExhibits, setAllUserExhibits] = useState([]);
   const [exhibitNames, setExhibitNames] = useState([]);
+  const [isLoadingExhibits, setLoadingExhibits] = useState(true);
 
   useEffect(() => {
     const fetchExhibitsForUser = async () => {
@@ -37,6 +38,8 @@ const ExploreCollectionDetails = () => {
         }
       } catch (error) {
         console.error("Error fetching exhibits for user", error);
+      }finally {
+        setLoadingExhibits(false);
       }
     };
     fetchExhibitsForUser();
@@ -347,13 +350,14 @@ const ExploreCollectionDetails = () => {
                 required
               >
                 <option value="" disabled>
-                  Select Exhibit
+                  {isLoadingExhibits ? 'Loading exhibits' : 'Select Exhibit'}
                 </option>
-                {allUserExhibits.map((exhibit, index) => (
-                  <option key={index} value={exhibit._id}>
-                    {exhibit.name}
-                  </option>
-                ))}
+                {!isLoadingExhibits &&
+                  allUserExhibits.map((exhibit, index) => (
+                    <option key={index} value={exhibit._id}>
+                      {exhibit.name}
+                    </option>
+                  ))}
               </select>
             </div>
             <div>
