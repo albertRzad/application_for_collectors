@@ -44,4 +44,6 @@ app.get('/purchaseOffersBySeller:email', tokenVerification, purchaseOfferControl
 app.post('/exchangeOfferForm',tokenVerification, exchangeOfferController.createExchangeOffer);
 app.get('/exchangeOffersBySeller:email', tokenVerification, exchangeOfferController.getExchangeOffersBySeller);
 
-app.listen(3000);
+var server = app.listen(3000);
+
+module.exports = server
