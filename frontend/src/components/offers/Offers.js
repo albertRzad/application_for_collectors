@@ -5,8 +5,6 @@ import "./css/offers.css";
 const Offers = () => {
   const [purchaseOffers, setPurchaseOffers] = useState([]);
   const [exchangeOffers, setExchangeOffers] = useState([]);
-  const [exhibit, setExhibit] = useState([]);
-  const [user, setUser] = useState([]);
 
   useEffect(() => {
     const fetchPurchaseOffers = async () => {
