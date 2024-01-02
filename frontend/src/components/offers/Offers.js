@@ -55,14 +55,15 @@ const Offers = () => {
   }, []);
 
   return (
-    <>
-      <label>Purchase offers:</label>
+    <div className="offersBody">
+      <div className="purchaseOffersContainer">
       <div className="offers-container">
+      <div className="offersLabel">Purchase offers:</div>
         {purchaseOffers.length > 0 ? (
           purchaseOffers.map((offer, index) => (
             <div key={index} className="offer">
               <p>Buyer Email: {offer.buyerEmail}</p>
-              <p>Seller Email: {offer.sellerEmail}</p>
+              {/* <p>Seller Email: {offer.sellerEmail}</p> */}
               <p>Price: {offer.price}</p>
               <p>Message: {offer.message}</p>
             </div>
@@ -71,13 +72,15 @@ const Offers = () => {
           <p>No purchase offers available.</p>
         )}
       </div>
-      <label>Exchange offers:</label>
+      </div>
+      <div className="exchangeOffersContainer">
       <div className="offers-container">
+      <div className="offersLabel">Exchange offers:</div>
         {exchangeOffers.length > 0 ? (
           exchangeOffers.map((offer, index) => (
             <div key={index} className="offer">
               <p>Buyer Email: {offer.buyerEmail}</p>
-              <p>Seller Email: {offer.sellerEmail}</p>
+              {/* <p>Seller Email: {offer.sellerEmail}</p> */}
               <p>Offered exhibit id: {offer.offeredExhibitId}</p>
               <p>Message: {offer.message}</p>
             </div>
@@ -86,7 +89,8 @@ const Offers = () => {
           <p>No exchange offers available.</p>
         )}
       </div>
-    </>
+    </div>
+    </div>
   );
 };
 
