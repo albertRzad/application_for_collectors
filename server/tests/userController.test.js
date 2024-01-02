@@ -1,26 +1,37 @@
 require("dotenv").config();
 
-const request = require("supertest")
-const app = require("../server")
+const request = require("supertest");
+const app = require("../server");
+const jwt = require('jsonwebtoken');
+const User = require('../models/user');
 
-describe("POST /registerForm", () => {
-    it("should create a new user", async () => {
+describe("create new user", () => {
+    it("should create a new user and then delete it", async () => {
         const newUser = {
             name: "John",
             surname: "Doe",
             email: "john.exa@example.com",
-            password: "Password123",
+            password: "Haslo123",
             phoneNumber: "123456789",
         };
 
-        return request(app)
+        const registrationResponse = await request(app)
             .post("/registerForm")
             .send(newUser)
             .expect("Content-Type", /json/)
-            .expect(200)
-            .then((res) => {
-                expect(res.body.message).toBe("User registered.");
-            });
+            .expect(200);
+
+        expect(registrationResponse.body.message).toBe("User registered.");
+
+        const token = jwt.sign({ email: 'john.exa@example.com' }, 'Haslo123');
+
+        const deletionResponse = await request(app)
+            .delete('/user:john.exa@example.com')
+            .set('x-access-token', token)
+            .expect('Content-Type', /json/)
+            .expect(200);
+
+        expect(deletionResponse.body.message).toBe('User deleted successfully.');
     });
 
     it("should return 400 with an appropriate error message for invalid data", async () => {
@@ -41,29 +52,53 @@ describe("POST /registerForm", () => {
                 expect(res.body.message).toContain("Invalid");
             });
     });
+});
 
-    it("should return 400 with 'Email already taken.' for an existing email", async () => {
-        const existingUser = {
-            name: "Jane",
+describe('get user by email', () => {
+    it('should return user information with a valid token', async () => {
+        const testUser = {
+            name: "John",
             surname: "Doe",
-            email: "jane.doe@example.com",
-            password: "Password123",
-            phoneNumber: "987654321",
+            email: "john.exa@example.com",
+            password: "Haslo123",
+            phoneNumber: "123456789",
         };
 
-        request(app)
-            .post("/registerForm")
-            .send(existingUser)
-            .expect("Content-Type", /json/)
-            .expect(200);
+        const user = new User(testUser);
+        await user.save();
+
+        const token = jwt.sign({ email: testUser.email }, testUser.password);
 
         return request(app)
-            .post("/registerForm")
-            .send(existingUser)
-            .expect("Content-Type", /json/)
-            .expect(400)
+            .get(`/user:${encodeURIComponent(testUser.email)}`)
+            .set('x-access-token', token)
+            .expect('Content-Type', /json/)
+            .expect(200)
             .then((res) => {
-                expect(res.body.message).toBe("Email already taken.");
+                expect(res.body.email).toBe(testUser.email);
+            });
+    });
+
+    it('should return 404 with an invalid email', async () => {
+        const token = jwt.sign({ email: 'test@example.com' }, 'Haslo123');
+
+        return request(app)
+            .get('/user:invalid_email')
+            .set('x-access-token', token)
+            .expect('Content-Type', /json/)
+            .expect(404)
+            .then((res) => {
+                expect(res.body.message).toBe('There is no user with given email address.');
+            });
+    });
+
+    it('should return 401 without a token', async () => {
+        return request(app)
+            .get('/user:test@example.com')
+            .expect('Content-Type', "application/json; charset=utf-8")
+            .expect(403)
+            .then((res) => {
+                expect(res.body.message).toBe('No token provided!');
             });
     });
 });

@@ -22,6 +22,7 @@ app.get('/user:email',tokenVerification,userController.findUserByEmail);
 app.post('/tokenVerification', userController.verificateUser);
 app.put('/user/update', tokenVerification,userController.updateUserDetails);
 app.put('/user/profile/update', tokenVerification,userController.updateUserProfileDetails);
+app.delete('/user:email',tokenVerification,userController.deleteUserByEmail);
 
 
 app.get('/getUserCollections:ownerEmail', tokenVerification, collectionController.findAllUserCollections);
