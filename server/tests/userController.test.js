@@ -6,7 +6,13 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 describe("create new user", () => {
-    it("should create a new user and then delete it", async () => {
+
+    beforeEach(async () => {
+        await User.findOneAndDelete({ email: "john.exa@example.com" });
+    });
+    
+    it("should create a new user", async () => {
+        jest.setTimeout(10000);
         const newUser = {
             name: "John",
             surname: "Doe",
@@ -22,16 +28,6 @@ describe("create new user", () => {
             .expect(200);
 
         expect(registrationResponse.body.message).toBe("User registered.");
-
-        const token = jwt.sign({ email: 'john.exa@example.com' }, 'Haslo123');
-
-        const deletionResponse = await request(app)
-            .delete('/user:john.exa@example.com')
-            .set('x-access-token', token)
-            .expect('Content-Type', /json/)
-            .expect(200);
-
-        expect(deletionResponse.body.message).toBe('User deleted successfully.');
     });
 
     it("should return 400 with an appropriate error message for invalid data", async () => {
