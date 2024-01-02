@@ -5,6 +5,8 @@ import "./css/offers.css";
 const Offers = () => {
   const [purchaseOffers, setPurchaseOffers] = useState([]);
   const [exchangeOffers, setExchangeOffers] = useState([]);
+  const [exhibit, setExhibit] = useState([]);
+  const [user, setUser] = useState([]);
   const [renderedPurchaseOffers, setRenderedPurchaseOffers] = useState([]);
   const [renderedExchangeOffers, setRenderedExchangeOffers] = useState([]);
 
@@ -145,6 +147,11 @@ const Offers = () => {
   }, [exchangeOffers]);
 
 
+  useEffect(() => {
+    
+  }, 
+  []);
+
   return (
     <div className="offersBody">
       <div className="purchaseOffersContainer">
@@ -152,6 +159,22 @@ const Offers = () => {
           <div className="offersLabel">Purchase offers:</div>
           {renderedPurchaseOffers.length > 0 ? renderedPurchaseOffers : <p>No purchase offers available.</p>}
         </div>
+      <div className="offers-container">
+      <div className="offersLabel">Purchase offers:</div>
+        {purchaseOffers.length > 0 ? (
+          purchaseOffers.map((offer, index) => (
+            <div key={index} className="offer">
+              <p>Offer from: {offer.buyerEmail}</p>
+              {/* <p>Seller Email: {offer.sellerEmail}</p> */}
+              <p>Exhibit: {offer.exhibitId}</p>
+              <p>Price: {offer.price}</p>
+              <p>Message: {offer.message}</p>
+            </div>
+          ))
+        ) : (
+          <p>No purchase offers available.</p>
+        )}
+      </div>
       </div>
       <div className="exchangeOffersContainer">
         <div className="offers-container">
@@ -159,6 +182,23 @@ const Offers = () => {
           {renderedExchangeOffers.length > 0 ? renderedExchangeOffers : <p>No exchange offers available.</p>}
         </div>
       </div>
+      <div className="offers-container">
+      <div className="offersLabel">Exchange offers:</div>
+        {exchangeOffers.length > 0 ? (
+          exchangeOffers.map((offer, index) => (
+            <div key={index} className="offer">
+              <p>Offer from: {offer.buyerEmail}</p>
+              <p>Exhibit: {offer.exhibitId}</p>
+              {/* <p>Seller Email: {offer.sellerEmail}</p> */}
+              <p>Offered exhibit id: {offer.offeredExhibitId}</p>
+              <p>Message: {offer.message}</p>
+            </div>
+          ))
+        ) : (
+          <p>No exchange offers available.</p>
+        )}
+      </div>
+    </div>
     </div>
   );
 };

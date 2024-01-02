@@ -106,3 +106,14 @@
     color: #d6be73;
     margin-bottom: 1rem;
   } 
+
+  .form__error {
+    font-family: 'Roboto', sans-serif;
+    font-size: 11px;
+    margin-left: 2rem;
+    margin-top: -12px;
+    color: #ad0000;
+    display: block;
+    transition: all 0.3s;
+    transform: translateY(0rem);
+  }
