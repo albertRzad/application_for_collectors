@@ -53,7 +53,6 @@ export default function About() {
           </p>
           <h4>The CollectOn Team</h4>
         </div>
-        {/* Jeśli tu miał być jakiś graficzny element, to możesz go dodać */}
       </div>
     </div>
   );
