@@ -93,14 +93,6 @@ const AccountSettings = () => {
     <div className="accountSettings">
       <div className="ProfileTitle">Account Settings</div>
 
-      <div className="currentUserDetails">
-        Actual user details:
-        <p>Name: {currentUser.name}</p>
-        <p>Surname: {currentUser.surname}</p>
-        <p>Email: {currentUser.email}</p>
-        <p>Phone Number: {currentUser.phoneNumber}</p>
-      </div>
-
       <form className="formContainer" onSubmit={handleSubmit}>
         <div className="form__account">
           <label className="form__input__label" id="n_password">

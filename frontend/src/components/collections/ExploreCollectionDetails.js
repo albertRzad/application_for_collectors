@@ -325,7 +325,7 @@ const ExploreCollectionDetails = () => {
                 required
               />
             </div>
-            <div>
+            <div className="modal__actions">
               <button className="submit-button" type="submit">
                 Send
               </button>
@@ -371,7 +371,7 @@ const ExploreCollectionDetails = () => {
                 required
               />
             </div>
-            <div>
+            <div className="modal__actions">
               <button className="submit-button" type="submit">
                 Send
               </button>

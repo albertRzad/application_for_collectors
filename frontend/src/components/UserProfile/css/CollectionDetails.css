@@ -101,9 +101,6 @@
 
   }
 
-  .addExhibitButtonContainer{
-
-  }
 
   .addExhibitButton {
     color: #000000;
@@ -116,4 +113,38 @@
     border: 0;
     border-radius: 4px;
     padding: 10px;
+  }
+
+  .submit-button{
+    color: #000000;
+    display: flex;
+    margin: 0 auto;
+    width: 40%;
+    text-align: center;
+    justify-content: center;
+    background-color: #d6be73;
+    cursor: pointer;
+    border: 0;
+    border-radius: 4px;
+    font-weight: 600;
+    margin: 0 0px;
+    padding: 10px 0;
+    transition: 0.4s;
+  }
+
+  .cancel-button{
+    color: #000000;
+    display: flex;
+    margin: 0 auto;
+    width: 40%;
+    text-align: center;
+    justify-content: center;
+    background-color: #d6be73;
+    cursor: pointer;
+    border: 0;
+    border-radius: 4px;
+    font-weight: 600;
+    margin: 0 0px;
+    padding: 10px 0;
+    transition: 0.4s;
   }
