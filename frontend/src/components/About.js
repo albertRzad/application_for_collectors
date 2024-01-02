@@ -6,73 +6,52 @@ export default function About() {
     <div className="about">
       <div className="shapeAbout">
         <div className="about-content">
-          <h2>O CollectOn</h2>
+          <h2>About CollectOn</h2>
           <p>
-            Witaj w świecie CollectOn – Twoim nowym przystanku w pasjonującej
-            podróży po świecie kolekcjonowania. CollectOn to nie tylko serwis -
-            to społeczność, w której pasja spotyka się z możliwościami.
-            Stworzyliśmy platformę, która jest równie bogata i zróżnicowana jak
-            kolekcje, które na niej prezentujesz.
+          Welcome to the world of CollectOn – your new destination in the fascinating journey of collecting. 
+          CollectOn is more than just a service - it's a community where passion meets opportunity. 
+          We have created a platform that is as rich and diverse as the collections you showcase.
           </p>
-          <h3>Dla Kolekcjonerów, przez Kolekcjonerów</h3>
+          <h3>For Collectors, by Collectors</h3>
           <p>
-            Nasza misja jest prosta: umożliwić Ci dzielenie się, wymianę i
-            rozwijanie Twoich kolekcji w otoczeniu, które rozumie i docenia
-            Twoją pasję. Od monet i znaczków pocztowych, po dzieła sztuki i
-            unikatowe pamiątki, CollectOn jest miejscem, gdzie każdy przedmiot
-            ma swoją historię, a każda historia znajduje swój dom.
+          Our mission is simple: to enable you to share, exchange, and develop your collections in an environment that understands and appreciates your passion. 
+          From coins and postage stamps to artworks and unique memorabilia, 
+          CollectOn is a place where every item has its story, and every story finds its home.
           </p>
-          <h3>Funkcje, które Łączą</h3>
-          <p>Na CollectOn znajdziesz narzędzia, które umożliwią Ci:</p>
+          <h3>Features that Connect</h3>
+          <p>At CollectOn, you will find tools that enable you to:</p>
           <ul>
             <li>
-              <strong>Komunikację bez Granic:</strong> Nawiązywanie kontaktów z
-              innymi kolekcjonerami, wymianę doświadczeń i tworzenie trwałych
-              relacji.
+              <strong>Borderless Communication:</strong> Connect with other collectors, exchange experiences, and create lasting relationships.
             </li>
             <li>
-              <strong>Twoją Własną Galerię:</strong> Kreowanie kolekcji i
-              dodawanie do nich eksponatów wraz z ich zdjęciami i opisami,
-              tworząc swoją unikalną wirtualną wystawę.
+              <strong>Your Own Gallery:</strong> Build your collection and add exhibits with photos and descriptions, creating your unique virtual exhibition.
             </li>
             <li>
-              <strong>Odkrywanie i Inspirację:</strong> Przeglądanie kolekcji
-              innych użytkowników, odkrywanie nowych przedmiotów i czerpanie
-              inspiracji na kolejne dodatki do swojej kolekcji.
+              <strong>Discovery and Inspiration:</strong> Browse other users' collections, discover new items, and draw inspiration for your next additions.
             </li>
             <li>
-              <strong>Handel z Pasją:</strong> Wysyłanie i odbieranie ofert
-              kupna oraz sprzedaży, negocjowanie cen i poszerzanie swojej
-              kolekcji w wygodny i bezpieczny sposób.
+              <strong>Trade with Passion:</strong> Send and receive purchase and sale offers, negotiate prices, and expand your collection in a convenient and secure way.
             </li>
           </ul>
-          <h3>Nasze Wartości</h3>
-          <p>Podejmujemy działania oparte na:</p>
+          <h3>Our Values</h3>
+          <p>We are committed to:</p>
           <ul>
             <li>
-              <strong>Przejrzystości:</strong> Każda transakcja jest jasna i
-              przejrzysta. Bez ukrytych opłat, bez zaskoczeń.
+              <strong>Transparency:</strong> Every transaction is clear and transparent. No hidden fees, no surprises.
             </li>
             <li>
-              <strong>Społeczności:</strong> Wierzymy, że najlepsze
-              doświadczenia wynikają ze współpracy. Dlatego CollectOn to coś
-              więcej niż platforma – to społeczność.
+              <strong>Community:</strong> We believe that the best experiences come from collaboration. That's why CollectOn is more than a platform – it's a community.
             </li>
             <li>
-              <strong>Wsparciu:</strong> Zawsze jesteśmy gotowi pomóc i słuchać.
-              Twoje opinie i sugestie są dla nas cenne i stanowią podstawę dla
-              ciągłego rozwoju CollectOn.
+              <strong>Support:</strong> We are always ready to help and listen. Your feedback and suggestions are valuable to us and form the basis for the continuous development of CollectOn.
             </li>
           </ul>
-          <h3>Dołącz do Nas</h3>
+          <h3>Join Us</h3>
           <p>
-            CollectOn to miejsce, w którym Twoja pasja do kolekcjonowania
-            znajduje nowy wymiar. Czy dopiero zaczynasz swoją przygodę, czy
-            jesteś doświadczonym kolekcjonerem – zapraszamy Cię do dołączenia do
-            naszej rosnącej społeczności. Rozwijaj swoją pasję, rozwijaj swoje
-            kolekcje, rozwijaj się razem z nami.
+          CollectOn is the place where your passion for collecting finds a new dimension. Whether you are just starting your journey or are an experienced collector – we invite you to join our growing community. Develop your passion, expand your collections, grow with us.
           </p>
-          <h4>Zespół CollectOn</h4>
+          <h4>The CollectOn Team</h4>
         </div>
         {/* Jeśli tu miał być jakiś graficzny element, to możesz go dodać */}
       </div>

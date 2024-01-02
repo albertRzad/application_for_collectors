@@ -20,6 +20,7 @@ const Login = () => {
   };
 
   const [showPopup, setShowPopup] = useState(false);
+  const [showPopup2, setShowPopup2] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,6 +40,10 @@ const Login = () => {
         }
       }).catch((error) => {
         console.error(error);
+        setShowPopup2(true);
+        setTimeout(function() {
+          window.location.assign("/login");
+        }, 2500);
       });;
   };
 
@@ -84,6 +89,14 @@ const Login = () => {
         <div className="popup">
           <div className="popup-content">
             <b> User successfully logged in. </b>
+          </div>
+        </div>
+      )}
+
+      {showPopup2 && (
+        <div className="popup">
+          <div className="popup-content">
+            <b> Invalid credentials. </b>
           </div>
         </div>
       )}

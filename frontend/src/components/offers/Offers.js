@@ -5,6 +5,8 @@ import "./css/offers.css";
 const Offers = () => {
   const [purchaseOffers, setPurchaseOffers] = useState([]);
   const [exchangeOffers, setExchangeOffers] = useState([]);
+  const [exhibit, setExhibit] = useState([]);
+  const [user, setUser] = useState([]);
 
   useEffect(() => {
     const fetchPurchaseOffers = async () => {
@@ -54,6 +56,11 @@ const Offers = () => {
     fetchExchangeOffers();
   }, []);
 
+  useEffect(() => {
+    
+  }, 
+  []);
+
   return (
     <div className="offersBody">
       <div className="purchaseOffersContainer">
@@ -62,8 +69,9 @@ const Offers = () => {
         {purchaseOffers.length > 0 ? (
           purchaseOffers.map((offer, index) => (
             <div key={index} className="offer">
-              <p>Buyer Email: {offer.buyerEmail}</p>
+              <p>Offer from: {offer.buyerEmail}</p>
               {/* <p>Seller Email: {offer.sellerEmail}</p> */}
+              <p>Exhibit: {offer.exhibitId}</p>
               <p>Price: {offer.price}</p>
               <p>Message: {offer.message}</p>
             </div>
@@ -79,7 +87,8 @@ const Offers = () => {
         {exchangeOffers.length > 0 ? (
           exchangeOffers.map((offer, index) => (
             <div key={index} className="offer">
-              <p>Buyer Email: {offer.buyerEmail}</p>
+              <p>Offer from: {offer.buyerEmail}</p>
+              <p>Exhibit: {offer.exhibitId}</p>
               {/* <p>Seller Email: {offer.sellerEmail}</p> */}
               <p>Offered exhibit id: {offer.offeredExhibitId}</p>
               <p>Message: {offer.message}</p>

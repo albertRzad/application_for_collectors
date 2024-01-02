@@ -54,8 +54,11 @@
 .offer {
     width: 70%;
     color: white;
-    border: 10px solid red;
+    border: 2px solid rgba(255, 255, 255, 0.055);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(8,7,16,0.6);
     margin: 10px;
+    background-color: #2e2e2e;
 }
 
 .offer p {
