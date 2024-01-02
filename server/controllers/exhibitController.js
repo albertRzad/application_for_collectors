@@ -123,9 +123,29 @@ const findAllExhibitsForUser = async (req, res) => {
   }
 };
 
+const getExhibitById = async (req, res) => {
+  const exhibitId = req.params.id;
+  const trimmedExhibitId = exhibitId.replace(":", "");
+  
+  try {
+    const exhibit = await Exhibit.findById(trimmedExhibitId);
+
+    if (!exhibit) {
+      return res.status(404).json({ message: "Exhibit not found" });
+    }
+
+    res.json(exhibit);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "There was an error" });
+  }
+};
+
+
 module.exports = {
   createExhibit: createExhibit,
   deleteExhibit: deleteExhibit,
   findCollectionOwnerByExhibitId: findCollectionOwnerByExhibitId,
-  findAllExhibitsForUser: findAllExhibitsForUser
+  findAllExhibitsForUser: findAllExhibitsForUser,
+  getExhibitById: getExhibitById
 };

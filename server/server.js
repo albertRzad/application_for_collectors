@@ -35,6 +35,7 @@ app.post('/collectionForm',tokenVerification, collectionController.createCollect
 
 app.get('/findCollectionOwnerByExhibitId:id',tokenVerification, exhibitController.findCollectionOwnerByExhibitId);
 app.get('/findAllExhibitsForUser:email', tokenVerification, exhibitController.findAllExhibitsForUser);
+app.get('/exhibit:id', tokenVerification, exhibitController.getExhibitById);
 app.post('/exhibitForm', tokenVerification,exhibitController.createExhibit);
 app.delete('/exhibit/delete:id', tokenVerification,exhibitController.deleteExhibit);
 
