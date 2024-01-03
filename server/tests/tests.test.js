@@ -3,8 +3,10 @@ require("dotenv").config();
 const request = require("supertest");
 const app = require("../server");
 const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
 const User = require('../models/user');
 const Collection = require('../models/collection');
+const Exhibit = require('../models/exhibit');
 
 describe("create new user", () => {
     it("should create a new user", async () => {
@@ -314,6 +316,233 @@ describe('getAllExhibitsByCollectionId', () => {
             .then((res) => {
                 expect(res.body.exhibits.length).toBeGreaterThan(0);
                 expect(res.body.collectionName).toBeDefined();
+            });
+    });
+});
+
+describe('createExhibit', () => {
+    it('should create a new exhibit', async () => {
+        const newExhibit = {
+            name: "Art Exhibit",
+            description: "A beautiful art piece",
+            year: "2022",
+            state: "Excellent",
+            collectionId: "656bd0519a2bcfce12c02021",
+            image: "exhibit_image.jpg",
+            toSold: false,
+        };
+
+        const token = jwt.sign({ email: 'albert@gmail.com' }, secretKey);
+
+        return request(app)
+            .post("/exhibitForm")
+            .set('x-access-token', token)
+            .send(newExhibit)
+            .expect("Content-Type", /json/)
+            .expect(200)
+            .then((res) => {
+                expect(res.body.message).toBe("Exhibit added.");
+            });
+    });
+
+    it('should return 400 for invalid exhibit data', async () => {
+        const invalidExhibit = {
+            name: "Invalid Exhibit",
+            description: 123,
+            year: "2022",
+            state: "Bad",
+            collectionId: "invalid_collection_id",
+            image: "exhibit_image.jpg",
+            toSold: false,
+        };
+
+        const token = jwt.sign({ email: 'albert@gmail.com' }, secretKey);
+
+        return request(app)
+            .post("/exhibitForm")
+            .set('x-access-token', token)
+            .send(invalidExhibit)
+            .expect("Content-Type", /json/)
+            .expect(400)
+            .then((res) => {
+                expect(res.body.message).toContain("Invalid");
+            });
+    });
+});
+
+describe('deleteExhibit', () => {
+    it('should delete an exhibit by ID', async () => {
+        const newExhibit = {
+            name: "Art Exhibit",
+            description: "A beautiful art piece",
+            year: "2022",
+            state: "Excellent",
+            collectionId: "656bd0519a2bcfce12c02021",
+            image: "exhibit_image.jpg",
+            toSold: false,
+        };
+
+        const exhibit = new Exhibit(newExhibit);
+        await exhibit.save();
+
+        const exhibitId = exhibit._id;
+
+        const token = jwt.sign({ email: 'albert@gmail.com' }, secretKey);
+
+        return request(app)
+            .delete(`/exhibit/delete:${exhibitId}`)
+            .set('x-access-token', token)
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .then((res) => {
+                expect(res.body.message).toBe("Exhibit deleted successfully.");
+            });
+    });
+
+    it('should return 404 for non-existing exhibit ID', async () => {
+        const token = jwt.sign({ email: 'albert@gmail.com' }, secretKey);
+        const fakeCollectionId = new mongoose.Types.ObjectId().toString();
+
+        return request(app)
+            .delete(`/exhibit/delete:${fakeCollectionId}`)
+            .set('x-access-token', token)
+            .expect('Content-Type', "application/json; charset=utf-8")
+            .expect(404)
+            .then((res) => {
+                expect(res.body.message).toBe("Exhibit not found.");
+            });
+    });
+});
+
+describe('findCollectionOwnerByExhibitId', () => {
+    it('should return the owner email of the collection associated with an exhibit', async () => {
+        const newExhibit = {
+            name: "Art Exhibit",
+            description: "A beautiful art piece",
+            year: "2022",
+            state: "Excellent",
+            collectionId: "656bd0519a2bcfce12c02021",
+            image: "exhibit_image.jpg",
+            toSold: false,
+        };
+
+        const exhibit = new Exhibit(newExhibit);
+        await exhibit.save();
+
+        const exhibitId = exhibit._id;
+
+        const token = jwt.sign({ email: 'albert@gmail.com' }, secretKey);
+
+        request(app)
+            .get(`/findCollectionOwnerByExhibitId:${exhibitId}`)
+            .set('x-access-token', token)
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .then((res) => {
+                expect(res.body.ownerEmail).toBeDefined();
+            });
+
+        Exhibit.findOneAndDelete({ _id: newExhibit._id })
+    });
+
+    it('should return 404 for non-existing exhibit ID', async () => {
+        const token = jwt.sign({ email: 'albert@gmail.com' }, secretKey);
+
+        const fakeCollectionId = new mongoose.Types.ObjectId().toString();
+
+        return request(app)
+            .get(`/findCollectionOwnerByExhibitId:${fakeCollectionId}`)
+            .set('x-access-token', token)
+            .expect('Content-Type', /json/)
+            .expect(404)
+            .then((res) => {
+                expect(res.body.message).toBe("Exhibit not found");
+            });
+    });
+});
+
+describe('findAllExhibitsForUser', () => {
+    it('should return exhibits for a specific user', async () => {
+        const userWithEmail = "ernest@gmail.com";
+
+        const token = jwt.sign({ email: userWithEmail }, secretKey);
+
+        return request(app)
+            .get(`/findAllExhibitsForUser:${userWithEmail}`)
+            .set('x-access-token', token)
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .then((res) => {
+                expect(res.body.length).toBeGreaterThan(0);
+            });
+    }, 15000);
+
+    it('should return 404 for user with no collections', async () => {
+        const testUser = {
+            name: "John",
+            surname: "Doe",
+            email: "userWithNoCollections@example.com",
+            password: "Haslo123",
+            phoneNumber: "123456789",
+        };
+
+        const user = new User(testUser);
+        await user.save();
+
+        const token = jwt.sign({ email: "albert@gmail.com" }, secretKey);
+
+        request(app)
+            .get(`/findAllExhibitsForUser:userWithNoCollections@example.com`)
+            .set('x-access-token', token)
+            .expect('Content-Type', /json/)
+            .expect(404)
+            .then((res) => {
+                expect(res.body.message).toBe("No collections found for this user.");
+            });
+        User.findOneAndDelete({ email: "userWithNoCollections@example.com" })
+    });
+});
+
+describe('getExhibitById', () => {
+    it('should return exhibit by ID', async () => {
+        const newExhibit = {
+            name: "Art Exhibit",
+            description: "A beautiful art piece",
+            year: "2022",
+            state: "Excellent",
+            collectionId: "656bd0519a2bcfce12c02021",
+            image: "exhibit_image.jpg",
+            toSold: false,
+        };
+
+        const exhibit = new Exhibit(newExhibit);
+        await exhibit.save();
+
+        const exhibitId = exhibit._id;
+
+        const token = jwt.sign({ email: 'albert@gmail.com' }, secretKey);
+
+        return request(app)
+            .get(`/exhibit:${exhibitId}`)
+            .set('x-access-token', token)
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .then((res) => {
+                expect(res.body._id).toBeDefined();
+            });
+    });
+
+    it('should return 404 for non-existing exhibit ID', async () => {
+        const token = jwt.sign({ email: 'albert@gmail.com' }, secretKey);
+        const fakeCollectionId = new mongoose.Types.ObjectId().toString();
+
+        return request(app)
+            .get(`/exhibit:${fakeCollectionId}`)
+            .set('x-access-token', token)
+            .expect('Content-Type', /json/)
+            .expect(404)
+            .then((res) => {
+                expect(res.body.message).toBe("Exhibit not found");
             });
     });
 });
