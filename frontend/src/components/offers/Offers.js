@@ -7,7 +7,8 @@ const Offers = () => {
   const [exchangeOffers, setExchangeOffers] = useState([]);
   const [renderedPurchaseOffers, setRenderedPurchaseOffers] = useState([]);
   const [renderedExchangeOffers, setRenderedExchangeOffers] = useState([]);
-
+  const [selectedBuyerDetails, setSelectedBuyerDetails] = useState(null);
+  const [showContactModal, setShowContactModal] = useState(false);
 
   useEffect(() => {
     const fetchPurchaseOffers = async () => {
@@ -95,6 +96,16 @@ const Offers = () => {
     }
   };
 
+  const openContactModal = (buyerDetails) => {
+    setSelectedBuyerDetails(buyerDetails);
+    setShowContactModal(true);
+  };
+
+  const closeContactModal = () => {
+    setSelectedBuyerDetails(null);
+    setShowContactModal(false);
+  };
+
   useEffect(() => {
     const renderPurchaseOffers = async () => {
       const offers = await Promise.all(
@@ -104,11 +115,31 @@ const Offers = () => {
 
           return (
             <div key={index} className="offer">
-              <p>Buyer Name: {buyerDetails ? `${buyerDetails.name} ${buyerDetails.surname}` : 'N/A'}</p>
-              <p>Exhibit Name: {exhibitDetails ? exhibitDetails.name : 'N/A'}</p>
-              <img className="exhibitImage" width={100} height={100} src={exhibitDetails.image} />
-              <p>Price: {offer.price}</p>
-              <p>Message: {offer.message}</p>
+              <div className="offerWrapper">
+                <div className="buyerInfo">
+                  <div className="offerInfoItem" id="user">
+                    <span className="offerInfoLabel">User:</span>
+                    <span className="offerInfoContent">
+                      {buyerDetails ? `${buyerDetails.name} ${buyerDetails.surname}` : 'N/A'}
+                    </span>
+                  </div>
+                  <div className="offerInfoItem" id="price">
+                    <span className="offerInfoLabel">Price:</span>
+                    <span className="offerInfoContent">{offer.price}€</span>
+                  </div>
+                  <div className="offerMessage" id="message">
+                    <span className="offerInfoLabel">Message:</span>
+                    <span className="offerInfoContent" style={{ display: 'block', whiteSpace: 'pre-wrap', maxWidth: '40ch' }}>{offer.message}</span>
+                  </div>
+                </div>
+                <div className="exhibitInfo"> 
+                  <img className="exhibitImageOffer" width={100} height={100} src={exhibitDetails.image} />
+                  <p>{exhibitDetails ? exhibitDetails.name : 'N/A'}</p>
+                </div>
+              </div>
+              <div className="offerButtons">
+                <button className="contactButton" onClick={() => openContactModal(buyerDetails)}>Contact</button>
+              </div>
             </div>
           );
         })
@@ -126,13 +157,36 @@ const Offers = () => {
         exchangeOffers.map(async (offer, index) => {
           const buyerDetails = await fetchUserDetails(offer.buyerEmail);
           const exhibitDetails = await fetchExhibitDetails(offer.offeredExhibitId);
+          const exhibitDetailsBuy = await fetchExhibitDetails(offer.exhibitId);
 
           return (
             <div key={index} className="offer">
-              <p>Buyer Name: {buyerDetails ? `${buyerDetails.name} ${buyerDetails.surname}` : 'N/A'}</p>
-              <p>Exhibit Name: {exhibitDetails ? exhibitDetails.name : 'N/A'}</p>
-              <img className="exhibitImage" width={100} height={100} src={exhibitDetails.image} />
-              <p>Message: {offer.message}</p>
+              <div className="buyerInfo">
+                <div className="offerInfoItem" id="user">
+                  <span className="offerInfoLabel">User:</span>
+                  <span className="offerInfoContent">{buyerDetails ? `${buyerDetails.name} ${buyerDetails.surname}` : 'N/A'}</span>
+                </div>
+                <div className="exhibitInfoExchange">
+                  <div className="exhibitToChange">
+                    <img className="exhibitImageOffer" width={100} height={100} src={exhibitDetailsBuy.image} />
+                    <p>Exhibit Name: {exhibitDetailsBuy ? exhibitDetailsBuy.name : 'N/A'}</p>
+                  </div>
+                  <span style={{ fontSize: '36px', color: '#d6be73', fontWeight: 'bold' }}>
+                    <i className="fa fa-arrow-right"></i>
+                  </span>
+                  <div className="exhibitOffered">
+                    <img className="exhibitImageOffer" width={100} height={100} src={exhibitDetails.image} />
+                    <p>Offered Exhibit: {exhibitDetails ? exhibitDetails.name : 'N/A'}</p>
+                  </div>
+                </div>
+                <div className="offerMessage" id="message">
+                  <span className="offerInfoLabel">Message:</span>
+                  <span className="offerInfoContent" style={{ display: 'block', whiteSpace: 'pre-wrap', maxWidth: '40ch' }}>{offer.message}</span>
+                </div>
+              </div>
+              <div className="offerButtons">
+                <button className="contactButton" onClick={() => openContactModal(buyerDetails)}>Contact</button>
+              </div>
             </div>
           );
         })
@@ -144,22 +198,47 @@ const Offers = () => {
     renderExchangeOffers();
   }, [exchangeOffers]);
 
-
   return (
-    <div className="offersBody">
-      <div className="purchaseOffersContainer">
-        <div className="offers-container">
-          <div className="offersLabel">Purchase offers:</div>
-          {renderedPurchaseOffers.length > 0 ? renderedPurchaseOffers : <p>No purchase offers available.</p>}
+    <>
+      <div className="offersBody">
+        <div className="purchaseOffersContainer">
+          <div className="offers-container">
+            <div className="offersLabel">Purchase offers:</div>
+            {renderedPurchaseOffers.length > 0 ? renderedPurchaseOffers : <p>No purchase offers available.</p>}
+          </div>
+        </div>
+        <div className="exchangeOffersContainer">
+          <div className="offers-container">
+            <div className="offersLabel">Exchange offers:</div>
+            {renderedExchangeOffers.length > 0 ? renderedExchangeOffers : <p>No exchange offers available.</p>}
+          </div>
         </div>
       </div>
-      <div className="exchangeOffersContainer">
-        <div className="offers-container">
-          <div className="offersLabel">Exchange offers:</div>
-          {renderedExchangeOffers.length > 0 ? renderedExchangeOffers : <p>No exchange offers available.</p>}
+
+
+      {showContactModal && (
+        <div className="contactModal">
+          <div className="contactModalContent">
+            <div className="contactModalLabel">
+              <h2>Contact</h2>
+            </div>
+            <div className="contactModalBody">
+              <div className="contactModalItem">
+              <span className="contactModalInfoLabel">Email:</span>
+              <span className="contactModalInfoContent">{selectedBuyerDetails.email}</span>
+            </div>
+            <div className="contactModalItem">
+              <span className="contactModalInfoLabel">Phone Number:</span>
+              <span className="contactModalInfoContent">{selectedBuyerDetails.phoneNumber}</span>
+            </div>
+            </div>
+            <span className="closeContactModal" onClick={closeContactModal}>
+          &times;
+        </span>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

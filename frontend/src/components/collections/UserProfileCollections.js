@@ -53,7 +53,7 @@ class UserProfileCollections extends React.Component {
             </Link>
             <div className="collection__item__info">
             <p>Name: {collection.name}</p>
-            <p>Likes: {collection.likes}</p>
+            {/* <p>Likes: {collection.likes}</p> */}
             </div>
           </div>
         ))}

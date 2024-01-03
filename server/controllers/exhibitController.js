@@ -18,7 +18,7 @@ const createExhibit = async (req, res) => {
     return res.status(400).json({ message: "Invalid description." });
   }
 
-  if (!year || !/^\d{4}$/.test(year)) {
+  if (!year || !/^\d{3,4}$/.test(year)) {
     return res.status(400).json({ message: "Invalid year." });
   }
 

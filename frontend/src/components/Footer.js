@@ -10,7 +10,7 @@ const Footer = () => {
 
         <address>
           <br />
-          123 Collectors Lane, Vintage City 54321
+          Politechnika Lubelska,  20-618 Lublin, Poland
         </address>
       </div>
 
@@ -25,10 +25,6 @@ const Footer = () => {
 
             <li>
               <a href="#">Rare Coins</a>
-            </li>
-
-            <li>
-              <a href="#">Vintage Toys</a>
             </li>
           </ul>
         </li>
@@ -64,7 +60,7 @@ const Footer = () => {
             </li>
 
             <li>
-              <a href="#">Sitemap</a>
+              <a href="#">FAQ</a>
             </li>
           </ul>
         </li>

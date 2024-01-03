@@ -27,9 +27,7 @@
   }
   
   .footer__logo {
-    font-family: 'Pacifico', cursive;
     font-weight: 400;
-    text-transform: lowercase;
     font-size: 1.5rem;
   }
   
@@ -40,7 +38,7 @@
   }
   
   .nav__title {
-    font-weight: 400;
+    font-weight: 700;
     font-size: 15px;
   }
   
@@ -81,6 +79,7 @@
   .footer__nav {
     display: flex;
       flex-flow: row wrap;
+      margin-top: 10px;
   }
   
   .footer__nav > * {

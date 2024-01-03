@@ -22,16 +22,16 @@
 
 .modal {
     border: none;
-    position: fixed; /* Fixed position */
-    top: 50%; /* Center vertically */
-    left: 57.5%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* Compensate for the dialog size */
-    z-index: 1000; /* Make sure it's on top of other elements */
-    width: 50%; /* Set a specific width */
-    max-width: 600px; /* Maximum width */
-    max-height: 90vh; /* Maximum height */
-    overflow-y: auto; /* Enable scroll if content is too long */
-    color: #333; /* Text color */
+    position: fixed; 
+    top: 50%; 
+    left: 57.5%; 
+    transform: translate(-50%, -50%); 
+    z-index: 1000; 
+    width: 50%; 
+    max-width: 600px; 
+    max-height: 90vh; 
+    overflow-y: auto; 
+    color: #333; 
     background-color: #1a1a1a;
     padding: 5em;
     border: 2px solid rgba(255, 255, 255, 0.055);
