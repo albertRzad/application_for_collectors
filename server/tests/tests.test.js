@@ -9,6 +9,13 @@ const Collection = require('../models/collection');
 const Exhibit = require('../models/exhibit');
 const PurchaseOffer = require('../models/purchaseOffer');
 
+afterEach(async () => {
+    await User.findOneAndDelete({ email: "john.example@example.com" });
+    await Collection.findOneAndDelete({ name: "Art Collection" });
+    await Exhibit.findOneAndDelete({ name: "Art Exhibit" });
+});
+
+
 describe("create new user", () => {
     it("should create a new user", async () => {
         await User.findOneAndDelete({ email: "john.example@example.com" });
