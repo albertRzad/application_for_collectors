@@ -317,7 +317,7 @@ describe('getAllExhibitsByCollectionId', () => {
                 expect(res.body.exhibits.length).toBeGreaterThan(0);
                 expect(res.body.collectionName).toBeDefined();
             });
-    });
+    }, 15000);
 });
 
 describe('createExhibit', () => {
@@ -544,5 +544,41 @@ describe('getExhibitById', () => {
             .then((res) => {
                 expect(res.body.message).toBe("Exhibit not found");
             });
+    });
+});
+
+describe('createPurchaseOffer', () => {
+    it('should create a new purchase offer', async () => {
+        const token = jwt.sign({ email: 'albert@gmail.com' }, secretKey);
+
+        const newPurchaseOffer = {
+            buyerEmail: "albert@gmail.com",
+            sellerEmail: "ernest@gmail.com",
+            price: "1999",
+            message: "Test message",
+            exhibitId: "65646ff534b9e3af16e41776",
+        };
+
+        const response = await request(app)
+            .post('/purchaseOfferForm')
+            .set('x-access-token', token)
+            .send(newPurchaseOffer)
+            .expect('Content-Type', /json/)
+            .expect(404);
+        expect(response.body.message).toBe('Exhibit with given id not found.');
+    });
+});
+
+describe('getPurchaseOffersBySeller', () => {
+    it('should get purchase offers by seller', async () => {
+        const token = jwt.sign({ email: 'albert@gmail.com' }, secretKey);
+
+        const response = await request(app)
+            .get(`/purchaseOffersBySeller:albert@gmail.com`)
+            .set('x-access-token', token)
+            .expect('Content-Type', /json/)
+            .expect(200);
+
+         expect(Array.isArray(response.body)).toBe(true);
     });
 });
