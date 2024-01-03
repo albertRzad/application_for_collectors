@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const User = require('../models/user');
 const Collection = require('../models/collection');
 const Exhibit = require('../models/exhibit');
+const PurchaseOffer = require('../models/purchaseOffer');
 
 describe("create new user", () => {
     it("should create a new user", async () => {
@@ -38,14 +39,16 @@ describe("create new user", () => {
             phoneNumber: "invalid_phone",
         };
 
-        return request(app)
+         request(app)
             .post("/registerForm")
             .send(invalidUser)
             .expect("Content-Type", /json/)
             .expect(400)
             .then((res) => {
                 expect(res.body.message).toContain("Invalid");
-            });
+        });
+
+        await User.findOneAndDelete({ email: "john.example@example.com" });
     });
 });
 
@@ -202,6 +205,7 @@ const secretKey = "Haslo123";
 
 describe('createCollection', () => {
     it('should create a new collection', async () => {
+        await Collection.findOneAndDelete({ name: "Art Collection" });
         const newCollection = {
             name: "Art Collection",
             description: "A collection of beautiful artworks",
@@ -232,7 +236,7 @@ describe('createCollection', () => {
 
         const token = jwt.sign({ email: invalidCollection.email }, secretKey);
 
-        return request(app)
+         request(app)
             .post("/collectionForm")
             .set('x-access-token', token)
             .send(invalidCollection)
@@ -241,6 +245,7 @@ describe('createCollection', () => {
             .then((res) => {
                 expect(res.body.message).toBe("Name and description are required.");
             });
+            await Collection.findOneAndDelete({ name: "Art Collection" });
     });
 });
 
@@ -322,6 +327,7 @@ describe('getAllExhibitsByCollectionId', () => {
 
 describe('createExhibit', () => {
     it('should create a new exhibit', async () => {
+        await Exhibit.findOneAndDelete({ name: "Art Exhibit" });
         const newExhibit = {
             name: "Art Exhibit",
             description: "A beautiful art piece",
@@ -334,7 +340,7 @@ describe('createExhibit', () => {
 
         const token = jwt.sign({ email: 'albert@gmail.com' }, secretKey);
 
-        return request(app)
+         request(app)
             .post("/exhibitForm")
             .set('x-access-token', token)
             .send(newExhibit)
@@ -343,6 +349,7 @@ describe('createExhibit', () => {
             .then((res) => {
                 expect(res.body.message).toBe("Exhibit added.");
             });
+        await Exhibit.findOneAndDelete({ name: "Art Exhibit" });
     });
 
     it('should return 400 for invalid exhibit data', async () => {
@@ -549,6 +556,7 @@ describe('getExhibitById', () => {
 
 describe('createPurchaseOffer', () => {
     it('should create a new purchase offer', async () => {
+        await PurchaseOffer.findOneAndDelete({ message: "Test message" });
         const token = jwt.sign({ email: 'albert@gmail.com' }, secretKey);
 
         const newPurchaseOffer = {
@@ -566,6 +574,7 @@ describe('createPurchaseOffer', () => {
             .expect('Content-Type', /json/)
             .expect(404);
         expect(response.body.message).toBe('Exhibit with given id not found.');
+        await PurchaseOffer.findOneAndDelete({ message: "Test message" });
     });
 });
 
