@@ -115,7 +115,7 @@ const findAllExhibitsForUser = async (req, res) => {
     if (allExhibits.length === 0) {
       return res.status(404).json({ message: "No exhibits found for this user." });
     }
-    
+
     res.json(allExhibits);
   } catch (err) {
     console.error(err);
@@ -126,7 +126,7 @@ const findAllExhibitsForUser = async (req, res) => {
 const getExhibitById = async (req, res) => {
   const exhibitId = req.params.id;
   const trimmedExhibitId = exhibitId.replace(":", "");
-  
+
   try {
     const exhibit = await Exhibit.findById(trimmedExhibitId);
 

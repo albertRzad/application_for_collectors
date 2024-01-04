@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv").config();
+require("dotenv").config();
 
 function tokenVerification(req, res, next) {
   let token = req.headers["x-access-token"];

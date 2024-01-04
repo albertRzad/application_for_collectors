@@ -8,15 +8,15 @@ export default function About() {
         <div className="about-content">
           <h2>About CollectOn</h2>
           <p>
-          Welcome to the world of CollectOn – your new destination in the fascinating journey of collecting. 
-          CollectOn is more than just a service - it's a community where passion meets opportunity. 
-          We have created a platform that is as rich and diverse as the collections you showcase.
+            Welcome to the world of CollectOn – your new destination in the fascinating journey of collecting.
+            CollectOn is more than just a service - it's a community where passion meets opportunity.
+            We have created a platform that is as rich and diverse as the collections you showcase.
           </p>
           <h3>For Collectors, by Collectors</h3>
           <p>
-          Our mission is simple: to enable you to share, exchange, and develop your collections in an environment that understands and appreciates your passion. 
-          From coins and postage stamps to artworks and unique memorabilia, 
-          CollectOn is a place where every item has its story, and every story finds its home.
+            Our mission is simple: to enable you to share, exchange, and develop your collections in an environment that understands and appreciates your passion.
+            From coins and postage stamps to artworks and unique memorabilia,
+            CollectOn is a place where every item has its story, and every story finds its home.
           </p>
           <h3>Features that Connect</h3>
           <p>At CollectOn, you will find tools that enable you to:</p>
@@ -49,7 +49,7 @@ export default function About() {
           </ul>
           <h3>Join Us</h3>
           <p>
-          CollectOn is the place where your passion for collecting finds a new dimension. Whether you are just starting your journey or are an experienced collector – we invite you to join our growing community. Develop your passion, expand your collections, grow with us.
+            CollectOn is the place where your passion for collecting finds a new dimension. Whether you are just starting your journey or are an experienced collector – we invite you to join our growing community. Develop your passion, expand your collections, grow with us.
           </p>
           <h4>The CollectOn Team</h4>
         </div>

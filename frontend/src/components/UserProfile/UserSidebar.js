@@ -1,7 +1,6 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./css/UserSidebar.css";
-import { useState } from "react";
 import "../authentication/css/Button.css";
 
 export default function UserSidebar({ activepage }) {

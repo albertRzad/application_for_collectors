@@ -42,11 +42,11 @@ app.delete('/exhibit/delete:id', tokenVerification, exhibitController.deleteExhi
 
 app.post('/purchaseOfferForm', tokenVerification, purchaseOfferController.createPurchaseOffer);
 app.get('/purchaseOffersBySeller:email', tokenVerification, purchaseOfferController.getPurchaseOffersBySeller);
-app.delete('/purchaseOffer:id',tokenVerification,purchaseOfferController.deletePurchaseOfferById);
+app.delete('/purchaseOffer:id', tokenVerification, purchaseOfferController.deletePurchaseOfferById);
 
 app.post('/exchangeOfferForm', tokenVerification, exchangeOfferController.createExchangeOffer);
 app.get('/exchangeOffersBySeller:email', tokenVerification, exchangeOfferController.getExchangeOffersBySeller);
-app.delete('/exchangeOffer:id',tokenVerification,exchangeOfferController.deleteExchangeOfferById);
+app.delete('/exchangeOffer:id', tokenVerification, exchangeOfferController.deleteExchangeOfferById);
 
 var server = app.listen(3000);
 

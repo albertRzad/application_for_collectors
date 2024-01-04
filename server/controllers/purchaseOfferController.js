@@ -46,7 +46,7 @@ const createPurchaseOffer = async (req, res) => {
 const getPurchaseOffersBySeller = async (req, res) => {
   const sellerEmail = req.params.email;
   const trimmedSellerEmail = sellerEmail.replace(":", "");
-  
+
   try {
     const purchaseOffers = await PurchaseOffer.find({
       sellerEmail: trimmedSellerEmail,
@@ -81,7 +81,7 @@ const deletePurchaseOfferById = async (req, res) => {
     if (!deletedOffer) {
       return res.status(404).json({ message: "Offer not found." });
     }
-    
+
     res.status(200).json({ message: "Purchase offer successfully deleted." });
   } catch (err) {
     console.error(err);

@@ -7,7 +7,6 @@ const CollectionDetails = () => {
   const [exhibits, setExhibits] = useState([]);
   const { id } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [image, setImage] = useState("");
   const [collectionName, setcollectionName] = useState("");
   const [showPopupAdd, setShowPopupAdd] = useState(false);
   const [showPopupDelete, setShowPopupDelete] = useState(false);
@@ -60,7 +59,6 @@ const CollectionDetails = () => {
     var reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
     reader.onload = () => {
-      setImage(reader.result);
       setFormData({ ...formData, image: reader.result });
     };
     reader.onerror = (error) => {

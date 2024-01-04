@@ -11,7 +11,6 @@ const ExploreCollectionDetails = () => {
   const [isExchangeModalOpen, setExchangeModalOpen] = useState(false);
   const [collectionName, setcollectionName] = useState("");
   const [allUserExhibits, setAllUserExhibits] = useState([]);
-  const [exhibitNames, setExhibitNames] = useState([]);
   const [isLoadingExhibits, setLoadingExhibits] = useState(true);
   const [showPopupOffer, setShowPopupOffer] = useState(false);
 
@@ -32,14 +31,12 @@ const ExploreCollectionDetails = () => {
 
         if (response.status === 200) {
           setAllUserExhibits(response.data);
-          const names = response.data.map((exhibit) => exhibit.name);
-          setExhibitNames(names);
         } else {
           console.error("Error fetching exhibits for user");
         }
       } catch (error) {
         console.error("Error fetching exhibits for user", error);
-      }finally {
+      } finally {
         setLoadingExhibits(false);
       }
     };

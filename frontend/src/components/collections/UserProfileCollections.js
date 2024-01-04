@@ -1,5 +1,6 @@
 import React from "react";
-import {Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 class UserProfileCollections extends React.Component {
   constructor(props) {
     super(props);
@@ -32,28 +33,28 @@ class UserProfileCollections extends React.Component {
       <div className="collection__wrapper">
         {collections.map((collection, index) => (
           <div
-          key={index}
-          className={`collection__item ${hoveredCollectionId === collection._id ? 'hovered' : ''}`}
-          onMouseEnter={() => this.handleMouseEnter(collection._id)}
-          onMouseLeave={this.handleMouseLeave}
-        >
-            <Link to= {`/exploreCollection/${collection._id}`}>
-            <figure className="collection__image__wrap" data-category={collection.type}>
-            {collection.image === "" || collection.image === null ? (
-              ""
-            ) : (
-              <img className="collection__image" width={100} height={100} src={collection.image} />
-            )} 
-            {hoveredCollectionId === collection._id && (
+            key={index}
+            className={`collection__item ${hoveredCollectionId === collection._id ? 'hovered' : ''}`}
+            onMouseEnter={() => this.handleMouseEnter(collection._id)}
+            onMouseLeave={this.handleMouseLeave}
+          >
+            <Link to={`/exploreCollection/${collection._id}`}>
+              <figure className="collection__image__wrap" data-category={collection.type}>
+                {collection.image === "" || collection.image === null ? (
+                  ""
+                ) : (
+                  <img className="collection__image" width={100} height={100} src={collection.image} />
+                )}
+                {hoveredCollectionId === collection._id && (
                   <div className="collection__description">
                     <p>Description: {collection.description}</p>
                   </div>
                 )}
-            </figure>
+              </figure>
             </Link>
             <div className="collection__item__info">
-            <p>Name: {collection.name}</p>
-            {/* <p>Likes: {collection.likes}</p> */}
+              <p>Name: {collection.name}</p>
+              {/* <p>Likes: {collection.likes}</p> */}
             </div>
           </div>
         ))}

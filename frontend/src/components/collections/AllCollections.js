@@ -59,12 +59,12 @@ class AllCollections extends Component {
                     />
                   )}
                   {hoveredCollectionId === collection._id && (
-                  <div className="collection__description">
-                    <p>Description: {collection.description}</p>
-                  </div>
-                )}
+                    <div className="collection__description">
+                      <p>Description: {collection.description}</p>
+                    </div>
+                  )}
                 </figure>
-                
+
               </>
             </Link>
             <div className="collection__item__info">

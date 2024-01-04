@@ -5,7 +5,6 @@ import axios from 'axios';
 import UserCollections from '../collections/UserCollections';
 
 const MyCollections = () => {
-  const [image, setImage] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userCollections, setUserCollections] = useState([]);
   const [showPopupAdd, setShowPopupAdd] = useState(false);
@@ -23,7 +22,6 @@ const MyCollections = () => {
     fetchCollections();
   }, []);
 
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -39,7 +37,6 @@ const MyCollections = () => {
     var reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
     reader.onload = () => {
-      setImage(reader.result);
       setFormData({ ...formData, image: reader.result });
     };
     reader.onerror = (error) => {

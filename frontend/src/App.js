@@ -129,7 +129,7 @@ function App() {
               <>
                 <NavbarForLoggedUser />
                 <main>
-                <ExploreCollections />
+                  <ExploreCollections />
                 </main>
                 <Footer />
               </>
@@ -142,7 +142,7 @@ function App() {
               <>
                 <NavbarForLoggedUser />
                 <main>
-                <CollectionDetails />
+                  <CollectionDetails />
                 </main>
                 <Footer />
               </>
@@ -155,7 +155,7 @@ function App() {
               <>
                 <NavbarForLoggedUser />
                 <main>
-                <ExploreCollectionDetails />
+                  <ExploreCollectionDetails />
                 </main>
                 <Footer />
               </>
@@ -168,7 +168,7 @@ function App() {
               <>
                 <NavbarForLoggedUser />
                 <main>
-                <ExploreProfile />
+                  <ExploreProfile />
                 </main>
                 <Footer />
               </>

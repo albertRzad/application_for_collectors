@@ -24,24 +24,24 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-     axios.post("http://localhost:3000/loginForm", formData)
+    axios.post("http://localhost:3000/loginForm", formData)
       .then((res) => {
         console.log(res);
         if (res.status === 200) {
           console.log(res.data.token);
           console.log(res.status);
           localStorage.setItem("token", res.data.token);
-          localStorage.setItem("email",formData.email)
+          localStorage.setItem("email", formData.email)
           setFormData(initialFormData);
           setShowPopup(true);
-          setTimeout(function() {
+          setTimeout(function () {
             window.location.assign("/home");
           }, 1500);
         }
       }).catch((error) => {
         console.error(error);
         setShowPopup2(true);
-        setTimeout(function() {
+        setTimeout(function () {
           window.location.assign("/login");
         }, 2500);
       });;

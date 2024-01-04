@@ -46,14 +46,14 @@ describe("create new user", () => {
             phoneNumber: "invalid_phone",
         };
 
-         request(app)
+        request(app)
             .post("/registerForm")
             .send(invalidUser)
             .expect("Content-Type", /json/)
             .expect(400)
             .then((res) => {
                 expect(res.body.message).toContain("Invalid");
-        });
+            });
 
         await User.findOneAndDelete({ email: "john.example@example.com" });
     });
@@ -243,7 +243,7 @@ describe('createCollection', () => {
 
         const token = jwt.sign({ email: invalidCollection.email }, secretKey);
 
-         request(app)
+        request(app)
             .post("/collectionForm")
             .set('x-access-token', token)
             .send(invalidCollection)
@@ -252,7 +252,7 @@ describe('createCollection', () => {
             .then((res) => {
                 expect(res.body.message).toBe("Name and description are required.");
             });
-            await Collection.findOneAndDelete({ name: "Art Collection" });
+        await Collection.findOneAndDelete({ name: "Art Collection" });
     });
 });
 
@@ -347,7 +347,7 @@ describe('createExhibit', () => {
 
         const token = jwt.sign({ email: 'albert@gmail.com' }, secretKey);
 
-         request(app)
+        request(app)
             .post("/exhibitForm")
             .set('x-access-token', token)
             .send(newExhibit)
@@ -595,6 +595,6 @@ describe('getPurchaseOffersBySeller', () => {
             .expect('Content-Type', /json/)
             .expect(200);
 
-         expect(Array.isArray(response.body)).toBe(true);
+        expect(Array.isArray(response.body)).toBe(true);
     });
 });

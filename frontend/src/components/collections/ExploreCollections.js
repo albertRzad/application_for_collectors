@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import AllCollections from "./AllCollections";
 import "./css/ExploreCollections.css";
+
 const ExploreCollections = () => {
   const [collections, setCollections] = useState([]);
 
@@ -33,16 +34,16 @@ const ExploreCollections = () => {
   return (
     <div className="allCollections">
       <div className="allCollectionsIn">
-      <div className="allCollectionsHeader">All Collections</div>
-      <div className="allCollectionsContainer">
-        {collections.length !== 0 ? 
-        <AllCollections
-          collections={collections}
-          fetchCollections={fetchCollections}
-        />
-        : <span className='loader'>  </span> }
+        <div className="allCollectionsHeader">All Collections</div>
+        <div className="allCollectionsContainer">
+          {collections.length !== 0 ?
+            <AllCollections
+              collections={collections}
+              fetchCollections={fetchCollections}
+            />
+            : <span className='loader'>  </span>}
+        </div>
       </div>
-    </div>
     </div>
   );
 };

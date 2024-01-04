@@ -163,7 +163,7 @@ const Offers = () => {
                     <span className="offerInfoContent" style={{ display: 'block', whiteSpace: 'pre-wrap', maxWidth: '40ch' }}>{offer.message}</span>
                   </div>
                 </div>
-                <div className="exhibitInfo"> 
+                <div className="exhibitInfo">
                   <img className="exhibitImageOffer" width={100} height={100} src={exhibitDetails.image} />
                   <p>{exhibitDetails ? exhibitDetails.name : 'N/A'}</p>
                 </div>
@@ -182,8 +182,6 @@ const Offers = () => {
 
     renderPurchaseOffers();
   }, [purchaseOffers]);
-
-  
 
   useEffect(() => {
     const renderExchangeOffers = async () => {
@@ -226,7 +224,6 @@ const Offers = () => {
           );
         })
       );
-
       setRenderedExchangeOffers(offers);
     };
 
@@ -250,7 +247,6 @@ const Offers = () => {
         </div>
       </div>
 
-
       {showContactModal && (
         <div className="contactModal">
           <div className="contactModalContent">
@@ -259,17 +255,17 @@ const Offers = () => {
             </div>
             <div className="contactModalBody">
               <div className="contactModalItem">
-              <span className="contactModalInfoLabel">Email:</span>
-              <span className="contactModalInfoContent">{selectedBuyerDetails.email}</span>
-            </div>
-            <div className="contactModalItem">
-              <span className="contactModalInfoLabel">Phone Number:</span>
-              <span className="contactModalInfoContent">{selectedBuyerDetails.phoneNumber}</span>
-            </div>
+                <span className="contactModalInfoLabel">Email:</span>
+                <span className="contactModalInfoContent">{selectedBuyerDetails.email}</span>
+              </div>
+              <div className="contactModalItem">
+                <span className="contactModalInfoLabel">Phone Number:</span>
+                <span className="contactModalInfoContent">{selectedBuyerDetails.phoneNumber}</span>
+              </div>
             </div>
             <span className="closeContactModal" onClick={closeContactModal}>
-          &times;
-        </span>
+              &times;
+            </span>
           </div>
         </div>
       )}
