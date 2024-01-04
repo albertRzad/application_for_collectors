@@ -68,7 +68,30 @@ const getExchangeOffersBySeller = async (req, res) => {
   }
 };
 
+const deleteExchangeOfferById = async (req, res) => {
+  try {
+    const offerId = req.params.offerId;
+    const trimmedOfferId = offerId.replace(":", "");
+
+    const deletedOffer = await ExchangeOffer.findByIdAndDelete(
+      trimmedOfferId
+    );
+
+    if (!deletedOffer) {
+      return res.status(404).json({ message: "Offer not found." });
+    }
+
+    res.status(200).json({ message: "Exchange offer successfully deleted." });
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .json({ message: "There was an error deleting the offer." });
+  }
+};
+
 module.exports = {
   createExchangeOffer: createExchangeOffer,
-  getExchangeOffersBySeller: getExchangeOffersBySeller
+  getExchangeOffersBySeller: getExchangeOffersBySeller,
+  deleteExchangeOfferById: deleteExchangeOfferById
 };
