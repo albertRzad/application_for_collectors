@@ -68,7 +68,10 @@ const getPurchaseOffersBySeller = async (req, res) => {
 
 const deletePurchaseOfferById = async (req, res) => {
   try {
-    const offerId = req.params.offerId;
+    const offerId = req.params.id;
+    console.log(offerId);
+    console.log(req.params);
+
     const trimmedOfferId = offerId.replace(":", "");
 
     const deletedOffer = await PurchaseOffer.findByIdAndDelete(
@@ -78,7 +81,7 @@ const deletePurchaseOfferById = async (req, res) => {
     if (!deletedOffer) {
       return res.status(404).json({ message: "Offer not found." });
     }
-
+    
     res.status(200).json({ message: "Purchase offer successfully deleted." });
   } catch (err) {
     console.error(err);

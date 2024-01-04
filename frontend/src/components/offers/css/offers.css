@@ -116,7 +116,7 @@
 .offerButtons{
     display: flex;
     width: 100%;
-    justify-content: center;
+    justify-content: space-around;
     margin: 10px;
 }
 
@@ -131,6 +131,19 @@
     border: 0px;
     transition: 0.4s;
     font-weight: 600;
+}
+
+.declineButton{
+    width: 25%;
+    padding: 2px;
+    color: #000000;
+    background-color: #d6be73;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 0px;
+    transition: 0.4s;
+    font-weight: 600;  
 }
 
 .exhibitOffered{

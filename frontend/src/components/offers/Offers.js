@@ -10,51 +10,51 @@ const Offers = () => {
   const [selectedBuyerDetails, setSelectedBuyerDetails] = useState(null);
   const [showContactModal, setShowContactModal] = useState(false);
 
+  const fetchPurchaseOffers = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const email = localStorage.getItem("email");
+
+      const config = {
+        method: "get",
+        url: `http://localhost:3000/purchaseOffersBySeller:${email}`,
+        headers: {
+          "x-access-token": token,
+        },
+      };
+
+      const response = await axios(config);
+      setPurchaseOffers(response.data);
+    } catch (error) {
+      console.error("Error fetching collections:", error);
+    }
+  };
+
   useEffect(() => {
-    const fetchPurchaseOffers = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const email = localStorage.getItem("email");
-
-        const config = {
-          method: "get",
-          url: `http://localhost:3000/purchaseOffersBySeller:${email}`,
-          headers: {
-            "x-access-token": token,
-          },
-        };
-
-        const response = await axios(config);
-        setPurchaseOffers(response.data);
-      } catch (error) {
-        console.error("Error fetching collections:", error);
-      }
-    };
-
     fetchPurchaseOffers();
   }, []);
 
+  const fetchExchangeOffers = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const email = localStorage.getItem("email");
+
+      const config = {
+        method: "get",
+        url: `http://localhost:3000/exchangeOffersBySeller:${email}`,
+        headers: {
+          "x-access-token": token,
+        },
+      };
+
+      const response = await axios(config);
+      setExchangeOffers(response.data);
+    } catch (error) {
+      console.error("Error fetching collections:", error);
+    }
+  };
+
   useEffect(() => {
-    const fetchExchangeOffers = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const email = localStorage.getItem("email");
-
-        const config = {
-          method: "get",
-          url: `http://localhost:3000/exchangeOffersBySeller:${email}`,
-          headers: {
-            "x-access-token": token,
-          },
-        };
-
-        const response = await axios(config);
-        setExchangeOffers(response.data);
-      } catch (error) {
-        console.error("Error fetching collections:", error);
-      }
-    };
-
     fetchExchangeOffers();
   }, []);
 
@@ -105,6 +105,37 @@ const Offers = () => {
     setSelectedBuyerDetails(null);
     setShowContactModal(false);
   };
+  const deletePurchaseOffer = async (purchaseOfferId) => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.delete(`http://localhost:3000/purchaseOffer:${purchaseOfferId}`, {
+        headers: {
+          'x-access-token': token,
+        },
+      });
+      if (response.status === 200) {
+        await fetchPurchaseOffers();
+      }
+    } catch (error) {
+      console.error('Error deleting offer: ', error);
+    }
+  };
+
+  const deleteExchangeOffer = async (exchangeOfferId) => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.delete(`http://localhost:3000/exchangeOffer:${exchangeOfferId}`, {
+        headers: {
+          'x-access-token': token,
+        },
+      });
+      if (response.status === 200) {
+        await fetchExchangeOffers();
+      }
+    } catch (error) {
+      console.error('Error deleting offer: ', error);
+    }
+  };
 
   useEffect(() => {
     const renderPurchaseOffers = async () => {
@@ -139,6 +170,7 @@ const Offers = () => {
               </div>
               <div className="offerButtons">
                 <button className="contactButton" onClick={() => openContactModal(buyerDetails)}>Contact</button>
+                <button className="declineButton" onClick={() => deletePurchaseOffer(offer._id)}>Decline</button>
               </div>
             </div>
           );
@@ -150,6 +182,8 @@ const Offers = () => {
 
     renderPurchaseOffers();
   }, [purchaseOffers]);
+
+  
 
   useEffect(() => {
     const renderExchangeOffers = async () => {
@@ -186,6 +220,7 @@ const Offers = () => {
               </div>
               <div className="offerButtons">
                 <button className="contactButton" onClick={() => openContactModal(buyerDetails)}>Contact</button>
+                <button className="declineButton" onClick={() => deleteExchangeOffer(offer._id)}>Decline</button>
               </div>
             </div>
           );

@@ -70,7 +70,7 @@ const getExchangeOffersBySeller = async (req, res) => {
 
 const deleteExchangeOfferById = async (req, res) => {
   try {
-    const offerId = req.params.offerId;
+    const offerId = req.params.id;
     const trimmedOfferId = offerId.replace(":", "");
 
     const deletedOffer = await ExchangeOffer.findByIdAndDelete(
