@@ -80,17 +80,6 @@ const ExploreCollectionDetails = () => {
     fetchExhibits();
   };
 
-  const closePopupOffer = () => {
-    setShowPopupOffer(false);
-  };
-
-  useEffect(() => {
-    if (showPopupOffer) {
-      const timeoutId = setTimeout(closePopupOffer, 1500);
-      return () => clearTimeout(timeoutId);
-    }
-  }, [showPopupOffer]);
-
   const handleChange = (e) => {
     setPurchaseOfferFormData({
       ...purchaseOfferformData,
@@ -157,6 +146,10 @@ const ExploreCollectionDetails = () => {
       if (response.status === 200) {
         closePurchaseModal();
         setShowPopupOffer(true);
+        setTimeout(function () {
+          setShowPopupOffer(false);
+        }, 1500);
+
       }
     } catch (error) {
       console.error("Error submitting purchase offer:", error);
@@ -189,6 +182,9 @@ const ExploreCollectionDetails = () => {
       if (response.status === 200) {
         closeExchangeModal();
         setShowPopupOffer(true);
+        setTimeout(function () {
+          setShowPopupOffer(false);
+        }, 1500);
       }
     } catch (error) {
       console.error("Error submitting purchase offer:", error);
