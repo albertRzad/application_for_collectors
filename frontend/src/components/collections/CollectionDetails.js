@@ -83,6 +83,9 @@ const CollectionDetails = () => {
       if (response.status === 200) {
         await fetchExhibits();
         setShowPopupDelete(true);
+        setTimeout(function () {
+          setShowPopupDelete(false);
+        }, 1500);
       }
     } catch (error) {
       console.error("Error deleting exhibit:", error);
@@ -107,6 +110,9 @@ const CollectionDetails = () => {
         if (response.status === 200) {
           toggleExhibit();
           setShowPopupAdd(true);
+          setTimeout(function () {
+            setShowPopupAdd(false);
+          }, 1500);
         }
       })
       .catch((error) => {
@@ -114,27 +120,6 @@ const CollectionDetails = () => {
       });
   };
 
-  const closePopupAdd = () => {
-    setShowPopupAdd(false);
-  };
-
-  const closePopupDelete = () => {
-    setShowPopupDelete(false);
-  };
-
-  useEffect(() => {
-    if (showPopupAdd) {
-      const timeoutId = setTimeout(closePopupAdd, 1500);
-      return () => clearTimeout(timeoutId);
-    }
-  }, [showPopupAdd]);
-
-  useEffect(() => {
-    if (showPopupDelete) {
-      const timeoutId = setTimeout(closePopupDelete, 1500);
-      return () => clearTimeout(timeoutId);
-    }
-  }, [showPopupDelete]);
 
   return (
     <div className="exhibitsBody">

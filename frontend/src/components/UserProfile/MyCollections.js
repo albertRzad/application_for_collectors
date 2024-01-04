@@ -65,6 +65,9 @@ const MyCollections = () => {
         if (response.status === 200) {
           toggleDialog();
           setShowPopupAdd(true);
+          setTimeout(function () {
+            setShowPopupAdd(false);
+          }, 1500);
         }
       })
       .catch((error) => {
@@ -98,33 +101,14 @@ const MyCollections = () => {
       if (response.status === 200) {
         await fetchCollections();
         setShowPopupDelete(true);
+        setTimeout(function () {
+          setShowPopupDelete(false);
+        }, 1500);
       }
     } catch (error) {
       console.error('Error deleting collection: ', error);
     }
   };
-
-  const closePopupDelete = () => {
-    setShowPopupDelete(false);
-  };
-
-  const closePopupAdd = () => {
-    setShowPopupAdd(false);
-  };
-
-  useEffect(() => {
-    if (showPopupAdd) {
-      const timeoutId = setTimeout(closePopupAdd, 1500);
-      return () => clearTimeout(timeoutId);
-    }
-   },[showPopupAdd]);
-
-  useEffect(() => {
-    if (showPopupDelete) {
-      const timeoutId = setTimeout(closePopupDelete, 1500); 
-      return () => clearTimeout(timeoutId); 
-    }
-  }, [showPopupDelete]);
 
   return (
     <>
