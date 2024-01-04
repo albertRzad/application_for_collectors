@@ -92,6 +92,13 @@ const deleteCollectionById = async (req, res) => {
     if (!deletedCollection) {
       return res.status(404).json({ message: "Collection not found." });
     }
+    const deletedExhibits = await Exhibit.deleteMany({
+      collectionId: trimmedCollectionId,
+    });
+
+    if (!deletedExhibits || deletedExhibits.deletedCount === 0) {
+      return res.status(404).json({ message: "Exhibits not found." });
+    }
 
     res.status(200).json({ message: "Collection successfully deleted." });
   } catch (err) {
