@@ -9,6 +9,8 @@ const CollectionDetails = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [image, setImage] = useState("");
   const [collectionName, setcollectionName] = useState("");
+  const [showPopupAdd, setShowPopupAdd] = useState(false);
+  const [showPopupDelete, setShowPopupDelete] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -19,7 +21,6 @@ const CollectionDetails = () => {
     collectionId: id,
     toSold: "No",
   });
-
 
   const toggleExhibit = () => {
     setIsModalOpen(!isModalOpen);
@@ -56,11 +57,9 @@ const CollectionDetails = () => {
   }, [id]);
 
   function convertToBase64(e) {
-    console.log(e);
     var reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
     reader.onload = () => {
-      console.log(reader.result);
       setImage(reader.result);
       setFormData({ ...formData, image: reader.result });
     };
@@ -83,6 +82,7 @@ const CollectionDetails = () => {
       const response = await axios(config);
       if (response.status === 200) {
         await fetchExhibits();
+        setShowPopupDelete(true);
       }
     } catch (error) {
       console.error("Error deleting exhibit:", error);
@@ -104,9 +104,9 @@ const CollectionDetails = () => {
 
     axios(config)
       .then((response) => {
-        console.log(response);
         if (response.status === 200) {
           toggleExhibit();
+          setShowPopupAdd(true);
         }
       })
       .catch((error) => {
@@ -114,125 +114,165 @@ const CollectionDetails = () => {
       });
   };
 
+  const closePopupAdd = () => {
+    setShowPopupAdd(false);
+  };
+
+  const closePopupDelete = () => {
+    setShowPopupDelete(false);
+  };
+
+  useEffect(() => {
+    if (showPopupAdd) {
+      const timeoutId = setTimeout(closePopupAdd, 1500);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [showPopupAdd]);
+
+  useEffect(() => {
+    if (showPopupDelete) {
+      const timeoutId = setTimeout(closePopupDelete, 1500);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [showPopupDelete]);
+
   return (
     <div className="exhibitsBody">
       <div className="exhibitsContainer">
-      <div className='CollectionName'> {collectionName} </div>
-      <div className="exhibitsItems">
-        {exhibits.map((exhibit, index) => (
-          <div key={index} className="exhibit">
-            <figure className="exhibitImageWrap" data-category={exhibit.type}>
-            {exhibit.image === "" || exhibit.image === null ? (
-              ""
-            ) : (
-              <img className="exhibitImage" width={100} height={100} src={exhibit.image} />
-            )}
-            </figure>
-            <div className="exhibitItemInfo">
-            <p>Name: {exhibit.name}</p>
-            <p>Description: {exhibit.description}</p>
-            <p>Year: {exhibit.year}</p>
-            <p>State: {exhibit.state}</p>
-            <div className="exhibitDeleteButton">
-            <button  className="delete__button" onClick={() => deleteExhibit(exhibit._id)}>Delete</button>
+        <div className="CollectionName"> {collectionName} </div>
+        <div className="exhibitsItems">
+          {exhibits.map((exhibit, index) => (
+            <div key={index} className="exhibit">
+              <figure className="exhibitImageWrap" data-category={exhibit.type}>
+                {exhibit.image === "" || exhibit.image === null ? (
+                  ""
+                ) : (
+                  <img className="exhibitImage" width={100} height={100} src={exhibit.image} alt="exhibit" />
+                )}
+              </figure>
+              <div className="exhibitItemInfo">
+                <p>Name: {exhibit.name}</p>
+                <p>Description: {exhibit.description}</p>
+                <p>Year: {exhibit.year}</p>
+                <p>State: {exhibit.state}</p>
+                <div className="exhibitDeleteButton">
+                  <button className="delete__button" onClick={() => deleteExhibit(exhibit._id)}>Delete</button>
+                </div>
+              </div>
             </div>
-            </div>
-          </div>
-        ))}
+          ))}
         </div>
-      <div className="addExhibitButtonContainer">
-      <button className="addExhibitButton" onClick={toggleExhibit}>
-        Add new exhibit
-      </button>
-      </div>
+        <div className="addExhibitButtonContainer">
+          <button className="addExhibitButton" onClick={toggleExhibit}>
+            Add new exhibit
+          </button>
+        </div>
       </div>
 
       <dialog className="modal" open={isModalOpen}>
-  <form className="collectionForm" onSubmit={handleSubmit}>
-    <div className='formTitle'>Add new exhibit</div>
-    
-    <div>
-      <input
-        type="text"
-        className="form__input"
-        name="name"
-        placeholder="Name"
-        onChange={handleChange}
-        value={formData.name}
-        required
-      />
-    </div>
+        <form className="collectionForm" onSubmit={handleSubmit}>
+          <div className='formTitle'>Add new exhibit</div>
 
-    <div>
-      <input
-        type="text"
-        className="form__input"
-        name="year"
-        placeholder="Year"
-        onChange={handleChange}
-        value={formData.year}
-        required
-      />
-    </div>
+          <div>
+            <input
+              type="text"
+              className="form__input"
+              name="name"
+              placeholder="Name"
+              onChange={handleChange}
+              value={formData.name}
+              required
+            />
+          </div>
 
-    <div>
-      <input
-        type="text"
-        className="form__input"
-        name="state"
-        placeholder="State"
-        onChange={handleChange}
-        value={formData.state}
-        required
-      />
-    </div>
+          <div>
+            <input
+              type="text"
+              className="form__input"
+              name="year"
+              placeholder="Year"
+              onChange={handleChange}
+              value={formData.year}
+              required
+            />
+          </div>
 
-    <div>
-      <textarea
-        className="form__input"
-        name="description"
-        placeholder="Description"
-        onChange={handleChange}
-        value={formData.description}
-        rows={4}
-        required
-      />
-    </div>
+          <div>
+            <input
+              type="text"
+              className="form__input"
+              name="state"
+              placeholder="State"
+              onChange={handleChange}
+              value={formData.state}
+              required
+            />
+          </div>
 
-    <div>
-      <select
-        className="form__input"
-        name="toSold"
-        onChange={handleChange}
-        value={formData.toSold}
-        required
-      >
-        <option value="Yes">Yes</option>
-        <option value="No">No</option>
-        <option value="To exchange">To exchange</option>
-      </select>
-    </div>
+          <div>
+            <textarea
+              className="form__input"
+              name="description"
+              placeholder="Description"
+              onChange={handleChange}
+              value={formData.description}
+              rows={4}
+              required
+            />
+          </div>
 
-    <div>
-      <input
-        type="file"
-        className="form__input"
-        name="image"
-        onChange={convertToBase64}
-        required
-      />
-    </div>
+          <div>
+            <select
+              className="form__input"
+              name="toSold"
+              onChange={handleChange}
+              value={formData.toSold}
+              required
+            >
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+              <option value="To exchange">To exchange</option>
+            </select>
+          </div>
 
-    <div className='modal__actions'>
-      <button className='modal-button' type='submit'>
-        Dodaj
-      </button>
-      <button className='modal-button' onClick={toggleExhibit} type='button'>
-        Anuluj
-      </button>
-    </div>
-  </form>
-</dialog>
+          <div>
+            <input
+              type="file"
+              className="form__input"
+              name="image"
+              onChange={convertToBase64}
+              required
+            />
+          </div>
+
+          <div className='modal__actions'>
+            <button className='modal-button' type='submit'>
+              Add
+            </button>
+            <button className='modal-button' onClick={toggleExhibit} type='button'>
+              Cancel
+            </button>
+          </div>
+        </form>
+      </dialog>
+
+      {showPopupDelete && (
+        <div className="popup">
+          <div className="popup-content">
+            <b> Exhibit has been deleted. </b>
+            <br></br>
+          </div>
+        </div>
+      )}
+
+      {showPopupAdd && (
+        <div className="popup">
+          <div className="popup-content">
+            <b> Exhibit has been added. </b>
+            <br></br>
+          </div>
+        </div>
+      )}
 
     </div>
   );

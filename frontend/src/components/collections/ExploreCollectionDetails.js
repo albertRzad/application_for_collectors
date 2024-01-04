@@ -13,6 +13,7 @@ const ExploreCollectionDetails = () => {
   const [allUserExhibits, setAllUserExhibits] = useState([]);
   const [exhibitNames, setExhibitNames] = useState([]);
   const [isLoadingExhibits, setLoadingExhibits] = useState(true);
+  const [showPopupOffer, setShowPopupOffer] = useState(false);
 
   useEffect(() => {
     const fetchExhibitsForUser = async () => {
@@ -79,6 +80,17 @@ const ExploreCollectionDetails = () => {
     fetchExhibits();
   };
 
+  const closePopupOffer = () => {
+    setShowPopupOffer(false);
+  };
+
+  useEffect(() => {
+    if (showPopupOffer) {
+      const timeoutId = setTimeout(closePopupOffer, 1500);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [showPopupOffer]);
+
   const handleChange = (e) => {
     setPurchaseOfferFormData({
       ...purchaseOfferformData,
@@ -144,6 +156,7 @@ const ExploreCollectionDetails = () => {
 
       if (response.status === 200) {
         closePurchaseModal();
+        setShowPopupOffer(true);
       }
     } catch (error) {
       console.error("Error submitting purchase offer:", error);
@@ -175,6 +188,7 @@ const ExploreCollectionDetails = () => {
 
       if (response.status === 200) {
         closeExchangeModal();
+        setShowPopupOffer(true);
       }
     } catch (error) {
       console.error("Error submitting purchase offer:", error);
@@ -380,6 +394,15 @@ const ExploreCollectionDetails = () => {
               </button>
             </div>
           </form>
+        </div>
+      )}
+
+      {showPopupOffer && (
+        <div className="popup">
+          <div className="popup-content">
+            <b> Offer has been sent. </b>
+            <br></br>
+          </div>
         </div>
       )}
     </>

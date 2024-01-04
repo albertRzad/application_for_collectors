@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./css/Profile.css";
 import "../authentication/css/Form.css";
 import axios from "axios";
@@ -10,6 +9,7 @@ const Profile = () => {
   const [country, setCountry] = useState("");
   const [image, setImage] = useState("");
   const [bio, setBio] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -17,15 +17,12 @@ const Profile = () => {
       const userEmail = localStorage.getItem("email");
 
       try {
-        const response = await axios.get(
-          `http://localhost:3000/user:${userEmail}`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              "x-access-token": token,
-            },
-          }
-        );
+        const response = await axios.get(`http://localhost:3000/user:${userEmail}`, {
+          headers: {
+            "Content-Type": "application/json",
+            "x-access-token": token,
+          },
+        });
 
         const userData = response.data;
         setNewName(userData.name || "");
@@ -67,7 +64,10 @@ const Profile = () => {
     axios(config)
       .then((response) => {
         if (response.status === 200) {
-          console.log("User details updated successfully");
+          setShowPopup(true);
+          setTimeout(() => {
+            setShowPopup(false);
+          }, 1500);
         }
       })
       .catch((error) => {
@@ -91,11 +91,6 @@ const Profile = () => {
       <div className="ProfileTitle">Profile</div>
       <form className="formContainer" onSubmit={handleSubmit}>
         <div className="form__profile">
-          <link
-            rel="stylesheet"
-            href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-          />
-
           <div
             className="avatar-preview"
             style={{ backgroundImage: `url(${image})` }}
@@ -115,7 +110,7 @@ const Profile = () => {
             />
           </div>
 
-          <label className="form__input__label " id="bio">
+          <label className="form__input__label" id="bio">
             Bio:
             <textarea
               className="bio__input"
@@ -129,7 +124,7 @@ const Profile = () => {
             Save Changes
           </button>
 
-          <label className="form__input__label " id="name">
+          <label className="form__input__label" id="name">
             Name:
             <input
               className="form__input"
@@ -160,6 +155,15 @@ const Profile = () => {
           </label>
         </div>
       </form>
+
+      {showPopup && (
+        <div className="popup">
+          <div className="popup-content">
+            <b>User details updated successfully.</b>
+            <br></br>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -148,7 +148,7 @@ const AccountSettings = () => {
       {showPopup && (
         <div className="popup">
           <div className="popup-content">
-            <b> User informations updated. </b>
+            <b>User information updated successfully.</b>
           </div>
         </div>
       )}

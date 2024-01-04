@@ -8,6 +8,8 @@ const MyCollections = () => {
   const [image, setImage] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userCollections, setUserCollections] = useState([]);
+  const [showPopupAdd, setShowPopupAdd] = useState(false);
+  const [showPopupDelete, setShowPopupDelete] = useState(false);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -20,6 +22,7 @@ const MyCollections = () => {
   useEffect(() => {
     fetchCollections();
   }, []);
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -61,6 +64,7 @@ const MyCollections = () => {
       .then((response) => {
         if (response.status === 200) {
           toggleDialog();
+          setShowPopupAdd(true);
         }
       })
       .catch((error) => {
@@ -93,13 +97,37 @@ const MyCollections = () => {
       });
       if (response.status === 200) {
         await fetchCollections();
+        setShowPopupDelete(true);
       }
     } catch (error) {
       console.error('Error deleting collection: ', error);
     }
   };
 
+  const closePopupDelete = () => {
+    setShowPopupDelete(false);
+  };
+
+  const closePopupAdd = () => {
+    setShowPopupAdd(false);
+  };
+
+  useEffect(() => {
+    if (showPopupAdd) {
+      const timeoutId = setTimeout(closePopupAdd, 1500);
+      return () => clearTimeout(timeoutId);
+    }
+   },[showPopupAdd]);
+
+  useEffect(() => {
+    if (showPopupDelete) {
+      const timeoutId = setTimeout(closePopupDelete, 1500); 
+      return () => clearTimeout(timeoutId); 
+    }
+  }, [showPopupDelete]);
+
   return (
+    <>
     <div className='myCollectionsContainer'>
       <div className='ProfileTitle'>My Collections</div>
       <div className='userCollections'>
@@ -142,15 +170,35 @@ const MyCollections = () => {
           </div>
           <div className='modal__actions'>
             <button className='modal-button' type='submit'>
-              Dodaj
+              Add
             </button>
             <button className='modal-button' onClick={toggleDialog} type='button'>
-              Anuluj
+              Cancel
             </button>
           </div>
         </form>
       </dialog>
     </div>
+
+      {showPopupDelete && (
+  <div className="popup">
+    <div className="popup-content">
+       <b> Collection has been deleted. </b>
+        <br></br>
+    </div>
+  </div>
+)}
+
+      {showPopupAdd && (
+        <div className="popup">
+          <div className="popup-content">
+             <b> Collection has been added. </b>
+              <br></br>
+          </div>
+          </div>
+          )}
+  
+    </>
   );
 };
 
