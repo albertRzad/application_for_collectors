@@ -9,7 +9,8 @@
 
   .footer {
     display: flex;
-    flex-flow: row wrap;
+    justify-items: space-between;
+    align-items: center;
     padding: 10px 5px 20px 100px;
     color: #d6be73;
     background-color: #2e2e2e; 
@@ -22,13 +23,16 @@
   }
   
   .footer__addr {
+    margin-left: 1.25em;
     margin-right: 1.25em;
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
   }
   
   .footer__logo {
-    font-weight: 400;
-    font-size: 1.5rem;
+    margin-left: 500px;
+    margin-bottom: -50px;
+    font-weight: 700;
+    font-size: 1.7rem;
   }
   
   .footer__addr h2 {
@@ -40,6 +44,7 @@
   .nav__title {
     font-weight: 700;
     font-size: 15px;
+    margin-left: 100px;
   }
   
   .footer address {
@@ -70,6 +75,7 @@
   
   .footer li {
     line-height: 2em;
+    margin-left: 100px;
   }
   
   .footer a {
@@ -77,6 +83,7 @@
   }
   
   .footer__nav {
+    margin-left:50px;
     display: flex;
       flex-flow: row wrap;
       margin-top: 10px;
@@ -111,6 +118,11 @@
   
   .heart {
     color: #2f2f2f;
+  }
+
+  .footer__info{
+    margin-top: 70px;
+    margin-left: 150px;
   }
   
   @media screen and (min-width: 24.375em) {

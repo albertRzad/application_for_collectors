@@ -13,6 +13,8 @@ const ExploreCollectionDetails = () => {
   const [allUserExhibits, setAllUserExhibits] = useState([]);
   const [isLoadingExhibits, setLoadingExhibits] = useState(true);
   const [showPopupOffer, setShowPopupOffer] = useState(false);
+  const [hoveredExhibitId, setHoveredExhibitId] = useState(null);
+  
 
   useEffect(() => {
     const fetchExhibitsForUser = async () => {
@@ -58,6 +60,14 @@ const ExploreCollectionDetails = () => {
     message: "",
     exhibitId: "",
   });
+
+  const handleMouseEnter = (exhibitId) => {
+    setHoveredExhibitId(exhibitId);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredExhibitId(null);
+  };
 
   const openPurchaseModal = () => {
     setPurchaseModalOpen(true);
@@ -146,7 +156,6 @@ const ExploreCollectionDetails = () => {
         setTimeout(function () {
           setShowPopupOffer(false);
         }, 1500);
-
       }
     } catch (error) {
       console.error("Error submitting purchase offer:", error);
@@ -195,6 +204,7 @@ const ExploreCollectionDetails = () => {
     if (sellerEmail) {
       await submitPurchaseOffer(sellerEmail, exhibitId);
     } else {
+      // Handle the case where seller's email is not fetched
     }
   };
 
@@ -205,19 +215,18 @@ const ExploreCollectionDetails = () => {
     if (sellerEmail) {
       await submitExchangeOffer(sellerEmail, exhibitId);
     } else {
+      // Handle the case where seller's email is not fetched
     }
   };
 
   const handleOpenBuyOfferForm = async (exhibitId) => {
     localStorage.setItem("currentExhibitId", exhibitId);
     openPurchaseModal();
-    console.log("Sending Buy Offer for Collection ID:", exhibitId);
   };
 
   const handleOpenExchangeOfferForm = async (exhibitId) => {
     localStorage.setItem("currentExhibitId", exhibitId);
     openExchangeModal();
-    console.log("Sending Exchange Offer for Collection ID:", exhibitId);
   };
 
   const fetchExhibits = async () => {
@@ -274,7 +283,12 @@ const ExploreCollectionDetails = () => {
           <div className="CollectionName"> {collectionName} </div>
           <div className="exhibitsItems">
             {exhibits.map((exhibit, index) => (
-              <div key={index} className="exhibit">
+              <div
+                key={index}
+                className={`exhibit ${hoveredExhibitId === exhibit._id ? 'hovered' : ''}`}
+                onMouseEnter={() => handleMouseEnter(exhibit._id)}
+                onMouseLeave={handleMouseLeave}
+              >
                 <figure
                   className="exhibitImageWrap"
                   data-category={exhibit.type}
@@ -285,17 +299,22 @@ const ExploreCollectionDetails = () => {
                     <img
                       className="exhibitImage"
                       width={100}
-                      alt="exhibitImage"
                       height={100}
+                      alt="exhibitImage"
                       src={exhibit.image}
                     />
+                  )}
+                  {hoveredExhibitId === exhibit._id && (
+                    <div className="exhibitDescription">
+                      <p>Description: {exhibit.description}</p>
+                    </div>
                   )}
                 </figure>
                 <div className="exhibitItemInfo">
                   <p>Name: {exhibit.name}</p>
-                  <p>Description: {exhibit.description}</p>
                   <p>Year: {exhibit.year}</p>
                   <p>State: {exhibit.state}</p>
+                  
                 </div>
                 <div className="exhibitOfferButton">
                   {renderOfferButton(exhibit.toSold, exhibit._id)}

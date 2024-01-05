@@ -104,3 +104,32 @@
     border-radius: 4px;
     padding: 10px;
 }
+
+.exhibitDescription{
+    position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  opacity: 0; 
+  transition: opacity 0.3s ease-in-out;
+}
+
+.exhibitDescription p {
+    margin-top: 3px;
+  display: flex;
+  justify-content: center;
+  color: #000000;
+  text-shadow: none;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.exhibitImageWrap:hover .exhibitDescription {
+  opacity: 0.8; 
+}

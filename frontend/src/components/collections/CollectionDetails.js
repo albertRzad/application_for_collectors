@@ -7,9 +7,10 @@ const CollectionDetails = () => {
   const [exhibits, setExhibits] = useState([]);
   const { id } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [collectionName, setcollectionName] = useState("");
+  const [collectionName, setCollectionName] = useState("");
   const [showPopupAdd, setShowPopupAdd] = useState(false);
   const [showPopupDelete, setShowPopupDelete] = useState(false);
+  const [hoveredExhibitId, setHoveredExhibitId] = useState(null);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -32,6 +33,14 @@ const CollectionDetails = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleMouseEnter = (exhibitId) => {
+    setHoveredExhibitId(exhibitId);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredExhibitId(null);
+  };
+
   const fetchExhibits = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -44,7 +53,7 @@ const CollectionDetails = () => {
       };
 
       const response = await axios(config);
-      setcollectionName(response.data.collectionName);
+      setCollectionName(response.data.collectionName);
       setExhibits(response.data.exhibits);
     } catch (error) {
       console.error("Error fetching collection details:", error);
@@ -118,24 +127,32 @@ const CollectionDetails = () => {
       });
   };
 
-
   return (
     <div className="exhibitsBody">
       <div className="exhibitsContainer">
         <div className="CollectionName"> {collectionName} </div>
         <div className="exhibitsItems">
           {exhibits.map((exhibit, index) => (
-            <div key={index} className="exhibit">
+            <div
+              key={index}
+              className={`exhibit ${hoveredExhibitId === exhibit._id ? 'hovered' : ''}`}
+              onMouseEnter={() => handleMouseEnter(exhibit._id)}
+              onMouseLeave={handleMouseLeave}
+            >
               <figure className="exhibitImageWrap" data-category={exhibit.type}>
                 {exhibit.image === "" || exhibit.image === null ? (
                   ""
                 ) : (
                   <img className="exhibitImage" width={100} height={100} src={exhibit.image} alt="exhibit" />
                 )}
+                {hoveredExhibitId === exhibit._id && (
+                  <div className="exhibit__description">
+                    <p>Description: {exhibit.description}</p>
+                  </div>
+                )}
               </figure>
               <div className="exhibitItemInfo">
                 <p>Name: {exhibit.name}</p>
-                <p>Description: {exhibit.description}</p>
                 <p>Year: {exhibit.year}</p>
                 <p>State: {exhibit.state}</p>
                 <div className="exhibitDeleteButton">
