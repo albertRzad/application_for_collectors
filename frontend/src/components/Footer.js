@@ -18,10 +18,10 @@ const Footer = () => {
           <h2 className="nav__title">Collections</h2>
           <ul className="nav__ul">
             <li>
-              <a href="http://localhost:3001/exploreCollections">Antiques</a>
+              <a href="http://localhost:3001/home">Home</a>
             </li>
             <li>
-              <a href="http://localhost:3001/exploreCollections">Rare Coins</a>
+              <a href="http://localhost:3001/about">About site</a>
             </li>
           </ul>
         </li>
