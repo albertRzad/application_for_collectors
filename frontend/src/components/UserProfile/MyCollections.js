@@ -9,6 +9,7 @@ const MyCollections = () => {
   const [userCollections, setUserCollections] = useState([]);
   const [showPopupAdd, setShowPopupAdd] = useState(false);
   const [showPopupDelete, setShowPopupDelete] = useState(false);
+  const [showPopupValidationFailed, setShowPopupValidationFailed] = useState(false);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -68,6 +69,10 @@ const MyCollections = () => {
         }
       })
       .catch((error) => {
+        setShowPopupValidationFailed(true);
+        setTimeout(function () {
+          setShowPopupValidationFailed(false);
+        }, 2000);
         console.error(error);
       });
   };
