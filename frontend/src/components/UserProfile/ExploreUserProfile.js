@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios"; // Import axios for making HTTP requests
+import axios from "axios";
 import "./css/ExploreUserProfile.css";
 import './css/CollectionForm.css';
 import UserProfileCollections from "../collections/UserProfileCollections";

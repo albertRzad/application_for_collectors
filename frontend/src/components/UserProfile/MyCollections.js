@@ -144,7 +144,7 @@ const MyCollections = () => {
               <option value='Sculptures'>Sculptures</option>
               <option value='Postcards'>Postcards</option>
               <option value='Banknotes'>Banknotes</option>
-              <option value='Figurines'>Figurines</option>
+              <option value='Weapons'>Weapons</option>
               <option value='Other'>Other</option>
             </select>
           </div>
@@ -183,6 +183,16 @@ const MyCollections = () => {
           </div>
           </div>
           )}
+
+           {showPopupValidationFailed && (
+        <div className="popup">
+          <div className="popup-content">
+            <b>Validation failed.</b>
+            <br></br>
+            <b>Something went wrong.</b>
+          </div>
+        </div>
+      )}
   
     </>
   );
