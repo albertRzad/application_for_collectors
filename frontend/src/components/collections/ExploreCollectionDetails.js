@@ -204,7 +204,6 @@ const ExploreCollectionDetails = () => {
     if (sellerEmail) {
       await submitPurchaseOffer(sellerEmail, exhibitId);
     } else {
-      // Handle the case where seller's email is not fetched
     }
   };
 
@@ -215,7 +214,6 @@ const ExploreCollectionDetails = () => {
     if (sellerEmail) {
       await submitExchangeOffer(sellerEmail, exhibitId);
     } else {
-      // Handle the case where seller's email is not fetched
     }
   };
 

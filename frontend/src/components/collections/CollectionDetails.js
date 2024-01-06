@@ -11,6 +11,7 @@ const CollectionDetails = () => {
   const [showPopupAdd, setShowPopupAdd] = useState(false);
   const [showPopupDelete, setShowPopupDelete] = useState(false);
   const [hoveredExhibitId, setHoveredExhibitId] = useState(null);
+  const [selectedExhibit, setSelectedExhibit] = useState(null);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -39,6 +40,14 @@ const CollectionDetails = () => {
 
   const handleMouseLeave = () => {
     setHoveredExhibitId(null);
+  };
+
+  const handleExhibitClick = (exhibit) => {
+    setSelectedExhibit(exhibit);
+  };
+
+  const handleCloseExhibit = () => {
+    setSelectedExhibit(null);
   };
 
   const fetchExhibits = async () => {
@@ -138,6 +147,7 @@ const CollectionDetails = () => {
               className={`exhibit ${hoveredExhibitId === exhibit._id ? 'hovered' : ''}`}
               onMouseEnter={() => handleMouseEnter(exhibit._id)}
               onMouseLeave={handleMouseLeave}
+              onClick={() => handleExhibitClick(exhibit)}  // Added click handler
             >
               <figure className="exhibitImageWrap" data-category={exhibit.type}>
                 {exhibit.image === "" || exhibit.image === null ? (
@@ -270,6 +280,15 @@ const CollectionDetails = () => {
           <div className="popup-content">
             <b> Exhibit has been added. </b>
             <br></br>
+          </div>
+        </div>
+      )}
+
+      {selectedExhibit && (
+        <div className="modal" onClick={handleCloseExhibit}>
+          <div className="modal-content">
+            <span className="close-button" onClick={handleCloseExhibit}>&times;</span>
+            <img className="fullSizeImage" src={selectedExhibit.image} alt="exhibit" />
           </div>
         </div>
       )}
