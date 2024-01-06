@@ -30,7 +30,9 @@ class UserProfileCollections extends React.Component {
     const { hoveredCollectionId } = this.state;
 
     return (
-      <div className="collection__wrapper">
+      <div className="collection__wrapper__user">
+        <div className='ProfileTitle'>Users Collections</div>
+        <div className="collection__wrapper">
         {collections.map((collection, index) => (
           <div
             key={index}
@@ -54,10 +56,10 @@ class UserProfileCollections extends React.Component {
             </Link>
             <div className="collection__item__info">
               <p>Name: {collection.name}</p>
-              {/* <p>Likes: {collection.likes}</p> */}
             </div>
           </div>
         ))}
+        </div>
       </div>
     );
   }

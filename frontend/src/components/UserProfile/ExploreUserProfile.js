@@ -100,28 +100,27 @@ const ExploreProfile = () => {
                   className="avatar-preview"
                 />
                 <div className="profile__info__item" id="name">
-                  <span className="info__label">Name:</span>
+                  <span className="info__label">Name:&nbsp;</span>
                   <span className="info__content">{newName}</span>
                 </div>
 
                 <div className="profile__info__item" id="surname">
-                  <span className="info__label">Surname:</span>
+                  <span className="info__label">Surname:&nbsp;</span>
                   <span className="info__content">{newSurname}</span>
                 </div>
 
                 <div className="profile__info__item" id="country">
-                  <span className="info__label">Country:</span>
+                  <span className="info__label">Country:&nbsp;</span>
                   <span className="info__content">{country}</span>
                 </div>
 
-                <div className="profile__info__item" id="bio">
-                  <span className="info__label">Bio:</span>
-                  <span className="info__content">{bio}</span>
+                <div className="profile__info__item" id="phoneNumber">
+                  <span className="info__label">Phone:&nbsp;</span>
+                  <span className="info__content">{phoneNumber}</span>
                 </div>
 
-                <div className="profile__info__item" id="phoneNumber">
-                  <span className="info__label">Phone Number:</span>
-                  <span className="info__content">{phoneNumber}</span>
+                <div className="profile__info__item" id="bio">
+                  <span className="info__content">{bio}</span>
                 </div>
               </div>
             </div>
