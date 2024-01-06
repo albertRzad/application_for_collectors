@@ -147,7 +147,7 @@ const CollectionDetails = () => {
               className={`exhibit ${hoveredExhibitId === exhibit._id ? 'hovered' : ''}`}
               onMouseEnter={() => handleMouseEnter(exhibit._id)}
               onMouseLeave={handleMouseLeave}
-              onClick={() => handleExhibitClick(exhibit)}  // Added click handler
+              onClick={() => handleExhibitClick(exhibit)}
             >
               <figure className="exhibitImageWrap" data-category={exhibit.type}>
                 {exhibit.image === "" || exhibit.image === null ? (
