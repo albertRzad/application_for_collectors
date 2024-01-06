@@ -13,8 +13,6 @@
     font-weight: 400;
     text-align: center;
     color: #d6be73;
-    /* margin-bottom: 1rem; */
-    /* margin-top: 2.5rem; */
     text-shadow: 3px 3px 12px #000000;
     
   } 
@@ -41,16 +39,13 @@
     justify-content: flex-start;
     align-items: center; 
     overflow: auto;
-    /* max-width: 23%; */
 }
 
 .exhibit {
-    /* flex: 1 0 100%; */
     border-radius: 10px;
     margin: 15px;
     transition: all 0.2s linear;
     overflow: auto;
-    /* max-width: 23%; */
     width: fit-content;
 }
 
