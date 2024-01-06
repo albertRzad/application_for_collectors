@@ -42,8 +42,12 @@ const CollectionDetails = () => {
     setHoveredExhibitId(null);
   };
 
-  const handleExhibitClick = (exhibit) => {
-    setSelectedExhibit(exhibit);
+  const handleExhibitClick = (exhibit, e) => {
+    if (e.target.classList.contains('delete__button')) {
+      e.stopPropagation();
+    } else {
+      setSelectedExhibit(exhibit);
+    }
   };
 
   const handleCloseExhibit = () => {
@@ -147,7 +151,7 @@ const CollectionDetails = () => {
               className={`exhibit ${hoveredExhibitId === exhibit._id ? 'hovered' : ''}`}
               onMouseEnter={() => handleMouseEnter(exhibit._id)}
               onMouseLeave={handleMouseLeave}
-              onClick={() => handleExhibitClick(exhibit)}
+              onClick={(e) => handleExhibitClick(exhibit, e)}
             >
               <figure className="exhibitImageWrap" data-category={exhibit.type}>
                 {exhibit.image === "" || exhibit.image === null ? (
@@ -287,8 +291,7 @@ const CollectionDetails = () => {
       {selectedExhibit && (
         <div className="modal" onClick={handleCloseExhibit}>
           <div className="modal-content">
-            <span className="close-button" onClick={handleCloseExhibit}>&times;</span>
-            <img className="fullSizeImage" src={selectedExhibit.image} alt="exhibit" />
+            <img className="fullSizeImage" src={selectedExhibit.image} onClick={handleCloseExhibit} alt="exhibit" />
           </div>
         </div>
       )}

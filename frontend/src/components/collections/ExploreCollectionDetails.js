@@ -69,8 +69,12 @@ const ExploreCollectionDetails = () => {
     setHoveredExhibitId(null);
   };
 
-  const handleExhibitClick = (exhibit) => {
-    setSelectedExhibit(exhibit);
+  const handleExhibitClick = (exhibit, e) => {
+    if (e.target.classList.contains('exhibitsOfferButton') || e.target.classList.contains('exhibitsOfferButton')) {
+      e.stopPropagation();
+    } else {
+      setSelectedExhibit(exhibit);
+    }
   };
 
   const handleCloseExhibit = () => {
@@ -294,7 +298,7 @@ const ExploreCollectionDetails = () => {
                 className={`exhibit ${hoveredExhibitId === exhibit._id ? 'hovered' : ''}`}
                 onMouseEnter={() => handleMouseEnter(exhibit._id)}
                 onMouseLeave={handleMouseLeave}
-                onClick={() => handleExhibitClick(exhibit)}
+                onClick={(e) => handleExhibitClick(exhibit, e)}
               >
                 <figure
                   className="exhibitImageWrap"
