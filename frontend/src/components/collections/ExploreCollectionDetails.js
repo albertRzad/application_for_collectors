@@ -14,7 +14,7 @@ const ExploreCollectionDetails = () => {
   const [isLoadingExhibits, setLoadingExhibits] = useState(true);
   const [showPopupOffer, setShowPopupOffer] = useState(false);
   const [hoveredExhibitId, setHoveredExhibitId] = useState(null);
-  
+  const [selectedExhibit, setSelectedExhibit] = useState(null);
 
   useEffect(() => {
     const fetchExhibitsForUser = async () => {
@@ -67,6 +67,14 @@ const ExploreCollectionDetails = () => {
 
   const handleMouseLeave = () => {
     setHoveredExhibitId(null);
+  };
+
+  const handleExhibitClick = (exhibit) => {
+    setSelectedExhibit(exhibit);
+  };
+
+  const handleCloseExhibit = () => {
+    setSelectedExhibit(null);
   };
 
   const openPurchaseModal = () => {
@@ -286,6 +294,7 @@ const ExploreCollectionDetails = () => {
                 className={`exhibit ${hoveredExhibitId === exhibit._id ? 'hovered' : ''}`}
                 onMouseEnter={() => handleMouseEnter(exhibit._id)}
                 onMouseLeave={handleMouseLeave}
+                onClick={() => handleExhibitClick(exhibit)}
               >
                 <figure
                   className="exhibitImageWrap"
@@ -312,7 +321,7 @@ const ExploreCollectionDetails = () => {
                   <p>Name: {exhibit.name}</p>
                   <p>Year: {exhibit.year}</p>
                   <p>State: {exhibit.state}</p>
-                  
+
                 </div>
                 <div className="exhibitOfferButton">
                   {renderOfferButton(exhibit.toSold, exhibit._id)}
@@ -412,6 +421,15 @@ const ExploreCollectionDetails = () => {
           <div className="popup-content">
             <b> Offer has been sent. </b>
             <br></br>
+          </div>
+        </div>
+      )}
+
+      {selectedExhibit && (
+        <div className="modal" onClick={handleCloseExhibit}>
+          <div className="modal-content">
+            <span className="close-button" onClick={handleCloseExhibit}>&times;</span>
+            <img className="fullSizeImage" src={selectedExhibit.image} alt="exhibit" />
           </div>
         </div>
       )}
