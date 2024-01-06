@@ -12,6 +12,7 @@ const CollectionDetails = () => {
   const [showPopupDelete, setShowPopupDelete] = useState(false);
   const [hoveredExhibitId, setHoveredExhibitId] = useState(null);
   const [selectedExhibit, setSelectedExhibit] = useState(null);
+  const [showPopupValidationFailed, setShowPopupValidationFailed] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -136,6 +137,10 @@ const CollectionDetails = () => {
         }
       })
       .catch((error) => {
+        setShowPopupValidationFailed(true);
+        setTimeout(function () {
+          setShowPopupValidationFailed(false);
+        }, 2000);
         console.error(error);
       });
   };
@@ -284,6 +289,17 @@ const CollectionDetails = () => {
           <div className="popup-content">
             <b> Exhibit has been added. </b>
             <br></br>
+          </div>
+        </div>
+      )}
+
+
+      {showPopupValidationFailed && (
+        <div className="popup">
+          <div className="popup-content">
+            <b>Validation failed.</b>
+            <br></br>
+            <b>Something went wrong.</b>
           </div>
         </div>
       )}
