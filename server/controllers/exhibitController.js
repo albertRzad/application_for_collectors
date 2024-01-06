@@ -22,7 +22,7 @@ const createExhibit = async (req, res) => {
     return res.status(400).json({ message: "Invalid year." });
   }
 
-  if (!state || state.length < 4 || !/^[a-zA-Z ]+$/.test(state)) {
+  if (!state || !/^[a-zA-Z ]+$/.test(state)) {
     return res.status(400).json({ message: "Invalid state." });
   }
 

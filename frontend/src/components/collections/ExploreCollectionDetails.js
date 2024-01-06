@@ -428,7 +428,6 @@ const ExploreCollectionDetails = () => {
       {selectedExhibit && (
         <div className="modal" onClick={handleCloseExhibit}>
           <div className="modal-content">
-            <span className="close-button" onClick={handleCloseExhibit}>&times;</span>
             <img className="fullSizeImage" src={selectedExhibit.image} alt="exhibit" />
           </div>
         </div>

@@ -140,7 +140,7 @@ const MyCollections = () => {
               <option value=''>Type</option>
               <option value='Coins'>Coins</option>
               <option value='Stamps'>Stamps</option>
-              <option value='Pictures'>Pictures</option>
+              <option value='Paintings'>Paintings</option>
               <option value='Sculptures'>Sculptures</option>
               <option value='Postcards'>Postcards</option>
               <option value='Banknotes'>Banknotes</option>
