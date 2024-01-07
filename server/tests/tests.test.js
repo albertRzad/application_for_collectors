@@ -321,7 +321,7 @@ describe('getAllExhibitsByCollectionId', () => {
         const token = jwt.sign({ email: 'albert@gmail.com' }, secretKey);
 
         return request(app)
-            .get(`/getAllCollectionExhibits:656bd0519a2bcfce12c02021`)
+            .get(`/getAllCollectionExhibits:6599648c54d479c93c91940c`)
             .set('x-access-token', token)
             .expect('Content-Type', /json/)
             .expect(200)
