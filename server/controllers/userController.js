@@ -33,6 +33,7 @@ const createUser = async (req, res) => {
   if (!phoneNumberRegex.test(phoneNumber)) {
     return res.status(400).json({ message: "Invalid phone number format." });
   }
+  
   const user = await User.findOne({ email: email });
 
   if (!user) {
