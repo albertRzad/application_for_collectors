@@ -45,7 +45,7 @@ class UserProfileCollections extends React.Component {
                 {collection.image === "" || collection.image === null ? (
                   ""
                 ) : (
-                  <img className="collection__image" width={100} height={100} src={collection.image} />
+                  <img className="collection__image" width={100} height={100} alt="" src={collection.image} />
                 )}
                 {hoveredCollectionId === collection._id && (
                   <div className="collection__description">

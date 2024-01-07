@@ -55,6 +55,7 @@ class AllCollections extends Component {
                       className="collection__image"
                       width={100}
                       height={100}
+                      alt=""
                       src={collection.image}
                     />
                   )}

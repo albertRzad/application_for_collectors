@@ -164,7 +164,7 @@ const Offers = () => {
                   </div>
                 </div>
                 <div className="exhibitInfo">
-                  <img className="exhibitImageOffer" width={100} height={100} src={exhibitDetails.image} />
+                  <img className="exhibitImageOffer" width={100} height={100} alt="" src={exhibitDetails.image} />
                   <p>{exhibitDetails ? exhibitDetails.name : 'N/A'}</p>
                 </div>
               </div>
@@ -200,14 +200,14 @@ const Offers = () => {
                 </div>
                 <div className="exhibitInfoExchange">
                   <div className="exhibitToChange">
-                    <img className="exhibitImageOffer" width={100} height={100} src={exhibitDetailsBuy.image} />
+                    <img className="exhibitImageOffer" width={100} height={100} alt="" src={exhibitDetailsBuy.image} />
                     <p>Exhibit Name: {exhibitDetailsBuy ? exhibitDetailsBuy.name : 'N/A'}</p>
                   </div>
                   <span style={{ fontSize: '36px', color: '#d6be73', fontWeight: 'bold' }}>
                     <i className="fa fa-arrow-right"></i>
                   </span>
                   <div className="exhibitOffered">
-                    <img className="exhibitImageOffer" width={100} height={100} src={exhibitDetails.image} />
+                    <img className="exhibitImageOffer" width={100} height={100} alt="" src={exhibitDetails.image} />
                     <p>Offered Exhibit: {exhibitDetails ? exhibitDetails.name : 'N/A'}</p>
                   </div>
                 </div>

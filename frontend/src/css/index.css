@@ -4,7 +4,7 @@ body {
     display: flex;
     flex-direction: column;
     font-size: 14px;
-    align-items: start;
+    align-items: flex-start;
     background: #1a1a1a;
     background-position: center center;
     background-repeat: no-repeat;
