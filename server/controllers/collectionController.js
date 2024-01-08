@@ -117,7 +117,13 @@ const getAllExhibitsByCollectionId = async (req, res) => {
 
     const exhibits = await Exhibit.find({ collectionId: trimmedCollectionId });
 
-    res.json({ exhibits: exhibits, collectionName: collection.name });
+    if (exhibits.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No exhibits found for this collection." });
+    }
+
+    res.json({ exhibits, collectionName: collection.name });
   } catch (error) {
     console.error(error);
     res

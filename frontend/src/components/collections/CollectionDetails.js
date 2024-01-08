@@ -66,18 +66,9 @@ const CollectionDetails = () => {
         },
       };
 
-      const response = await axios(config).then(
-        () => {
-        if(response.data.exhibits.length === 0){
-          setCollectionName("This collection");
-          return; 
-        }
-  
-          setCollectionName(response.data.collectionName);    
-          setExhibits(response.data.exhibits);
-        }
-      );
-  
+      const response = await axios(config);
+      setCollectionName(response.data.collectionName);
+      setExhibits(response.data.exhibits);
     } catch (error) {
       console.error("Error fetching collection details:", error);
     }
@@ -320,6 +311,7 @@ const CollectionDetails = () => {
           </div>
         </div>
       )}
+
     </div>
   );
 };

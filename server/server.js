@@ -15,6 +15,7 @@ app.use(express.urlencoded({ limit: '25mb', extended: true }));
 
 app.use(cors());
 
+
 app.post('/registerForm', userController.createUser);
 app.post('/loginForm', userController.loginUser);
 app.get('/user:email', tokenVerification, userController.findUserByEmail);
